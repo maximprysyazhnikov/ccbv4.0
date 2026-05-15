@@ -3,6 +3,12 @@ import os, sqlite3, time
 from typing import Optional, Tuple, Dict
 from utils.db import get_conn
 
+try:
+    from config.trading_defaults import get_trading_default
+except Exception:
+    def get_trading_default(key: str, default: Optional[str] = None) -> Optional[str]:
+        return default
+
 _CACHE: Dict[str, Tuple[str, float]] = {}
 _TTL = 10.0  # сек
 
@@ -21,6 +27,10 @@ def get_setting(key: str, default: Optional[str] = None) -> Optional[str]:
     if env is not None:
         _CACHE[key] = (env, now)
         return env
+    trading_default = get_trading_default(key, default)
+    if trading_default is not None:
+        _CACHE[key] = (trading_default, now)
+        return trading_default
     return default
 
 def get_setting_float(key: str, default: float = 0.0) -> float:

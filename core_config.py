@@ -10,6 +10,12 @@ from dotenv import load_dotenv
 load_dotenv("env")
 load_dotenv(".env", override=True)
 
+try:
+    from config.trading_defaults import apply_trading_defaults
+    apply_trading_defaults()
+except Exception:
+    pass
+
 # Import Pydantic settings
 try:
     from config.settings import settings as _pydantic_settings

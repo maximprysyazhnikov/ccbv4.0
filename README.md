@@ -31,3 +31,7 @@ TZ_NAME=Europe/Kyiv
 
 Recommended: attach a Railway volume mounted at `/data` so SQLite state survives redeploys.
 
+Trading/runtime defaults live in `config/trading_defaults.py`. Railway variables still
+override those defaults, so keep only secrets and environment-specific values in Railway
+unless you need a quick runtime override.
+

@@ -18,7 +18,14 @@ from importlib.machinery import PathFinder
 # Підтягнемо .env РАНО (до імпорту основного коду), якщо доступний python-dotenv
 try:
     from dotenv import load_dotenv
-    load_dotenv("env", override=True)
+    load_dotenv("env", override=False)
+    load_dotenv(".env", override=False)
+except Exception:
+    pass
+
+try:
+    from config.trading_defaults import apply_trading_defaults
+    apply_trading_defaults()
 except Exception:
     pass
 
