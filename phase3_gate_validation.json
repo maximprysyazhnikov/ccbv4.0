@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-01-30T10:05:55.597120",
+  "phase": "gate_logic_validation",
+  "status": "completed",
+  "gate_analysis": {
+    "total_analyzed": 16,
+    "gate_pass_rate": 0.9375,
+    "correlation_gate_pnl": NaN,
+    "symbol_analysis": {
+      "gate_score": {
+        "BNBUSDT": 9.0,
+        "BTCUSDT": 7.0,
+        "ETHUSDT": 9.5,
+        "FOGOUSDT": 9.75,
+        "LINKUSDT": 9.25,
+        "ZECUSDT": 9.25
+      },
+      "pnl": {
+        "BNBUSDT": NaN,
+        "BTCUSDT": NaN,
+        "ETHUSDT": NaN,
+        "FOGOUSDT": NaN,
+        "LINKUSDT": NaN,
+        "ZECUSDT": NaN
+      },
+      "gate_passed": {
+        "BNBUSDT": 1.0,
+        "BTCUSDT": 0.0,
+        "ETHUSDT": 1.0,
+        "FOGOUSDT": 1.0,
+        "LINKUSDT": 1.0,
+        "ZECUSDT": 1.0
+      }
+    },
+    "recommendations": [
+      "Занадто високий gate pass rate - критерії надто м'які",
+      "Трейди з низьким gate score більш прибуткові - переглянути критерії",
+      "Додати L/S Ratio як 13-й критерій gate logic",
+      "Провести backtesting різних gate threshold значень",
+      "Оптимізувати ваги окремих критеріїв"
+    ]
+  },
+  "backtest_framework": {
+    "description": "Gate Logic Backtesting Framework",
+    "parameters": {
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT"
+      ],
+      "timeframes": [
+        "5m",
+        "15m",
+        "1h"
+      ],
+      "date_range": {
+        "start": "2025-12-31T10:05:55.631556",
+        "end": "2026-01-30T10:05:55.631556"
+      },
+      "gate_thresholds": [
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8
+      ],
+      "criteria_weights": {
+        "trend": 1.0,
+        "volatility": 1.0,
+        "momentum": 1.0,
+        "volume": 0.8,
+        "support_resistance": 0.9
+      }
+    },
+    "metrics": [
+      "win_rate",
+      "profit_factor",
+      "sharpe_ratio",
+      "max_drawdown",
+      "total_return",
+      "avg_trade_duration"
+    ],
+    "output_format": {
+      "summary_report": "backtest_summary.json",
+      "detailed_results": "backtest_detailed.csv",
+      "charts": "backtest_charts.png"
+    }
+  },
+  "report": "# 📊 PHASE 3: GATE LOGIC VALIDATION REPORT\n**Timestamp:** 2026-01-30T10:05:55.597120\n\n## 🔍 GATE LOGIC ANALYSIS\n- **Analyzed trades:** 16\n- **Gate pass rate:** 93.8%\n- **Correlation gate-P&L:** nan\n\n### 💡 RECOMMENDATIONS\n- Занадто високий gate pass rate - критерії надто м'які\n- Трейди з низьким gate score більш прибуткові - переглянути критерії\n- Додати L/S Ratio як 13-й критерій gate logic\n- Провести backtesting різних gate threshold значень\n- Оптимізувати ваги окремих критеріїв\n\n## 🔧 BACKTESTING FRAMEWORK\n✅ Created backtesting template with parameters:\n- Symbols: BTCUSDT, ETHUSDT, BNBUSDT\n- Thresholds: [0.4, 0.5, 0.6, 0.7, 0.8]\n- Metrics: win_rate, profit_factor, sharpe_ratio, max_drawdown, total_return, avg_trade_duration\n\n## 🎯 NEXT STEPS\n1. **Implement L/S Ratio** as 13th gate criterion\n2. **Run backtesting** with historical data\n3. **Optimize gate thresholds** based on results\n4. **A/B test** different criteria combinations"
+}

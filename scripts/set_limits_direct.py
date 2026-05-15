@@ -1,0 +1,10 @@
+import sqlite3
+conn=sqlite3.connect('storage/bot.db')
+cur=conn.cursor()
+cur.execute("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",('max_open_per_run','9999'))
+cur.execute("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",('max_open_per_day','9999'))
+conn.commit()
+print('done')
+cur.execute("SELECT key,value FROM settings WHERE key LIKE 'max_open_%'")
+print(cur.fetchall())
+cur.close(); conn.close()

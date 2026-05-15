@@ -1,0 +1,24 @@
+{
+  "consec_losses": {
+    "active": false,
+    "value": 0.0,
+    "last_sent_at": "2026-05-04T01:27:35.764346+03:00"
+  },
+  "day_drawdown": {
+    "active": false,
+    "value": 0.0,
+    "last_sent_at": "2026-05-14T23:24:21.483824+03:00"
+  },
+  "week_drawdown": {
+    "active": false,
+    "value": 0.0,
+    "last_sent_at": "2026-05-15T07:25:22.536077+03:00"
+  },
+  "low_wr": {
+    "active": false,
+    "wr": 1.0,
+    "wins": 0,
+    "losses": 0,
+    "last_sent_at": "2026-05-04T03:59:16.311141+03:00"
+  }
+}

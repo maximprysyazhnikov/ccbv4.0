@@ -1,0 +1,46 @@
+{
+  "description": "Gate Logic Backtesting Framework",
+  "parameters": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT"
+    ],
+    "timeframes": [
+      "5m",
+      "15m",
+      "1h"
+    ],
+    "date_range": {
+      "start": "2025-12-31T10:05:55.631556",
+      "end": "2026-01-30T10:05:55.631556"
+    },
+    "gate_thresholds": [
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8
+    ],
+    "criteria_weights": {
+      "trend": 1.0,
+      "volatility": 1.0,
+      "momentum": 1.0,
+      "volume": 0.8,
+      "support_resistance": 0.9
+    }
+  },
+  "metrics": [
+    "win_rate",
+    "profit_factor",
+    "sharpe_ratio",
+    "max_drawdown",
+    "total_return",
+    "avg_trade_duration"
+  ],
+  "output_format": {
+    "summary_report": "backtest_summary.json",
+    "detailed_results": "backtest_detailed.csv",
+    "charts": "backtest_charts.png"
+  }
+}

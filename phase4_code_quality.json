@@ -1,0 +1,1465 @@
+{
+  "timestamp": "2026-01-30T10:29:53.472572",
+  "phase": "code_quality_review",
+  "status": "completed",
+  "project_structure": {
+    "total_files": 554,
+    "python_files": 174,
+    "directories": 26,
+    "file_sizes": {
+      "=": 0,
+      "analysis_results.json": 19081,
+      "apply-ccbv3-db-patch.ps1": 4813,
+      "backtest_template.json": 913,
+      "code_quality_analyzer.py": 22328,
+      "core_config.py": 9393,
+      "core_config_patch.txt": 459,
+      "critical_fixes_implementation.json": 1935,
+      "critical_fixes_implementer.py": 16524,
+      "critical_fixes_report.md": 1079,
+      "display_results.py": 1404,
+      "env": 2197,
+      "fix-ai-handler.patch": 4095,
+      "fix_ai_and_autopost.patch": 507,
+      "fix_autopost_job.patch": 1422,
+      "gate_optimization_report.md": 1783,
+      "gate_optimization_results.json": 9755,
+      "gate_optimizer.py": 20808,
+      "gate_validator.py": 14396,
+      "get_chat_id.py": 787,
+      "handlers_patch.txt": 743,
+      "HYBRID_MIGRATION.md": 1610,
+      "implementation_roadmap.json": 19080,
+      "implementation_roadmap.md": 7516,
+      "implementation_roadmap.py": 29116,
+      "logick.md": 6735,
+      "main.py": 53836,
+      "market_analysis.py": 1222,
+      "market_analyzer.py": 19132,
+      "MAXPILOT.md": 41510,
+      "optimized_gate_logic.py": 4157,
+      "phase2_db_analysis.py": 16657,
+      "phase3_gate_report.md": 1131,
+      "phase3_gate_validation.json": 3477,
+      "phase4_code_quality.json": 52668,
+      "phase4_code_report.md": 1189,
+      "phase5_security_audit.json": 60184,
+      "phase5_security_report.md": 1440,
+      "phase6_market_analysis.json": 7267,
+      "pilotplan.md": 10663,
+      "pilotplancheck.md": 27063,
+      "pilot_final_report.md": 3182,
+      "pytest.ini": 122,
+      "README.md": 699,
+      "requirements-dev.txt": 92,
+      "requirements.txt": 677,
+      "schema_migration.sql": 886,
+      "security_auditor.py": 23166,
+      "sitecustomize.py": 7431,
+      "SUMMARY.md": 14121,
+      "system_diagnostics.py": 2825,
+      "test_token.py": 352,
+      "trading_analytics.py": 1604,
+      "__init__.py": 0,
+      "alerts\\push_alerts.py": 7306,
+      "alerts\\signal_registry.py": 8450,
+      "alerts\\__init__.py": 0,
+      "config\\settings.py": 8489,
+      "config\\__init__.py": 101,
+      "data\\users.db": 28672,
+      "gpt_analyst\\full_analyzer.py": 6368,
+      "gpt_analyst\\llm_client.py": 2317,
+      "gpt_analyst\\symbol_screener.py": 1785,
+      "gpt_analyst\\__init__.py": 0,
+      "gpt_decider\\decider.py": 3302,
+      "gpt_decider\\__init__.py": 0,
+      "logs\\app.log": 674339,
+      "market_data\\binance.py": 2622,
+      "market_data\\binance_data.py": 1220,
+      "market_data\\binance_rank.py": 1568,
+      "market_data\\candles.py": 1322,
+      "market_data\\long_short_ratio.py": 8666,
+      "market_data\\news.py": 1987,
+      "market_data\\orderbook.py": 2409,
+      "market_data\\orderbook_light.py": 3735,
+      "market_data\\__init__.py": 0,
+      "migrations\\003_settings_and_indexes.sql": 845,
+      "migrations\\004_telemetry_columns.sql": 1432,
+      "migrations\\005_laddering.sql": 784,
+      "migrations\\00XX_trades_and_settings.sql": 928,
+      "reports\\auto_analyze_report.md": 109788,
+      "reports\\BNBUSDT_2025-08-10_08-04-16.md": 108,
+      "reports\\BNBUSDT_2025-08-10_08-12-53.md": 110,
+      "reports\\BNBUSDT_2025-08-10_08-29-20.md": 110,
+      "reports\\BNBUSDT_2025-08-10_08-38-34.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-45-50.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-46-20.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-47-35.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-48-29.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-49-09.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-51-51.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-52-17.md": 110,
+      "reports\\BNBUSDT_2025-08-10_10-52-49.md": 110,
+      "reports\\BNBUSDT_2025-08-10_11-42-07.md": 108,
+      "reports\\BNBUSDT_2025-08-10_11-43-46.md": 108,
+      "reports\\BNBUSDT_2025-08-10_11-57-09.md": 108,
+      "reports\\BNBUSDT_2025-08-10_16-21-06.md": 149,
+      "reports\\BNBUSDT_2025-08-10_16-34-28.md": 110,
+      "reports\\BNBUSDT_2025-08-10_16-39-11.md": 110,
+      "reports\\BNBUSDT_2025-08-10_16-41-10.md": 110,
+      "reports\\BNBUSDT_2025-08-10_17-01-29.md": 110,
+      "reports\\BNBUSDT_2025-08-10_19-32-41.md": 110,
+      "reports\\BNBUSDT_2025-08-10_21-33-13.md": 110,
+      "reports\\BNBUSDT_2025-08-11_16-24-53.md": 110,
+      "reports\\BNBUSDT_2025-08-11_16-25-35.md": 110,
+      "reports\\BNBUSDT_2025-08-11_20-32-34.md": 110,
+      "reports\\BNBUSDT_2025-08-12_00-20-28.md": 108,
+      "reports\\BNBUSDT_2025-08-12_00-30-20.md": 110,
+      "reports\\BNBUSDT_2025-08-12_08-51-31.md": 110,
+      "reports\\BNBUSDT_2025-08-12_09-35-42.md": 108,
+      "reports\\BNBUSDT_2025-08-13_00-35-53.md": 110,
+      "reports\\BNBUSDT_2025-08-13_11-18-00.md": 109,
+      "reports\\BNBUSDT_2025-08-14_01-43-49.md": 108,
+      "reports\\BNBUSDT_2025-08-14_02-33-50.md": 108,
+      "reports\\BNBUSDT_2025-08-14_04-20-07.md": 109,
+      "reports\\BNBUSDT_2025-08-14_08-32-38.md": 110,
+      "reports\\BNBUSDT_2025-08-14_12-38-17.md": 108,
+      "reports\\BNBUSDT_2025-08-16_03-40-33.md": 108,
+      "reports\\BTCUSDT_2025-08-10_08-04-15.md": 121,
+      "reports\\BTCUSDT_2025-08-10_08-12-52.md": 121,
+      "reports\\BTCUSDT_2025-08-10_08-29-18.md": 123,
+      "reports\\BTCUSDT_2025-08-10_08-38-32.md": 121,
+      "reports\\BTCUSDT_2025-08-10_10-45-49.md": 123,
+      "reports\\BTCUSDT_2025-08-10_10-46-18.md": 123,
+      "reports\\BTCUSDT_2025-08-10_10-47-34.md": 123,
+      "reports\\BTCUSDT_2025-08-10_10-48-28.md": 123,
+      "reports\\BTCUSDT_2025-08-10_10-49-07.md": 123,
+      "reports\\BTCUSDT_2025-08-10_10-51-49.md": 122,
+      "reports\\BTCUSDT_2025-08-10_10-52-15.md": 121,
+      "reports\\BTCUSDT_2025-08-10_10-52-48.md": 121,
+      "reports\\BTCUSDT_2025-08-10_11-42-06.md": 119,
+      "reports\\BTCUSDT_2025-08-10_11-43-44.md": 119,
+      "reports\\BTCUSDT_2025-08-10_11-57-08.md": 119,
+      "reports\\BTCUSDT_2025-08-10_16-21-05.md": 160,
+      "reports\\BTCUSDT_2025-08-10_16-34-26.md": 121,
+      "reports\\BTCUSDT_2025-08-10_16-39-09.md": 121,
+      "reports\\BTCUSDT_2025-08-10_16-41-08.md": 121,
+      "reports\\BTCUSDT_2025-08-10_17-01-27.md": 119,
+      "reports\\BTCUSDT_2025-08-10_19-32-39.md": 121,
+      "reports\\BTCUSDT_2025-08-10_21-33-12.md": 121,
+      "reports\\BTCUSDT_2025-08-11_16-24-51.md": 121,
+      "reports\\BTCUSDT_2025-08-11_16-25-34.md": 121,
+      "reports\\BTCUSDT_2025-08-11_20-32-32.md": 121,
+      "reports\\BTCUSDT_2025-08-12_00-20-26.md": 119,
+      "reports\\BTCUSDT_2025-08-12_00-30-19.md": 119,
+      "reports\\BTCUSDT_2025-08-12_08-51-29.md": 120,
+      "reports\\BTCUSDT_2025-08-12_09-35-40.md": 119,
+      "reports\\BTCUSDT_2025-08-13_00-35-52.md": 121,
+      "reports\\BTCUSDT_2025-08-13_11-17-58.md": 119,
+      "reports\\BTCUSDT_2025-08-14_01-43-47.md": 120,
+      "reports\\BTCUSDT_2025-08-14_02-33-48.md": 119,
+      "reports\\BTCUSDT_2025-08-14_04-20-05.md": 121,
+      "reports\\BTCUSDT_2025-08-14_08-32-36.md": 121,
+      "reports\\BTCUSDT_2025-08-14_12-38-15.md": 119,
+      "reports\\BTCUSDT_2025-08-16_03-40-32.md": 119,
+      "reports\\ETHUSDT_2025-08-10_08-04-15.md": 113,
+      "reports\\ETHUSDT_2025-08-10_08-12-52.md": 113,
+      "reports\\ETHUSDT_2025-08-10_08-29-19.md": 113,
+      "reports\\ETHUSDT_2025-08-10_08-38-33.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-45-50.md": 114,
+      "reports\\ETHUSDT_2025-08-10_10-46-19.md": 114,
+      "reports\\ETHUSDT_2025-08-10_10-47-34.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-48-29.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-49-08.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-51-50.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-52-16.md": 113,
+      "reports\\ETHUSDT_2025-08-10_10-52-49.md": 113,
+      "reports\\ETHUSDT_2025-08-10_11-42-07.md": 111,
+      "reports\\ETHUSDT_2025-08-10_11-43-45.md": 111,
+      "reports\\ETHUSDT_2025-08-10_11-57-08.md": 111,
+      "reports\\ETHUSDT_2025-08-10_16-21-05.md": 152,
+      "reports\\ETHUSDT_2025-08-10_16-34-27.md": 113,
+      "reports\\ETHUSDT_2025-08-10_16-39-10.md": 113,
+      "reports\\ETHUSDT_2025-08-10_16-41-09.md": 113,
+      "reports\\ETHUSDT_2025-08-10_17-01-28.md": 113,
+      "reports\\ETHUSDT_2025-08-10_19-32-40.md": 111,
+      "reports\\ETHUSDT_2025-08-10_21-33-12.md": 113,
+      "reports\\ETHUSDT_2025-08-11_16-24-52.md": 111,
+      "reports\\ETHUSDT_2025-08-11_16-25-35.md": 111,
+      "reports\\ETHUSDT_2025-08-11_20-32-33.md": 113,
+      "reports\\ETHUSDT_2025-08-12_00-20-27.md": 112,
+      "reports\\ETHUSDT_2025-08-12_00-30-20.md": 113,
+      "reports\\ETHUSDT_2025-08-12_08-51-30.md": 113,
+      "reports\\ETHUSDT_2025-08-12_09-35-41.md": 111,
+      "reports\\ETHUSDT_2025-08-13_00-35-53.md": 113,
+      "reports\\ETHUSDT_2025-08-13_11-17-59.md": 111,
+      "reports\\ETHUSDT_2025-08-14_01-43-48.md": 111,
+      "reports\\ETHUSDT_2025-08-14_02-33-49.md": 111,
+      "reports\\ETHUSDT_2025-08-14_04-20-06.md": 112,
+      "reports\\ETHUSDT_2025-08-14_08-32-37.md": 113,
+      "reports\\ETHUSDT_2025-08-14_12-38-16.md": 111,
+      "reports\\ETHUSDT_2025-08-16_03-40-32.md": 111,
+      "reports\\RAYUSDT_2025-08-10_10-51-54.md": 104,
+      "reports\\RAYUSDT_2025-08-10_10-52-20.md": 104,
+      "reports\\RAYUSDT_2025-08-10_10-52-52.md": 104,
+      "reports\\RAYUSDT_2025-08-10_11-42-10.md": 104,
+      "reports\\RAYUSDT_2025-08-10_11-43-48.md": 104,
+      "reports\\RAYUSDT_2025-08-10_11-57-12.md": 102,
+      "reports\\RAYUSDT_2025-08-10_16-21-07.md": 143,
+      "reports\\RAYUSDT_2025-08-10_16-34-31.md": 104,
+      "reports\\RAYUSDT_2025-08-10_16-39-13.md": 104,
+      "reports\\RAYUSDT_2025-08-10_16-41-12.md": 104,
+      "reports\\RAYUSDT_2025-08-10_17-01-31.md": 104,
+      "reports\\RAYUSDT_2025-08-10_19-32-43.md": 102,
+      "reports\\RAYUSDT_2025-08-10_21-33-16.md": 104,
+      "reports\\RAYUSDT_2025-08-11_16-24-55.md": 104,
+      "reports\\RAYUSDT_2025-08-11_16-25-38.md": 104,
+      "reports\\RAYUSDT_2025-08-11_20-32-37.md": 104,
+      "reports\\RAYUSDT_2025-08-12_00-20-30.md": 104,
+      "reports\\RAYUSDT_2025-08-12_00-30-23.md": 104,
+      "reports\\RAYUSDT_2025-08-12_08-51-33.md": 104,
+      "reports\\RAYUSDT_2025-08-12_09-35-45.md": 103,
+      "reports\\RAYUSDT_2025-08-13_00-35-56.md": 102,
+      "reports\\RAYUSDT_2025-08-13_11-18-03.md": 103,
+      "reports\\RAYUSDT_2025-08-14_01-43-51.md": 102,
+      "reports\\RAYUSDT_2025-08-14_02-33-52.md": 102,
+      "reports\\RAYUSDT_2025-08-14_04-20-09.md": 103,
+      "reports\\RAYUSDT_2025-08-14_08-32-40.md": 104,
+      "reports\\RAYUSDT_2025-08-14_12-38-20.md": 102,
+      "reports\\RAYUSDT_2025-08-16_03-40-36.md": 102,
+      "reports\\SHELLUSDT_2025-08-16_03-40-36.md": 104,
+      "reports\\SOLUSDT_2025-08-10_08-04-17.md": 110,
+      "reports\\SOLUSDT_2025-08-10_08-12-54.md": 110,
+      "reports\\SOLUSDT_2025-08-10_08-29-20.md": 110,
+      "reports\\SOLUSDT_2025-08-10_08-38-35.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-45-51.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-46-21.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-47-36.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-48-30.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-49-10.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-51-52.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-52-18.md": 110,
+      "reports\\SOLUSDT_2025-08-10_10-52-50.md": 110,
+      "reports\\SOLUSDT_2025-08-10_11-42-08.md": 108,
+      "reports\\SOLUSDT_2025-08-10_11-43-46.md": 108,
+      "reports\\SOLUSDT_2025-08-10_11-57-10.md": 108,
+      "reports\\SOLUSDT_2025-08-10_16-21-06.md": 149,
+      "reports\\SOLUSDT_2025-08-10_16-34-29.md": 109,
+      "reports\\SOLUSDT_2025-08-10_16-39-11.md": 110,
+      "reports\\SOLUSDT_2025-08-10_16-41-11.md": 110,
+      "reports\\SOLUSDT_2025-08-10_17-01-30.md": 110,
+      "reports\\SOLUSDT_2025-08-10_19-32-41.md": 108,
+      "reports\\SOLUSDT_2025-08-10_21-33-14.md": 108,
+      "reports\\SOLUSDT_2025-08-11_16-24-54.md": 110,
+      "reports\\SOLUSDT_2025-08-11_16-25-36.md": 110,
+      "reports\\SOLUSDT_2025-08-11_20-32-35.md": 110,
+      "reports\\SOLUSDT_2025-08-12_00-20-29.md": 110,
+      "reports\\SOLUSDT_2025-08-12_00-30-21.md": 110,
+      "reports\\SOLUSDT_2025-08-12_08-51-32.md": 110,
+      "reports\\SOLUSDT_2025-08-12_09-35-43.md": 108,
+      "reports\\SOLUSDT_2025-08-13_00-35-54.md": 108,
+      "reports\\SOLUSDT_2025-08-13_11-18-01.md": 108,
+      "reports\\SOLUSDT_2025-08-14_01-43-49.md": 108,
+      "reports\\SOLUSDT_2025-08-14_02-33-51.md": 108,
+      "reports\\SOLUSDT_2025-08-14_04-20-08.md": 109,
+      "reports\\SOLUSDT_2025-08-14_08-32-38.md": 110,
+      "reports\\SOLUSDT_2025-08-14_12-38-18.md": 108,
+      "reports\\SOLUSDT_2025-08-16_03-40-34.md": 108,
+      "reports\\XRPUSDT_2025-08-10_08-04-18.md": 102,
+      "reports\\XRPUSDT_2025-08-10_08-12-55.md": 104,
+      "reports\\XRPUSDT_2025-08-10_08-29-21.md": 104,
+      "reports\\XRPUSDT_2025-08-10_08-38-35.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-45-52.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-46-22.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-47-37.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-48-31.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-49-10.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-51-53.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-52-19.md": 104,
+      "reports\\XRPUSDT_2025-08-10_10-52-51.md": 104,
+      "reports\\XRPUSDT_2025-08-10_11-42-09.md": 102,
+      "reports\\XRPUSDT_2025-08-10_11-43-47.md": 102,
+      "reports\\XRPUSDT_2025-08-10_11-57-11.md": 102,
+      "reports\\XRPUSDT_2025-08-10_16-21-07.md": 143,
+      "reports\\XRPUSDT_2025-08-10_16-34-30.md": 104,
+      "reports\\XRPUSDT_2025-08-10_16-39-12.md": 104,
+      "reports\\XRPUSDT_2025-08-10_16-41-12.md": 104,
+      "reports\\XRPUSDT_2025-08-10_17-01-30.md": 104,
+      "reports\\XRPUSDT_2025-08-10_19-32-43.md": 102,
+      "reports\\XRPUSDT_2025-08-10_21-33-15.md": 103,
+      "reports\\XRPUSDT_2025-08-11_16-24-55.md": 104,
+      "reports\\XRPUSDT_2025-08-11_16-25-37.md": 104,
+      "reports\\XRPUSDT_2025-08-11_20-32-36.md": 102,
+      "reports\\XRPUSDT_2025-08-12_00-20-29.md": 103,
+      "reports\\XRPUSDT_2025-08-12_00-30-22.md": 104,
+      "reports\\XRPUSDT_2025-08-12_08-51-32.md": 104,
+      "reports\\XRPUSDT_2025-08-12_09-35-44.md": 102,
+      "reports\\XRPUSDT_2025-08-13_00-35-55.md": 103,
+      "reports\\XRPUSDT_2025-08-13_11-18-02.md": 102,
+      "reports\\XRPUSDT_2025-08-14_01-43-50.md": 102,
+      "reports\\XRPUSDT_2025-08-14_02-33-51.md": 102,
+      "reports\\XRPUSDT_2025-08-14_04-20-08.md": 102,
+      "reports\\XRPUSDT_2025-08-14_08-32-39.md": 104,
+      "reports\\XRPUSDT_2025-08-14_12-38-19.md": 102,
+      "reports\\XRPUSDT_2025-08-16_03-40-35.md": 102,
+      "reports\\__init__.py": 0,
+      "router\\analyzer_router.py": 4122,
+      "router\\__init__.py": 0,
+      "scheduler\\local_top5_job.py": 3053,
+      "scheduler\\periodic_runner.py": 1028,
+      "scheduler\\runner.py": 1655,
+      "scheduler\\screener_job.py": 1884,
+      "scheduler\\__init__.py": 0,
+      "scripts\\auto_analyze.py": 4286,
+      "scripts\\db_add_indexes.py": 582,
+      "scripts\\db_audit.py": 8639,
+      "scripts\\db_migrate_v2.py": 2145,
+      "scripts\\db_peek.py": 850,
+      "scripts\\db_probe_open.py": 1320,
+      "scripts\\db_seed_signals.py": 4924,
+      "scripts\\debug_load_handlers.py": 430,
+      "scripts\\kpi_by_symbol.py": 8110,
+      "scripts\\kpi_reasons.py": 4995,
+      "scripts\\kpi_report.py": 3201,
+      "scripts\\make_neutral.py": 1680,
+      "scripts\\migrate.py": 3057,
+      "scripts\\migrate_v3.py": 1310,
+      "scripts\\migrate_v3.sql": 1153,
+      "scripts\\print_gate.py": 210,
+      "scripts\\query_trades.py": 479,
+      "scripts\\rr_probe.py": 1335,
+      "scripts\\run_parser_smoke.py": 1240,
+      "scripts\\smoke_imports.py": 1653,
+      "scripts\\Smoke_test_trading.py": 10413,
+      "scripts\\stats_breakdown.py": 1841,
+      "services\\analyzer_core.py": 15251,
+      "services\\autopost.py": 44799,
+      "services\\autopost_bridge.py": 10476,
+      "services\\autopost_llm_guard.py": 1606,
+      "services\\autopost_sources.py": 12270,
+      "services\\daily_tracker.py": 13797,
+      "services\\indicators.py": 2563,
+      "services\\kpi.py": 6816,
+      "services\\ladder_manager.py": 1731,
+      "services\\mock_df.py": 2663,
+      "services\\pnl.py": 892,
+      "services\\position_manager.py": 10314,
+      "services\\scalping_sources.py": 30048,
+      "services\\signals_repo.py": 4818,
+      "services\\signal_closer.py": 11692,
+      "services\\signal_filter.py": 1735,
+      "services\\signal_sync.py": 1978,
+      "services\\trade_engine.py": 10900,
+      "services\\winrate_tracker.py": 1797,
+      "services\\autopost\\core.py": 16365,
+      "services\\autopost\\formatting.py": 10020,
+      "services\\autopost\\indicators.py": 2762,
+      "services\\autopost\\orderbook.py": 2441,
+      "services\\autopost\\persistence.py": 5017,
+      "services\\autopost\\scoring.py": 3192,
+      "services\\autopost\\__init__.py": 894,
+      "signal_tools\\ta_calc.py": 8526,
+      "signal_tools\\__init__.py": 0,
+      "stats\\model_ranker.py": 344,
+      "stats\\outcome_resolver.py": 532,
+      "stats\\__init__.py": 0,
+      "storage\\bot.db": 405504,
+      "storage\\migrate.py": 1116,
+      "storage\\seed_demo.py": 1239,
+      "storage\\reports\\2025-08-18_07-22-48__BTCUSDT.md": 726,
+      "storage\\reports\\2025-08-18_07-22-52__ETHUSDT.md": 647,
+      "storage\\reports\\2025-08-18_07-22-58__BNBUSDT.md": 529,
+      "storage\\reports\\2025-08-18_07-23-10__SOLUSDT.md": 661,
+      "storage\\reports\\2025-08-18_07-23-20__XRPUSDT.md": 687,
+      "storage\\reports\\2025-08-18_07-23-30__RAYUSDT.md": 628,
+      "storage\\reports\\2025-08-18_07-23-40__SHELLUSDT.md": 722,
+      "storage\\reports\\2025-08-18_07-24-06__BTCUSDT.md": 654,
+      "storage\\reports\\2025-08-18_07-24-19__ETHUSDT.md": 634,
+      "storage\\reports\\2025-08-18_07-24-23__BNBUSDT.md": 534,
+      "storage\\reports\\2025-08-18_07-24-36__SOLUSDT.md": 706,
+      "storage\\reports\\2025-08-18_07-24-47__XRPUSDT.md": 639,
+      "storage\\reports\\2025-08-18_07-24-57__RAYUSDT.md": 567,
+      "storage\\reports\\2025-08-18_07-25-02__SHELLUSDT.md": 612,
+      "storage\\reports\\2025-08-18_07-28-39__BTCUSDT.md": 604,
+      "storage\\reports\\2025-08-18_07-28-51__ETHUSDT.md": 640,
+      "storage\\reports\\2025-08-18_07-28-59__BNBUSDT.md": 581,
+      "storage\\reports\\2025-08-18_07-29-06__SOLUSDT.md": 616,
+      "storage\\reports\\2025-08-18_07-29-18__XRPUSDT.md": 648,
+      "storage\\reports\\2025-08-18_07-29-23__RAYUSDT.md": 560,
+      "storage\\reports\\2025-08-18_07-29-36__SHELLUSDT.md": 689,
+      "storage\\reports\\2025-08-18_07-29-42__ADAUSDT.md": 664,
+      "storage\\reports\\2025-08-18_07-30-09__BTCUSDT.md": 620,
+      "storage\\reports\\2025-08-18_07-30-13__ETHUSDT.md": 632,
+      "storage\\reports\\2025-08-18_07-30-20__BNBUSDT.md": 578,
+      "storage\\reports\\2025-08-18_07-30-27__SOLUSDT.md": 573,
+      "storage\\reports\\2025-08-18_07-33-07__BTCUSDT.md": 672,
+      "storage\\reports\\2025-08-18_07-33-51__ADAUSDT.md": 614,
+      "storage\\reports\\2025-08-18_07-45-12__ETHUSDT.md": 616,
+      "storage\\reports\\2025-08-18_07-45-17__BNBUSDT.md": 581,
+      "storage\\reports\\2025-08-18_07-45-24__SOLUSDT.md": 601,
+      "storage\\reports\\2025-08-18_07-45-35__XRPUSDT.md": 595,
+      "storage\\reports\\2025-08-18_07-45-41__RAYUSDT.md": 719,
+      "storage\\reports\\2025-08-18_07-45-46__SHELLUSDT.md": 551,
+      "storage\\reports\\2025-08-18_07-45-53__ADAUSDT.md": 624,
+      "storage\\reports\\2025-08-18_07-47-19__BTCUSDT.md": 664,
+      "storage\\reports\\2025-08-18_07-47-24__ETHUSDT.md": 630,
+      "storage\\reports\\2025-08-18_07-47-38__BNBUSDT.md": 844,
+      "storage\\reports\\2025-08-18_07-47-50__SOLUSDT.md": 706,
+      "storage\\reports\\2025-08-18_07-48-01__XRPUSDT.md": 607,
+      "storage\\reports\\2025-08-18_07-48-12__RAYUSDT.md": 641,
+      "storage\\reports\\2025-08-18_07-48-26__SHELLUSDT.md": 757,
+      "storage\\reports\\2025-08-18_07-48-38__ADAUSDT.md": 643,
+      "storage\\reports\\2025-08-18_07-58-06__BTCUSDT.md": 626,
+      "storage\\reports\\2025-08-18_07-58-15__ETHUSDT.md": 636,
+      "storage\\reports\\2025-08-18_07-58-23__BNBUSDT.md": 506,
+      "storage\\reports\\2025-08-18_07-58-28__SOLUSDT.md": 649,
+      "storage\\reports\\2025-08-18_07-58-33__XRPUSDT.md": 546,
+      "storage\\reports\\2025-08-18_07-58-40__RAYUSDT.md": 559,
+      "storage\\reports\\2025-08-18_07-58-45__SHELLUSDT.md": 514,
+      "storage\\reports\\2025-08-18_07-58-49__ADAUSDT.md": 544,
+      "storage\\reports\\2025-08-18_08-00-55__BTCUSDT.md": 619,
+      "storage\\reports\\2025-08-18_08-01-07__ETHUSDT.md": 635,
+      "storage\\reports\\2025-08-18_08-01-12__BNBUSDT.md": 611,
+      "storage\\reports\\2025-08-18_08-01-19__SOLUSDT.md": 575,
+      "storage\\reports\\2025-08-18_08-01-30__XRPUSDT.md": 573,
+      "storage\\reports\\2025-08-18_08-01-39__RAYUSDT.md": 716,
+      "storage\\reports\\2025-08-18_08-01-53__SHELLUSDT.md": 738,
+      "storage\\reports\\2025-08-18_08-02-04__ADAUSDT.md": 694,
+      "storage\\reports\\2025-08-18_08-02-57__BTCUSDT.md": 572,
+      "storage\\reports\\2025-08-18_08-03-02__ETHUSDT.md": 723,
+      "storage\\reports\\2025-08-18_08-03-08__BNBUSDT.md": 575,
+      "storage\\reports\\2025-08-18_08-03-14__SOLUSDT.md": 618,
+      "storage\\reports\\2025-08-18_08-03-22__XRPUSDT.md": 701,
+      "storage\\reports\\2025-08-18_08-03-26__RAYUSDT.md": 523,
+      "storage\\reports\\2025-08-18_08-03-30__SHELLUSDT.md": 559,
+      "storage\\reports\\2025-08-18_08-03-34__ADAUSDT.md": 721,
+      "storage\\reports\\2025-08-18_08-10-19__BTCUSDT.md": 612,
+      "storage\\reports\\2025-08-18_08-10-24__ETHUSDT.md": 712,
+      "storage\\reports\\2025-08-18_08-10-28__BNBUSDT.md": 649,
+      "storage\\reports\\2025-08-18_08-10-33__SOLUSDT.md": 750,
+      "storage\\reports\\2025-08-18_08-10-37__XRPUSDT.md": 599,
+      "storage\\reports\\2025-08-18_08-10-42__LTCUSDT.md": 672,
+      "storage\\reports\\2025-08-18_08-10-46__XLMUSDT.md": 618,
+      "storage\\reports\\2025-08-18_08-10-51__ADAUSDT.md": 627,
+      "storage\\reports\\2025-08-18_08-56-08__BTCUSDT.md": 669,
+      "storage\\reports\\2025-08-18_08-56-16__ETHUSDT.md": 574,
+      "storage\\reports\\2025-08-18_08-56-29__BNBUSDT.md": 668,
+      "storage\\reports\\2025-08-18_08-56-35__SOLUSDT.md": 658,
+      "storage\\reports\\2025-08-18_08-56-46__XRPUSDT.md": 532,
+      "storage\\reports\\2025-08-18_08-56-51__LTCUSDT.md": 757,
+      "storage\\reports\\2025-08-18_08-57-05__XLMUSDT.md": 649,
+      "storage\\reports\\2025-08-18_08-57-16__ADAUSDT.md": 591,
+      "storage\\reports\\2025-08-18_09-59-45__BTCUSDT.md": 608,
+      "storage\\reports\\2025-08-18_09-59-52__ETHUSDT.md": 723,
+      "storage\\reports\\2025-08-18_10-00-00__BNBUSDT.md": 645,
+      "storage\\reports\\2025-08-18_10-00-08__SOLUSDT.md": 577,
+      "storage\\reports\\2025-08-18_10-00-16__XRPUSDT.md": 787,
+      "storage\\reports\\2025-08-18_10-00-26__LTCUSDT.md": 643,
+      "storage\\reports\\2025-08-18_10-00-37__XLMUSDT.md": 564,
+      "storage\\reports\\2025-08-18_10-00-50__ADAUSDT.md": 643,
+      "storage\\reports\\2025-08-18_10-40-56__BTCUSDT.md": 609,
+      "storage\\reports\\2025-08-18_10-41-03__ETHUSDT.md": 563,
+      "storage\\reports\\2025-08-18_10-41-13__BNBUSDT.md": 601,
+      "storage\\reports\\2025-08-18_10-41-20__SOLUSDT.md": 604,
+      "storage\\reports\\2025-08-18_10-41-31__XRPUSDT.md": 637,
+      "storage\\reports\\2025-08-18_10-41-47__LTCUSDT.md": 686,
+      "storage\\reports\\2025-08-18_10-41-54__XLMUSDT.md": 563,
+      "storage\\reports\\2025-08-18_10-41-59__ADAUSDT.md": 477,
+      "storage\\reports\\2025-08-18_10-42-06__BTCUSDT.md": 754,
+      "storage\\reports\\2025-08-18_10-42-14__ETHUSDT.md": 675,
+      "storage\\reports\\2025-08-18_10-42-26__BNBUSDT.md": 546,
+      "storage\\reports\\2025-08-18_10-42-33__SOLUSDT.md": 695,
+      "storage\\reports\\2025-08-18_10-42-39__XRPUSDT.md": 693,
+      "storage\\reports\\2025-08-18_10-42-53__LTCUSDT.md": 644,
+      "storage\\reports\\2025-08-18_10-43-09__XLMUSDT.md": 691,
+      "storage\\reports\\2025-08-18_10-43-16__ADAUSDT.md": 625,
+      "storage\\reports\\2025-08-18_14-09-50__BTCUSDT.md": 657,
+      "storage\\reports\\2025-08-18_14-10-01__ETHUSDT.md": 578,
+      "storage\\reports\\2025-08-18_14-10-13__BNBUSDT.md": 577,
+      "storage\\reports\\2025-08-18_14-10-19__SOLUSDT.md": 666,
+      "storage\\reports\\2025-08-18_14-10-27__XRPUSDT.md": 626,
+      "storage\\reports\\2025-08-18_14-10-37__LTCUSDT.md": 591,
+      "storage\\reports\\2025-08-18_14-10-54__XLMUSDT.md": 661,
+      "storage\\reports\\2025-08-18_14-12-54__BTCUSDT.md": 613,
+      "storage\\reports\\2025-08-18_14-12-58__ETHUSDT.md": 612,
+      "storage\\reports\\2025-08-18_14-13-04__BNBUSDT.md": 647,
+      "storage\\reports\\2025-08-18_14-13-15__SOLUSDT.md": 603,
+      "storage\\reports\\2025-08-18_14-13-19__XRPUSDT.md": 628,
+      "storage\\reports\\2025-08-18_14-13-30__LTCUSDT.md": 621,
+      "storage\\reports\\2025-08-18_14-13-41__XLMUSDT.md": 625,
+      "storage\\reports\\2025-08-18_14-13-49__ADAUSDT.md": 625,
+      "storage\\reports\\__init__.py": 0,
+      "telegram_bot\\auto_scheduler.py": 1219,
+      "telegram_bot\\bot.py": 1251,
+      "telegram_bot\\extra_handlers.py": 907,
+      "telegram_bot\\handlers.py": 59681,
+      "telegram_bot\\handlers_addons.py": 3415,
+      "telegram_bot\\handlers_help.py": 647,
+      "telegram_bot\\panel.py": 9906,
+      "telegram_bot\\panel_neutral.py": 6304,
+      "telegram_bot\\sender.py": 488,
+      "telegram_bot\\__init__.py": 0,
+      "telegram_bot\\handlers\\ai_commands.py": 36667,
+      "telegram_bot\\handlers\\callbacks.py": 1523,
+      "telegram_bot\\handlers\\commands.py": 9778,
+      "telegram_bot\\handlers\\helpers.py": 3848,
+      "telegram_bot\\handlers\\kpi_handlers.py": 2715,
+      "telegram_bot\\handlers\\panel_handlers.py": 3455,
+      "telegram_bot\\handlers\\register.py": 2609,
+      "telegram_bot\\handlers\\top_handlers.py": 4157,
+      "telegram_bot\\handlers\\__init__.py": 1632,
+      "tests\\conftest.py": 4033,
+      "tests\\test_backfill_job.py": 1322,
+      "tests\\test_kpi.py": 2266,
+      "tests\\test_panel_ui.py": 10200,
+      "tests\\__init__.py": 16,
+      "tests\\integration\\test_kpi_breakdown.py": 2403,
+      "tests\\integration\\test_kpi_callbacks.py": 4288,
+      "tests\\integration\\__init__.py": 28,
+      "tests\\unit\\test_autopost_bridge_parse.py": 1180,
+      "tests\\unit\\test_decider.py": 4869,
+      "tests\\unit\\test_gate_scoring.py": 5429,
+      "tests\\unit\\test_pnl_calculations.py": 4657,
+      "tests\\unit\\test_rr_calculations.py": 3443,
+      "tests\\unit\\__init__.py": 21,
+      "tools\\backfill_signals_from_trades.py": 4155,
+      "tools\\create_test_trade.py": 617,
+      "tools\\print_trades.py": 344,
+      "tools\\seed_signals.py": 1969,
+      "tools\\__init__.py": 0,
+      "trader\\broker.py": 396,
+      "trader\\paper_trade.py": 133,
+      "trader\\risk_manager.py": 274,
+      "trader\\__init__.py": 0,
+      "utils\\captcha.py": 4363,
+      "utils\\db.py": 4638,
+      "utils\\db_migrate.py": 20509,
+      "utils\\exceptions.py": 708,
+      "utils\\formatter.py": 373,
+      "utils\\formatting.py": 3137,
+      "utils\\health.py": 2237,
+      "utils\\ids.py": 162,
+      "utils\\indicators.py": 4920,
+      "utils\\logging_config.py": 3268,
+      "utils\\news_fetcher.py": 10761,
+      "utils\\openrouter.py": 14726,
+      "utils\\openrouter_client.py": 6647,
+      "utils\\pretty_md.py": 4306,
+      "utils\\rate_limiter.py": 2144,
+      "utils\\report_saver.py": 293,
+      "utils\\retry.py": 2362,
+      "utils\\scoring.py": 2368,
+      "utils\\screener_cache.py": 653,
+      "utils\\settings.py": 1084,
+      "utils\\settings_cached.py": 1308,
+      "utils\\settings_ob.py": 1073,
+      "utils\\signals_db.py": 3143,
+      "utils\\signal_register.py": 3818,
+      "utils\\symbol_validator.py": 3409,
+      "utils\\ta_formatter.py": 9710,
+      "utils\\texts.py": 6111,
+      "utils\\trading_db.py": 3856,
+      "utils\\user_settings.py": 7715,
+      "utils\\__init__.py": 0
+    },
+    "largest_files": [],
+    "empty_files": [
+      "=",
+      "__init__.py",
+      "alerts\\__init__.py",
+      "gpt_analyst\\__init__.py",
+      "gpt_decider\\__init__.py",
+      "market_data\\__init__.py",
+      "reports\\__init__.py",
+      "router\\__init__.py",
+      "scheduler\\__init__.py",
+      "signal_tools\\__init__.py",
+      "stats\\__init__.py",
+      "storage\\reports\\__init__.py",
+      "telegram_bot\\__init__.py",
+      "tools\\__init__.py",
+      "trader\\__init__.py",
+      "utils\\__init__.py"
+    ]
+  },
+  "code_quality": {
+    "files_analyzed": 174,
+    "total_lines": 24004,
+    "total_functions": 786,
+    "total_classes": 49,
+    "complexity_warnings": [
+      {
+        "file": "code_quality_analyzer.py",
+        "function": "analyze_code_quality",
+        "lines": 68
+      },
+      {
+        "file": "code_quality_analyzer.py",
+        "function": "analyze_performance",
+        "lines": 56
+      },
+      {
+        "file": "code_quality_analyzer.py",
+        "function": "analyze_security",
+        "lines": 63
+      },
+      {
+        "file": "code_quality_analyzer.py",
+        "function": "generate_report",
+        "lines": 68
+      },
+      {
+        "file": "core_config.py",
+        "function": "_parse_or_slots_from_env",
+        "lines": 79
+      },
+      {
+        "file": "critical_fixes_implementer.py",
+        "function": "fix_exception_handling",
+        "lines": 84
+      },
+      {
+        "file": "critical_fixes_implementer.py",
+        "function": "generate_implementation_report",
+        "lines": 51
+      },
+      {
+        "file": "gate_optimizer.py",
+        "function": "generate_optimized_gate_code",
+        "lines": 148
+      },
+      {
+        "file": "gate_optimizer.py",
+        "function": "generate_optimization_report",
+        "lines": 70
+      },
+      {
+        "file": "gate_optimizer.py",
+        "function": "run_gate_optimization",
+        "lines": 56
+      },
+      {
+        "file": "gate_validator.py",
+        "function": "analyze_gate_criteria",
+        "lines": 63
+      },
+      {
+        "file": "implementation_roadmap.py",
+        "function": "create_implementation_phases",
+        "lines": 140
+      },
+      {
+        "file": "implementation_roadmap.py",
+        "function": "calculate_expected_improvements",
+        "lines": 80
+      },
+      {
+        "file": "implementation_roadmap.py",
+        "function": "create_resource_requirements",
+        "lines": 85
+      },
+      {
+        "file": "implementation_roadmap.py",
+        "function": "generate_final_roadmap_report",
+        "lines": 146
+      },
+      {
+        "file": "main.py",
+        "function": "_append_pnl_bars",
+        "lines": 56
+      },
+      {
+        "file": "main.py",
+        "function": "_get_open_orders",
+        "lines": 125
+      },
+      {
+        "file": "main.py",
+        "function": "_get_scalp_stats",
+        "lines": 158
+      },
+      {
+        "file": "main.py",
+        "function": "build_app",
+        "lines": 186
+      },
+      {
+        "file": "market_analyzer.py",
+        "function": "generate_final_report",
+        "lines": 113
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "function": "analyze_trades_table",
+        "lines": 129
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "function": "analyze_data_integrity",
+        "lines": 67
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "function": "calculate_key_metrics",
+        "lines": 88
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "function": "generate_report",
+        "lines": 63
+      },
+      {
+        "file": "security_auditor.py",
+        "function": "audit_secrets_and_credentials",
+        "lines": 82
+      },
+      {
+        "file": "security_auditor.py",
+        "function": "audit_input_validation",
+        "lines": 57
+      },
+      {
+        "file": "security_auditor.py",
+        "function": "audit_configuration_management",
+        "lines": 61
+      },
+      {
+        "file": "security_auditor.py",
+        "function": "generate_security_report",
+        "lines": 67
+      },
+      {
+        "file": "sitecustomize.py",
+        "function": "_patch_httpx",
+        "lines": 55
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "function": "should_emit_signal",
+        "lines": 103
+      },
+      {
+        "file": "config\\settings.py",
+        "function": "_parse_or_slots_from_env",
+        "lines": 66
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "function": "run_full_analysis",
+        "lines": 62
+      },
+      {
+        "file": "scripts\\db_audit.py",
+        "function": "anomalies",
+        "lines": 61
+      },
+      {
+        "file": "scripts\\db_seed_signals.py",
+        "function": "seed",
+        "lines": 58
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "function": "main",
+        "lines": 168
+      },
+      {
+        "file": "scripts\\Smoke_test_trading.py",
+        "function": "main",
+        "lines": 65
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "function": "compute_indicators",
+        "lines": 62
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "function": "evaluate_gate",
+        "lines": 152
+      },
+      {
+        "file": "services\\autopost.py",
+        "function": "_compute_preset3_metrics",
+        "lines": 88
+      },
+      {
+        "file": "services\\autopost.py",
+        "function": "_quick_qscore",
+        "lines": 73
+      },
+      {
+        "file": "services\\autopost.py",
+        "function": "_qscore_basic",
+        "lines": 79
+      },
+      {
+        "file": "services\\autopost.py",
+        "function": "_format_message_text",
+        "lines": 98
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "function": "_parse",
+        "lines": 62
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "function": "handle_autopost_message",
+        "lines": 68
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "function": "_pick_tp",
+        "lines": 58
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "function": "collect_autopost_candidates",
+        "lines": 112
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "function": "_fetch_trades_closed_between",
+        "lines": 76
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "function": "compute_kpis",
+        "lines": 92
+      },
+      {
+        "file": "services\\kpi.py",
+        "function": "kpi_summary",
+        "lines": 123
+      },
+      {
+        "file": "services\\position_manager.py",
+        "function": "_close_position_with_pnl",
+        "lines": 60
+      },
+      {
+        "file": "services\\position_manager.py",
+        "function": "manage_open_positions",
+        "lines": 73
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "function": "collect_all_indicators",
+        "lines": 88
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "function": "_evaluate_scalping_gate",
+        "lines": 168
+      },
+      {
+        "file": "services\\signals_repo.py",
+        "function": "insert_open_signal",
+        "lines": 79
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "function": "_ensure_schema",
+        "lines": 51
+      },
+      {
+        "file": "services\\trade_engine.py",
+        "function": "open_trade_from_signal",
+        "lines": 95
+      },
+      {
+        "file": "signal_tools\\ta_calc.py",
+        "function": "get_ta_indicators",
+        "lines": 90
+      },
+      {
+        "file": "telegram_bot\\panel.py",
+        "function": "panel_keyboard",
+        "lines": 144
+      },
+      {
+        "file": "telegram_bot\\panel.py",
+        "function": "apply_panel_action",
+        "lines": 81
+      },
+      {
+        "file": "tests\\conftest.py",
+        "function": "in_memory_db",
+        "lines": 52
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "function": "backfill_signals",
+        "lines": 69
+      },
+      {
+        "file": "utils\\db.py",
+        "function": "get_conn",
+        "lines": 76
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "function": "_ensure_signals",
+        "lines": 82
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "function": "_ensure_trades",
+        "lines": 87
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "function": "_ensure_user_settings",
+        "lines": 122
+      },
+      {
+        "file": "utils\\formatting.py",
+        "function": "build_trade_plan_message",
+        "lines": 59
+      },
+      {
+        "file": "utils\\logging_config.py",
+        "function": "setup_logging",
+        "lines": 61
+      },
+      {
+        "file": "utils\\news_fetcher.py",
+        "function": "get_latest_news",
+        "lines": 82
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "function": "_extract_content",
+        "lines": 62
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "function": "chat_completion",
+        "lines": 167
+      },
+      {
+        "file": "utils\\pretty_md.py",
+        "function": "render_trade_brief",
+        "lines": 94
+      },
+      {
+        "file": "utils\\ta_formatter.py",
+        "function": "format_ta_report",
+        "lines": 117
+      },
+      {
+        "file": "utils\\user_settings.py",
+        "function": "_ensure_schema",
+        "lines": 91
+      },
+      {
+        "file": "services\\autopost\\formatting.py",
+        "function": "format_message_text",
+        "lines": 225
+      },
+      {
+        "file": "services\\autopost\\orderbook.py",
+        "function": "get_wall_info",
+        "lines": 54
+      },
+      {
+        "file": "services\\autopost\\scoring.py",
+        "function": "quick_qscore",
+        "lines": 61
+      }
+    ],
+    "code_smells": [
+      {
+        "file": "telegram_bot\\handlers.py",
+        "type": "syntax_error",
+        "message": "unexpected indent (handlers.py, line 490)"
+      }
+    ],
+    "imports_analysis": {
+      "code_quality_analyzer.py": 9,
+      "core_config.py": 5,
+      "critical_fixes_implementer.py": 5,
+      "display_results.py": 1,
+      "gate_optimizer.py": 6,
+      "gate_validator.py": 7,
+      "get_chat_id.py": 2,
+      "implementation_roadmap.py": 4,
+      "main.py": 29,
+      "market_analysis.py": 2,
+      "market_analyzer.py": 6,
+      "optimized_gate_logic.py": 0,
+      "phase2_db_analysis.py": 6,
+      "security_auditor.py": 8,
+      "sitecustomize.py": 4,
+      "system_diagnostics.py": 3,
+      "test_token.py": 2,
+      "trading_analytics.py": 2,
+      "__init__.py": 0,
+      "alerts\\push_alerts.py": 9,
+      "alerts\\signal_registry.py": 8,
+      "alerts\\__init__.py": 0,
+      "config\\settings.py": 7,
+      "config\\__init__.py": 1,
+      "gpt_analyst\\full_analyzer.py": 5,
+      "gpt_analyst\\llm_client.py": 3,
+      "gpt_analyst\\symbol_screener.py": 6,
+      "gpt_analyst\\__init__.py": 0,
+      "gpt_decider\\decider.py": 3,
+      "gpt_decider\\__init__.py": 0,
+      "market_data\\binance.py": 5,
+      "market_data\\binance_data.py": 2,
+      "market_data\\binance_rank.py": 3,
+      "market_data\\candles.py": 4,
+      "market_data\\long_short_ratio.py": 5,
+      "market_data\\news.py": 6,
+      "market_data\\orderbook.py": 3,
+      "market_data\\orderbook_light.py": 5,
+      "market_data\\__init__.py": 0,
+      "reports\\__init__.py": 0,
+      "router\\analyzer_router.py": 5,
+      "router\\__init__.py": 0,
+      "scheduler\\local_top5_job.py": 9,
+      "scheduler\\periodic_runner.py": 6,
+      "scheduler\\runner.py": 7,
+      "scheduler\\screener_job.py": 9,
+      "scheduler\\__init__.py": 0,
+      "scripts\\auto_analyze.py": 5,
+      "scripts\\db_add_indexes.py": 1,
+      "scripts\\db_audit.py": 3,
+      "scripts\\db_migrate_v2.py": 2,
+      "scripts\\db_peek.py": 3,
+      "scripts\\db_probe_open.py": 1,
+      "scripts\\db_seed_signals.py": 3,
+      "scripts\\debug_load_handlers.py": 1,
+      "scripts\\kpi_by_symbol.py": 3,
+      "scripts\\kpi_reasons.py": 3,
+      "scripts\\kpi_report.py": 3,
+      "scripts\\make_neutral.py": 1,
+      "scripts\\migrate.py": 2,
+      "scripts\\migrate_v3.py": 1,
+      "scripts\\print_gate.py": 2,
+      "scripts\\query_trades.py": 2,
+      "scripts\\rr_probe.py": 2,
+      "scripts\\run_parser_smoke.py": 3,
+      "scripts\\smoke_imports.py": 2,
+      "scripts\\Smoke_test_trading.py": 6,
+      "scripts\\stats_breakdown.py": 2,
+      "services\\analyzer_core.py": 5,
+      "services\\autopost.py": 17,
+      "services\\autopost_bridge.py": 7,
+      "services\\autopost_llm_guard.py": 2,
+      "services\\autopost_sources.py": 8,
+      "services\\daily_tracker.py": 8,
+      "services\\indicators.py": 3,
+      "services\\kpi.py": 2,
+      "services\\ladder_manager.py": 3,
+      "services\\mock_df.py": 5,
+      "services\\pnl.py": 1,
+      "services\\position_manager.py": 7,
+      "services\\scalping_sources.py": 8,
+      "services\\signals_repo.py": 3,
+      "services\\signal_closer.py": 7,
+      "services\\signal_filter.py": 0,
+      "services\\signal_sync.py": 3,
+      "services\\trade_engine.py": 5,
+      "services\\winrate_tracker.py": 5,
+      "signal_tools\\ta_calc.py": 3,
+      "signal_tools\\__init__.py": 0,
+      "stats\\model_ranker.py": 1,
+      "stats\\outcome_resolver.py": 3,
+      "stats\\__init__.py": 0,
+      "storage\\migrate.py": 4,
+      "storage\\seed_demo.py": 2,
+      "telegram_bot\\auto_scheduler.py": 5,
+      "telegram_bot\\bot.py": 8,
+      "telegram_bot\\extra_handlers.py": 6,
+      "telegram_bot\\handlers.py": 20,
+      "telegram_bot\\handlers_addons.py": 4,
+      "telegram_bot\\handlers_help.py": 3,
+      "telegram_bot\\panel.py": 6,
+      "telegram_bot\\panel_neutral.py": 8,
+      "telegram_bot\\sender.py": 2,
+      "telegram_bot\\__init__.py": 0,
+      "tests\\conftest.py": 6,
+      "tests\\test_backfill_job.py": 2,
+      "tests\\test_kpi.py": 5,
+      "tests\\test_panel_ui.py": 5,
+      "tests\\__init__.py": 0,
+      "tools\\backfill_signals_from_trades.py": 4,
+      "tools\\create_test_trade.py": 2,
+      "tools\\print_trades.py": 1,
+      "tools\\seed_signals.py": 1,
+      "tools\\__init__.py": 0,
+      "trader\\broker.py": 2,
+      "trader\\paper_trade.py": 1,
+      "trader\\risk_manager.py": 1,
+      "trader\\__init__.py": 0,
+      "utils\\captcha.py": 6,
+      "utils\\db.py": 8,
+      "utils\\db_migrate.py": 6,
+      "utils\\exceptions.py": 1,
+      "utils\\formatter.py": 2,
+      "utils\\formatting.py": 3,
+      "utils\\health.py": 5,
+      "utils\\ids.py": 2,
+      "utils\\indicators.py": 2,
+      "utils\\logging_config.py": 8,
+      "utils\\news_fetcher.py": 7,
+      "utils\\openrouter.py": 5,
+      "utils\\openrouter_client.py": 6,
+      "utils\\pretty_md.py": 3,
+      "utils\\rate_limiter.py": 5,
+      "utils\\report_saver.py": 1,
+      "utils\\retry.py": 3,
+      "utils\\scoring.py": 0,
+      "utils\\screener_cache.py": 3,
+      "utils\\settings.py": 4,
+      "utils\\settings_cached.py": 2,
+      "utils\\settings_ob.py": 4,
+      "utils\\signals_db.py": 4,
+      "utils\\signal_register.py": 4,
+      "utils\\symbol_validator.py": 6,
+      "utils\\ta_formatter.py": 6,
+      "utils\\texts.py": 0,
+      "utils\\trading_db.py": 3,
+      "utils\\user_settings.py": 5,
+      "utils\\__init__.py": 0,
+      "services\\autopost\\core.py": 15,
+      "services\\autopost\\formatting.py": 4,
+      "services\\autopost\\indicators.py": 3,
+      "services\\autopost\\orderbook.py": 5,
+      "services\\autopost\\persistence.py": 6,
+      "services\\autopost\\scoring.py": 2,
+      "services\\autopost\\__init__.py": 2,
+      "storage\\reports\\__init__.py": 0,
+      "telegram_bot\\handlers\\ai_commands.py": 24,
+      "telegram_bot\\handlers\\callbacks.py": 7,
+      "telegram_bot\\handlers\\commands.py": 6,
+      "telegram_bot\\handlers\\helpers.py": 9,
+      "telegram_bot\\handlers\\kpi_handlers.py": 9,
+      "telegram_bot\\handlers\\panel_handlers.py": 7,
+      "telegram_bot\\handlers\\register.py": 8,
+      "telegram_bot\\handlers\\top_handlers.py": 8,
+      "telegram_bot\\handlers\\__init__.py": 1,
+      "tests\\integration\\test_kpi_breakdown.py": 7,
+      "tests\\integration\\test_kpi_callbacks.py": 7,
+      "tests\\integration\\__init__.py": 0,
+      "tests\\unit\\test_autopost_bridge_parse.py": 2,
+      "tests\\unit\\test_decider.py": 2,
+      "tests\\unit\\test_gate_scoring.py": 2,
+      "tests\\unit\\test_pnl_calculations.py": 3,
+      "tests\\unit\\test_rr_calculations.py": 4,
+      "tests\\unit\\__init__.py": 0
+    },
+    "async_usage": 95
+  },
+  "architecture": {
+    "main_entry_points": [
+      "main.py"
+    ],
+    "service_layers": [
+      "services"
+    ],
+    "data_layers": [
+      "data",
+      "storage"
+    ],
+    "ui_layers": [
+      "telegram_bot"
+    ],
+    "dependencies": {
+      "requirements_count": 37,
+      "major_deps": [
+        "aiohappyeyeballs==2.6.1",
+        "aiohttp==3.12.15",
+        "aiolimiter==1.1.1",
+        "aiosignal==1.4.0",
+        "anyio==4.10.0",
+        "APScheduler==3.11.0",
+        "attrs==25.3.0",
+        "certifi==2025.8.3",
+        "charset-normalizer==3.4.3",
+        "dateparser==1.2.2"
+      ]
+    },
+    "circular_imports": [],
+    "solid_violations": []
+  },
+  "performance": {
+    "database_queries": [
+      {
+        "file": "main.py",
+        "query_count": 2
+      },
+      {
+        "file": "main.py",
+        "query_count": 8
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "query_count": 7
+      },
+      {
+        "file": "phase2_db_analysis.py",
+        "query_count": 19
+      },
+      {
+        "file": "system_diagnostics.py",
+        "query_count": 4
+      },
+      {
+        "file": "system_diagnostics.py",
+        "query_count": 5
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "query_count": 3
+      },
+      {
+        "file": "scripts\\kpi_reasons.py",
+        "query_count": 3
+      },
+      {
+        "file": "scripts\\kpi_report.py",
+        "query_count": 1
+      },
+      {
+        "file": "scripts\\make_neutral.py",
+        "query_count": 1
+      },
+      {
+        "file": "scripts\\migrate.py",
+        "query_count": 1
+      },
+      {
+        "file": "scripts\\query_trades.py",
+        "query_count": 1
+      },
+      {
+        "file": "scripts\\rr_probe.py",
+        "query_count": 1
+      },
+      {
+        "file": "scripts\\Smoke_test_trading.py",
+        "query_count": 8
+      },
+      {
+        "file": "scripts\\Smoke_test_trading.py",
+        "query_count": 14
+      },
+      {
+        "file": "services\\autopost.py",
+        "query_count": 9
+      },
+      {
+        "file": "services\\autopost.py",
+        "query_count": 5
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "query_count": 4
+      },
+      {
+        "file": "services\\autopost_llm_guard.py",
+        "query_count": 2
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "query_count": 4
+      },
+      {
+        "file": "services\\ladder_manager.py",
+        "query_count": 3
+      },
+      {
+        "file": "services\\position_manager.py",
+        "query_count": 8
+      },
+      {
+        "file": "services\\position_manager.py",
+        "query_count": 22
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "query_count": 10
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "query_count": 32
+      },
+      {
+        "file": "services\\trade_engine.py",
+        "query_count": 7
+      },
+      {
+        "file": "services\\trade_engine.py",
+        "query_count": 10
+      },
+      {
+        "file": "storage\\seed_demo.py",
+        "query_count": 2
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "query_count": 1
+      },
+      {
+        "file": "telegram_bot\\panel_neutral.py",
+        "query_count": 2
+      },
+      {
+        "file": "tests\\conftest.py",
+        "query_count": 5
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "query_count": 3
+      },
+      {
+        "file": "tools\\create_test_trade.py",
+        "query_count": 1
+      },
+      {
+        "file": "tools\\print_trades.py",
+        "query_count": 1
+      },
+      {
+        "file": "tools\\print_trades.py",
+        "query_count": 1
+      },
+      {
+        "file": "tools\\seed_signals.py",
+        "query_count": 1
+      },
+      {
+        "file": "utils\\captcha.py",
+        "query_count": 1
+      },
+      {
+        "file": "utils\\db.py",
+        "query_count": 1
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "query_count": 6
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "query_count": 12
+      },
+      {
+        "file": "utils\\health.py",
+        "query_count": 1
+      },
+      {
+        "file": "utils\\health.py",
+        "query_count": 1
+      },
+      {
+        "file": "utils\\settings.py",
+        "query_count": 2
+      },
+      {
+        "file": "utils\\settings.py",
+        "query_count": 2
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "query_count": 2
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "query_count": 2
+      },
+      {
+        "file": "utils\\signals_db.py",
+        "query_count": 4
+      },
+      {
+        "file": "utils\\trading_db.py",
+        "query_count": 2
+      },
+      {
+        "file": "utils\\user_settings.py",
+        "query_count": 2
+      },
+      {
+        "file": "services\\autopost\\persistence.py",
+        "query_count": 9
+      },
+      {
+        "file": "services\\autopost\\persistence.py",
+        "query_count": 5
+      },
+      {
+        "file": "telegram_bot\\handlers\\kpi_handlers.py",
+        "query_count": 1
+      }
+    ],
+    "memory_usage": {},
+    "async_patterns": 373,
+    "caching_usage": 1,
+    "bottlenecks": []
+  },
+  "security": {
+    "sql_injection_risks": [
+      {
+        "file": "security_auditor.py",
+        "line": 133,
+        "code": "if ('execute(' in line or 'cursor.execute' in line) and ('%' in line or '+' in line or 'format(' in line):"
+      }
+    ],
+    "hardcoded_secrets": [
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 309,
+        "type": "potential_secret"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 310,
+        "type": "potential_secret"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 311,
+        "type": "potential_secret"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 312,
+        "type": "potential_secret"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 313,
+        "type": "potential_secret"
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "line": 7,
+        "type": "potential_secret"
+      }
+    ],
+    "input_validation": [],
+    "error_handling": [
+      {
+        "file": "critical_fixes_implementer.py",
+        "line": 105,
+        "issue": "bare_except"
+      },
+      {
+        "file": "critical_fixes_implementer.py",
+        "line": 136,
+        "issue": "bare_except"
+      },
+      {
+        "file": "security_auditor.py",
+        "line": 191,
+        "issue": "bare_except"
+      }
+    ]
+  },
+  "report": "# 📊 PHASE 4: CODE QUALITY REVIEW REPORT\n**Timestamp:** 2026-01-30T10:29:54.960312\n\n## 📁 PROJECT STRUCTURE\n- **Total files:** 554\n- **Python files:** 174\n- **Directories:** 26\n- **Largest files:** 0\n- **Empty files:** 16\n\n## 🔍 CODE QUALITY\n- **Files analyzed:** 174\n- **Total lines:** 24004\n- **Functions:** 786\n- **Classes:** 49\n- **Async functions:** 95\n- **Complexity warnings:** 76\n- **Code smells:** 1\n\n## 🏗️ ARCHITECTURE\n- **Entry points:** main.py\n- **Service layers:** services\n- **Data layers:** data, storage\n- **UI layers:** telegram_bot\n- **Dependencies:** 37\n\n## ⚡ PERFORMANCE\n- **Database queries:** 52 files\n- **Async patterns:** 373\n- **Caching usage:** 1\n\n## 🔒 SECURITY\n- **SQL injection risks:** 1\n- **Hardcoded secrets:** 6\n- **Error handling issues:** 3\n\n## 💡 RECOMMENDATIONS\n- Видалити 16 порожніх файлів\n- Рефакторити 76 складних функцій (>50 рядків)\n- Виправити 1 code smells\n- Оптимізувати database queries (можливо додати індекси)\n- Перевірити 1 потенційних SQL ін'єкцій\n- Перемістити 6 hardcoded секретів в env змінні\n"
+}

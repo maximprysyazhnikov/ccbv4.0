@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-01-30T10:36:36.305816",
+  "phase": "market_analysis_final",
+  "status": "completed",
+  "market_conditions": {
+    "symbols_analyzed": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "ADAUSDT",
+      "SOLUSDT"
+    ],
+    "price_data": {
+      "BTCUSDT": {
+        "price": null,
+        "ema50": null,
+        "ema200": null,
+        "rsi": null,
+        "trend": "DOWNTREND"
+      },
+      "ETHUSDT": {
+        "price": null,
+        "ema50": null,
+        "ema200": null,
+        "rsi": null,
+        "trend": "DOWNTREND"
+      },
+      "BNBUSDT": {
+        "price": null,
+        "ema50": null,
+        "ema200": null,
+        "rsi": null,
+        "trend": "DOWNTREND"
+      }
+    },
+    "volatility_analysis": {},
+    "trend_analysis": {},
+    "ls_ratio_data": {
+      "BTCUSDT": {
+        "long_pct": 74.53,
+        "short_pct": 25.47,
+        "ls_ratio": 2.9262,
+        "bias": "LONG",
+        "bias_emoji": "🟢",
+        "sentiment": "BULLISH"
+      },
+      "ETHUSDT": {
+        "long_pct": 75.22,
+        "short_pct": 24.779999999999998,
+        "ls_ratio": 3.0355,
+        "bias": "LONG",
+        "bias_emoji": "🟢",
+        "sentiment": "BULLISH"
+      },
+      "BNBUSDT": {
+        "long_pct": 77.91,
+        "short_pct": 22.09,
+        "ls_ratio": 3.5269,
+        "bias": "LONG",
+        "bias_emoji": "🟢",
+        "sentiment": "BULLISH"
+      },
+      "ADAUSDT": {
+        "long_pct": 69.36,
+        "short_pct": 30.64,
+        "ls_ratio": 2.2637,
+        "bias": "LONG",
+        "bias_emoji": "🟢",
+        "sentiment": "BULLISH"
+      },
+      "SOLUSDT": {
+        "long_pct": 82.87,
+        "short_pct": 17.130000000000003,
+        "ls_ratio": 4.8377,
+        "bias": "LONG",
+        "bias_emoji": "🟢",
+        "sentiment": "BULLISH"
+      }
+    },
+    "funding_rates": {}
+  },
+  "market_regime": {
+    "overall_regime": "BULLISH",
+    "volatility_regime": "MODERATE",
+    "trend_regime": "MIXED",
+    "recommendations": [
+      "Ринок в бичачому режимі - розглянути LONG позиції"
+    ]
+  },
+  "seasonal_patterns": {
+    "current_hour": 10,
+    "current_day": "Friday",
+    "time_zone_bias": {
+      "EUR": "ACTIVE"
+    },
+    "recommendations": [
+      "Активна європейська сесія - підвищена волатильність",
+      "Friday - підвищена волатильність на початку/кінці тижня"
+    ]
+  },
+  "trading_recommendations": {
+    "immediate_actions": [
+      "Терміново перемістити 6 hardcoded секретів в environment variables",
+      "Виправити 1 SQL injection та 1 command injection вразливість",
+      "Замінити 16 bare except blocks на специфічні exception types",
+      "Рефакторити 62 функції довжиною >50 рядків"
+    ],
+    "risk_management": [
+      "Зменшити gate pass rate з 93.8% до 70% для кращої фільтрації",
+      "Додати L/S Ratio як 13-й gate критерій",
+      "Імплементувати stricter stop-loss правила",
+      "Додати maximum drawdown limits"
+    ],
+    "strategy_adjustments": [
+      "Оптимізувати entry/exit умови на основі 17.46% win rate",
+      "Покращити risk-reward ratio розрахунки",
+      "Додати backtesting framework для тестування змін",
+      "Імплементувати ML модель для gate logic",
+      "Ринок бичачий - пріоритет LONG позицій"
+    ],
+    "monitoring_points": [
+      "Моніторити gate pass rate після оптимізації",
+      "Відслідковувати win rate покращення",
+      "Контролювати drawdown limits",
+      "Аналізувати P&L по символах щотижня"
+    ]
+  },
+  "final_report": "# 📊 PHASE 6: MARKET ANALYSIS & FINAL REPORT\n**Timestamp:** 2026-01-30T10:36:51.563994\n\n## 📈 PILOT PLAN EXECUTION SUMMARY\n\n- **Phase 1: System Diagnostics**: ✅ COMPLETED - Infrastructure OK, Bot Running\n- **Phase 2: Data Analysis**: ✅ COMPLETED - 17.46% Win Rate, -$86.93 Loss - CRITICAL\n- **Phase 3: Gate Logic Validation**: ✅ COMPLETED - 93.8% Pass Rate - TOO LENIENT\n- **Phase 4: Code Quality Review**: ✅ COMPLETED - 168 files, 728 functions, 62 complex functions\n- **Phase 5: Security & Configuration**: ✅ COMPLETED - 6 secrets, 1 SQL + 1 CMD injection risk\n- **Phase 6: Market Analysis**: ✅ COMPLETED - Market regime analysis & recommendations\n\n## 🚨 CRITICAL ISSUES IDENTIFIED\n\n- ❌ 17.46% Win Rate (Target: 35%+)\n- ❌ -$86.93 Total P&L Loss\n- ❌ 24-trade Loss Streak (Max)\n- ❌ 93.8% Gate Pass Rate (Too High)\n- ❌ 6 Hardcoded Secrets in Code\n- ❌ 1 SQL Injection + 1 Command Injection Risk\n- ❌ 16 Bare Except Blocks\n- ❌ 62 Functions >50 Lines (Complexity)\n\n## 📊 CURRENT MARKET ANALYSIS\n- **Symbols analyzed:** 5\n- **L/S Ratio data:** 5 symbols\n- **Sentiment breakdown:**\n  - BULLISH: 5 symbols\n\n## 💡 ACTIONABLE RECOMMENDATIONS\n\n### Immediate Actions (Priority 1):\n- 🔴 Терміново перемістити 6 hardcoded секретів в environment variables\n- 🔴 Виправити 1 SQL injection та 1 command injection вразливість\n- 🔴 Замінити 16 bare except blocks на специфічні exception types\n- 🔴 Рефакторити 62 функції довжиною >50 рядків\n\n### Risk Management (Priority 2):\n- 🟡 Зменшити gate pass rate з 93.8% до 70% для кращої фільтрації\n- 🟡 Додати L/S Ratio як 13-й gate критерій\n- 🟡 Імплементувати stricter stop-loss правила\n- 🟡 Додати maximum drawdown limits\n\n### Strategy Adjustments (Priority 3):\n- 🟢 Оптимізувати entry/exit умови на основі 17.46% win rate\n- 🟢 Покращити risk-reward ratio розрахунки\n- 🟢 Додати backtesting framework для тестування змін\n- 🟢 Імплементувати ML модель для gate logic\n- 🟢 Ринок бичачий - пріоритет LONG позицій\n\n### Monitoring Points:\n- 👁️ Моніторити gate pass rate після оптимізації\n- 👁️ Відслідковувати win rate покращення\n- 👁️ Контролювати drawdown limits\n- 👁️ Аналізувати P&L по символах щотижня\n\n## 🎯 NEXT STEPS\n\n- 1. **Immediate Security Fixes** - Move secrets to env, fix injections\n- 2. **Gate Logic Optimization** - Reduce pass rate to 70%, add L/S ratio\n- 3. **Code Refactoring** - Break down complex functions, improve error handling\n- 4. **Backtesting Implementation** - Test gate logic changes\n- 5. **Risk Management Enhancement** - Implement drawdown limits\n- 6. **Performance Monitoring** - Track improvements over next 30 trades\n\n---\n**Report generated by MAXPILOT AI Assistant** - 2026-01-30 10:36:51"
+}

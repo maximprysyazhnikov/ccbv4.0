@@ -1,0 +1,1753 @@
+# Auto-analysis report
+Generated: 2026-01-29T03:39:16.247636Z
+
+## autopost (35 files)
+- .\main.py
+  - L56: from services.autopost import mark_autopost_sent, run_autopost_once
+  - L330: log.info(f"autopost sending to chat_id: {chat_id}")
+  - L371: log.warning("autopost send fail: %s", e)
+  - L393: log.info("autopost scan done (sent=%d)", sent)
+  - L565: "[jobqueue] ✅ scheduled: autopost 300s, signal_closer %ss%s; "
+- .\schema_migration.sql
+  - L7: autopost INTEGER DEFAULT 0,
+- .\SUMMARY.md
+  - L47: │   ├── autopost.py   # Auto signal posting
+  - L180: | `user_settings` | Per-user prefs | timeframe, autopost, rr_threshold, locale |
+  - L253: ⚠️ **Large files** - handlers.py (~1246 lines), autopost.py (~1097 lines)
+  - L309: **autopost.py → autopost/**
+  - L309: **autopost.py → autopost/**
+- .\.cursor\plans\ccbv3.8_code_quality_improvements_1d94033a.plan.md
+  - L23: - id: phase3-autopost
+  - L24: content: "Phase 3.2: Split services/autopost.py into autopost/ submodule"
+  - L24: content: "Phase 3.2: Split services/autopost.py into autopost/ submodule"
+  - L113: - **test_rr_calculations.py**: Test `_compute_rr_num()` from [services/autopost.py](services/autopost.py) and [telegram_bot/handlers.py](telegram_bot/handlers.py)
+  - L113: - **test_rr_calculations.py**: Test `_compute_rr_num()` from [services/autopost.py](services/autopost.py) and [telegram_bot/handlers.py](telegram_bot/handlers.py)
+- .\gpt_analyst\full_analyzer.py
+  - L61: Якщо реальна RR-логіка буде в іншому модулі (наприклад, analyzer_core чи services.autopost),
+  - L67: # from services.autopost import compute_rr_metrics
+- .\market_data\candles.py
+  - L11: TTL_SEC = 30  # однакові дані протягом 30с в усіх місцях (autopost,/ai,Analyze ALL)
+- .\scheduler\runner.py
+  - L8: from services.autopost import run_autopost_once
+- .\scripts\auto_analyze.py
+  - L8: "autopost": re.compile(r"\bautopost\b", re.I),
+  - L10: "rr": re.compile(r"\brr\b|risk[_\s-]*reward|autopost[_\s-]*rr", re.I),
+  - L57: for key in ["autopost","parse_func","direction","rr","user_settings","db_insert","transactions","db_create_signals","signals_table","trades_table"]:
+- .\scripts\db_audit.py
+  - L65: section("USERS (autopost/settings)")
+  - L68: COALESCE(autopost,0) AS autopost,
+  - L68: COALESCE(autopost,0) AS autopost,
+  - L81: on_cnt = sum(1 for r in rows if r["autopost"])
+  - L82: print(f"users total: {len(rows)} | autopost ON: {on_cnt}")
+- .\scripts\db_seed_signals.py
+  - L42: autopost INTEGER,
+- .\scripts\migrate_v3.py
+  - L23: "autopost": "INTEGER DEFAULT 0",
+- .\scripts\migrate_v3.sql
+  - L5: autopost INTEGER DEFAULT 0,
+- .\services\analyzer_core.py
+  - L11: # але приймаємо cfg з autopost; якщо cfg немає — використаємо дефолти нижче.
+  - L324: # Щоб зробити критерій активним, треба передавати df в autopost (що ми і робимо).
+- .\services\autopost.py
+  - L1: # services/autopost.py
+  - L41: log = logging.getLogger("autopost")
+  - L593: "source": "autopost",
+  - L640: log.warning("[autopost] indicators/gate failed: %s", e)
+  - L788: # Delegated to services.autopost.core
+- .\services\autopost_bridge.py
+  - L20: # Parsers for autopost text
+  - L22: # 🤖 Autopost plan ETHUSDT [1h]
+  - L26: _RE_HEADER = re.compile(r"Autopost plan\s+([A-Z0-9]+)\s+\[([^\]]+)\]", re.I)
+  - L53: "source": "autopost",
+  - L120: plan.get("source","autopost"),
+- .\services\autopost_llm_guard.py
+  - L5: log = logging.getLogger("autopost")
+  - L28: log.warning("autopost guard: cannot persist %s=%s (%s)", key, value, e)
+  - L42: log.warning("autopost: LLM disabled (%s)", reason)
+- .\services\signals_repo.py
+  - L74: source: str = "autopost",
+  - L101: "source": source or "autopost",
+- .\services\autopost\core.py
+  - L1: """Core autopost execution logic."""
+  - L15: from services.autopost.formatting import (
+  - L18: from services.autopost.persistence import (
+  - L21: from services.autopost.indicators import ind_summary, build_panel_lite
+  - L22: from services.autopost.scoring import compute_rr_num, quick_qscore
+- .\services\autopost\formatting.py
+  - L1: """Message formatting functions for autopost."""
+  - L59: """Format autopost message text."""
+- .\services\autopost\indicators.py
+  - L6: from services.autopost.formatting import fmt_num, fmt_pct
+- .\services\autopost\persistence.py
+  - L1: """Database persistence functions for autopost."""
+  - L11: log = logging.getLogger("autopost")
+  - L30: """Mark autopost as sent."""
+  - L57: """Atomically reserve autopost slot."""
+  - L98: """Complete autopost send by updating ts_sent."""
+- .\services\autopost\__init__.py
+  - L2: from services.autopost.core import run_autopost_once
+  - L3: from services.autopost.persistence import mark_autopost_sent
+- .\storage\seed_demo.py
+  - L10: cur.execute("INSERT OR IGNORE INTO user_settings(user_id,autopost,locale) VALUES(?,0,'uk')", (uid,))
+- .\telegram_bot\auto_scheduler.py
+  - L5: from services.autopost import run_autopost_once
+- .\telegram_bot\extra_handlers.py
+  - L7: from services.autopost import run_autopost_once
+  - L17: await update.message.reply_text("✅ Autopost scan завершено")
+- .\telegram_bot\handlers.py
+  - L26: from services.autopost import run_autopost_once
+  - L496: "   • `Autopost` вкл/викл\n"
+  - L497: "   • `Autopost TF` — окремий TF для фонового аналізу\n"
+  - L498: "   • `Autopost RR` — мінімальний Risk/Reward для автопосту\n"
+  - L672: """Обробка всіх натискань на кнопки панелі (toggle Autopost/TF/RR/Locale/Model...)."""
+- .\telegram_bot\panel.py
+  - L37: autopost  = int(us.get("autopost") or 0)
+  - L37: autopost  = int(us.get("autopost") or 0)
+  - L48: # Autopost ON/OFF
+  - L51: f"Autopost: {_bool_emoji(autopost)}",
+  - L51: f"Autopost: {_bool_emoji(autopost)}",
+- .\telegram_bot\handlers\callbacks.py
+  - L9: from services.autopost import run_autopost_once
+  - L38: logging.getLogger("autopost").warning("send fail: %s", e)
+- .\telegram_bot\handlers\commands.py
+  - L52: "   • `Autopost` вкл/викл\n"
+  - L53: "   • `Autopost TF` — окремий TF для фонового аналізу\n"
+  - L54: "   • `Autopost RR` — мінімальний Risk/Reward для автопосту\n"
+- .\telegram_bot\handlers\panel_handlers.py
+  - L46: "- Autopost — вкл/викл фоновий аналіз моніторинг-пар.\n"
+- .\tests\unit\test_rr_calculations.py
+  - L4: from services.autopost import _compute_rr_num
+- .\tools\seed_signals.py
+  - L9: timeframe TEXT, autopost INTEGER, autopost_tf TEXT, autopost_rr REAL,
+- .\utils\db_migrate.py
+  - L247: autopost        INTEGER DEFAULT 0,
+  - L283: autopost        INTEGER DEFAULT 0,
+  - L297: INSERT OR IGNORE INTO user_settings_new(user_id, autopost, autopost_rr, rr_threshold, model_key, locale)
+  - L300: COALESCE(MAX(CASE WHEN kv.key='autopost'     THEN CAST(kv.value AS INTEGER) END), 0),
+  - L324: autopost        INTEGER DEFAULT 0,
+- .\utils\texts.py
+  - L6: • /panel — панель керування (TF, RR, Autopost, Model, Locale, OrderBook)
+- .\utils\user_settings.py
+  - L23: autopost        INTEGER DEFAULT 0,
+  - L40: "autopost":        "ALTER TABLE user_settings ADD COLUMN autopost INTEGER DEFAULT 0",
+  - L40: "autopost":        "ALTER TABLE user_settings ADD COLUMN autopost INTEGER DEFAULT 0",
+  - L113: SELECT user_id, timeframe, autopost, autopost_tf, autopost_rr,
+  - L126: Приклад: set_user_settings(123, autopost_rr=2.0, autopost=1)
+
+## parse_func (2 files)
+- .\scripts\auto_analyze.py
+  - L82: f.write("- Run detailed iterator on candidate parser files and add unit tests for parse() to assert LONG/SHORT and rr extraction.\n")
+- .\services\autopost_bridge.py
+  - L35: def _parse(text: str) -> Optional[Dict]:
+  - L156: plan = _parse(text)
+
+## direction (162 files)
+- .\SUMMARY.md
+  - L121: | 1 | RSI (14) | Momentum | LONG ≥50, SHORT ≤50 |
+  - L121: | 1 | RSI (14) | Momentum | LONG ≥50, SHORT ≤50 |
+  - L167: | Order book support (LONG) | +8 |
+  - L168: | Order book resistance (SHORT) | +8 |
+  - L264: ### 🔴 High Priority
+- .\.cursor\plans\ccbv3.8_code_quality_improvements_1d94033a.plan.md
+  - L97: addopts = -v --tb=short
+- .\alerts\signal_registry.py
+  - L22: direction: str   # LONG/SHORT
+  - L22: direction: str   # LONG/SHORT
+  - L97: direction: str,          # LONG/SHORT
+  - L97: direction: str,          # LONG/SHORT
+  - L144: if st.direction.upper() == "LONG":
+- .\gpt_analyst\full_analyzer.py
+  - L50: "direction": re.compile(r"\b(LONG|SHORT)\b", re.I),
+  - L50: "direction": re.compile(r"\b(LONG|SHORT)\b", re.I),
+  - L81: # direction: якщо є і LONG і SHORT — залишимо «-»
+  - L81: # direction: якщо є і LONG і SHORT — залишимо «-»
+  - L127: "Return a *short* plan containing the fields on their own lines:\n"
+- .\gpt_decider\decider.py
+  - L11: DIR_RX = re.compile(r"\b(LONG|SHORT|NO[_\s-]?TRADE|NEUTRAL)\b", re.I)
+  - L11: DIR_RX = re.compile(r"\b(LONG|SHORT|NO[_\s-]?TRADE|NEUTRAL)\b", re.I)
+  - L59: "direction": "LONG|SHORT|NO_TRADE|NEUTRAL|None",
+  - L59: "direction": "LONG|SHORT|NO_TRADE|NEUTRAL|None",
+- .\migrations\005_laddering.sql
+  - L10: side      TEXT    NOT NULL,        -- 'BUY'|'SELL'
+  - L10: side      TEXT    NOT NULL,        -- 'BUY'|'SELL'
+- .\migrations\00XX_trades_and_settings.sql
+  - L7: direction TEXT CHECK(direction IN ('LONG','SHORT')),
+  - L7: direction TEXT CHECK(direction IN ('LONG','SHORT')),
+- .\scheduler\local_top5_job.py
+  - L36: if sma7>sma25 and macd_d>0 and rsi>=52: return "LONG"
+  - L37: if sma7<sma25 and macd_d<0 and rsi<=48: return "SHORT"
+  - L63: arrow="▲" if r["bias"]=="LONG" else "▼" if r["bias"]=="SHORT" else "•"
+  - L63: arrow="▲" if r["bias"]=="LONG" else "▼" if r["bias"]=="SHORT" else "•"
+- .\scheduler\screener_job.py
+  - L20: if sma7 > sma25 and macd_d > 0 and rsi >= 52: return "LONG"
+  - L21: if sma7 < sma25 and macd_d < 0 and rsi <= 48: return "SHORT"
+  - L42: arrow = "▲" if bias=="LONG" else "▼" if bias=="SHORT" else "•"
+  - L42: arrow = "▲" if bias=="LONG" else "▼" if bias=="SHORT" else "•"
+- .\scripts\auto_analyze.py
+  - L11: "direction": re.compile(r"\bLONG\b|\bSHORT\b|\U0001F7E2|\U0001F534|BUY|SELL|\u2B06\uFE0F|\u2B07\uFE0F", re.I),
+  - L11: "direction": re.compile(r"\bLONG\b|\bSHORT\b|\U0001F7E2|\U0001F534|BUY|SELL|\u2B06\uFE0F|\u2B07\uFE0F", re.I),
+  - L74: # check if direction-only mentions LONG or only SHORT
+  - L74: # check if direction-only mentions LONG or only SHORT
+  - L81: f.write("- Review files listed above for: support of SHORT and LONG parsing, RR sourcing from user settings, DB transactions wrapping inserts.\n")
+- .\scripts\db_seed_signals.py
+  - L70: # LONG-сценарій (для WIN: tp далі, для LOSS: sl ближче)
+- .\scripts\migrate_v3.sql
+  - L19: direction TEXT CHECK(direction IN ('LONG','SHORT')) NOT NULL,
+  - L19: direction TEXT CHECK(direction IN ('LONG','SHORT')) NOT NULL,
+- .\scripts\rr_probe.py
+  - L22: def rr(entry, sl, px, direction='LONG', eps=1e-6):
+  - L26: return (px - entry) / r if (direction or "LONG").upper() == "LONG" else (entry - px) / r
+  - L26: return (px - entry) / r if (direction or "LONG").upper() == "LONG" else (entry - px) / r
+  - L37: rrv = rr(float(entry or 0), float(sl or 0), px, direction or "LONG")
+- .\scripts\Smoke_test_trading.py
+  - L45: def open_dummy_trade(symbol="BTCUSDT", timeframe="15m", direction="LONG",
+  - L59: direction TEXT CHECK(direction IN ('LONG','SHORT')),
+  - L59: direction TEXT CHECK(direction IN ('LONG','SHORT')),
+  - L122: if direction == "LONG":
+  - L147: if direction == "LONG":
+- .\services\analyzer_core.py
+  - L224: dir_long = str(direction or "LONG").upper() == "LONG"
+  - L224: dir_long = str(direction or "LONG").upper() == "LONG"
+  - L320: # оцінимо за close: (останнє > max за n-1) для LONG, або < min для SHORT
+  - L320: # оцінимо за close: (останнє > max за n-1) для LONG, або < min для SHORT
+- .\services\autopost.py
+  - L80: if direction == "LONG":
+  - L83: elif direction == "SHORT":
+  - L235: trend_ok = (ema50 >= ema200) if direction == "LONG" else (ema50 < ema200)
+  - L368: trend_up = "🟢" if m["ema50"] >= m["ema200"] else "🔴"
+  - L368: trend_up = "🟢" if m["ema50"] >= m["ema200"] else "🔴"
+- .\services\autopost_bridge.py
+  - L23: # Dir: LONG | RR≈2.4211
+  - L27: _RE_DIR_RR = re.compile(r"Dir:\s*(LONG|SHORT)\s*\|\s*RR[≈~=]\s*([0-9.]+)", re.I)
+  - L27: _RE_DIR_RR = re.compile(r"Dir:\s*(LONG|SHORT)\s*\|\s*RR[≈~=]\s*([0-9.]+)", re.I)
+  - L48: "direction": direction,   # 'LONG' або 'SHORT'
+  - L48: "direction": direction,   # 'LONG' або 'SHORT'
+- .\services\autopost_sources.py
+  - L107: return ((tp - entry) / dist) if direction == "LONG" else ((entry - tp) / dist)
+  - L121: if direction == "LONG":
+  - L154: if direction == "LONG":
+  - L162: if direction == "LONG":
+  - L203: direction = "LONG" if ema50 >= ema200 else "SHORT"
+- .\services\ladder_manager.py
+  - L19: price = entry0 - delta if direction == "LONG" else entry0 + delta
+  - L22: price = entry0 * (1 - k) if direction == "LONG" else entry0 * (1 + k)
+  - L37: c.execute("INSERT INTO trade_legs(trade_id, side, qty, price, filled_at) VALUES (?,?,?,?,datetime('now'))", (trade_id, "BUY" if price<=new_avg else "SELL", qty, price))
+  - L37: c.execute("INSERT INTO trade_legs(trade_id, side, qty, price, filled_at) VALUES (?,?,?,?,datetime('now'))", (trade_id, "BUY" if price<=new_avg else "SELL", qty, price))
+- .\services\mock_df.py
+  - L8: Direction = Literal["LONG", "SHORT"]
+  - L8: Direction = Literal["LONG", "SHORT"]
+  - L11: direction: Direction = "LONG",
+  - L23: - тренд відповідав напрямку (EMA50 > EMA200 для LONG і навпаки)
+  - L31: drift = step if direction == "LONG" else -step
+- .\services\pnl.py
+  - L8: move = (close_price - entry) if direction.upper() == "LONG" else (entry - close_price)
+- .\services\position_manager.py
+  - L52: if (direction or "LONG").upper() == "LONG":
+  - L52: if (direction or "LONG").upper() == "LONG":
+  - L112: if (direction or "LONG").upper() == "LONG":
+  - L112: if (direction or "LONG").upper() == "LONG":
+  - L164: if (direction or "LONG").upper() == "LONG":
+- .\services\signal_closer.py
+  - L86: if (direction or "LONG").upper() == "LONG":
+  - L86: if (direction or "LONG").upper() == "LONG":
+  - L169: rr = _rr_from_exit(entry, sl, exit_px, direction or "LONG")
+  - L180: direction=direction or "LONG",
+- .\services\trade_engine.py
+  - L61: - id (signal_id) | symbol | timeframe | direction ('LONG'/'SHORT')
+  - L61: - id (signal_id) | symbol | timeframe | direction ('LONG'/'SHORT')
+  - L67: if direction not in ("LONG", "SHORT"):
+  - L67: if direction not in ("LONG", "SHORT"):
+  - L99: gross = (close - entry) * qty if direction == "LONG" else (entry - close) * qty
+- .\services\autopost\core.py
+  - L96: direction = str(c.get("direction", "LONG")).upper()
+- .\services\autopost\formatting.py
+  - L69: if direction == "LONG":
+- .\services\autopost\indicators.py
+  - L26: trend_ok = (ema50 >= ema200) if direction == "LONG" else (ema50 < ema200)
+  - L77: "📈 Trend: " + ("🟢" if trend_flag is True else ("🔴" if trend_flag is False else "–"))
+  - L77: "📈 Trend: " + ("🟢" if trend_flag is True else ("🔴" if trend_flag is False else "–"))
+- .\services\autopost\orderbook.py
+  - L36: if direction == "LONG":
+- .\services\autopost\scoring.py
+  - L18: if direction == "LONG":
+  - L21: elif direction == "SHORT":
+  - L55: if direction == "LONG":
+  - L66: if (direction == "LONG" and macd_hist > 0) or (direction == "SHORT" and macd_hist < 0):
+  - L66: if (direction == "LONG" and macd_hist > 0) or (direction == "SHORT" and macd_hist < 0):
+- .\storage\seed_demo.py
+  - L13: (uid, "BTCUSDT", "15m", "LONG", 100.0, 95.0, 109.0, 1.80, now-3600*20, now-3600*18, "WIN", 9.0),
+  - L14: (uid, "ETHUSDT", "15m", "SHORT",  50.0, 55.0,  47.0, 0.60, now-3600*10, now-3600* 9, "LOSS", -10.0),
+  - L15: (uid, "SOLUSDT", "1h",  "LONG",  10.0,  9.5,  11.5, 3.00, now-3600*30, now-3600*28, "WIN", 15.0),
+- .\storage\reports\2025-08-18_07-22-48__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L10: - **Technical**: Recent breakdown below 115500 support with high-volume sell-off (315 BTC at 116670).
+- .\storage\reports\2025-08-18_07-22-52__ETHUSDT.md
+  - L8: - **Orderbook**: Despite BUY_DOMINANT imbalance, bid/ask walls are thin, suggesting low conviction.
+- .\storage\reports\2025-08-18_07-22-58__BNBUSDT.md
+  - L6: - **Orderbook:** BUY_DOMINANT imbalance, but bid/ask walls are thin, indicating weak conviction.
+  - L7: - **News:** Mixed sentiment with rising leverage concerns and institutional buying, creating uncertainty.
+- .\storage\reports\2025-08-18_07-23-10__SOLUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance but thin bid wall at 182.3; ask wall at 182.52 may cap upside.
+  - L12: - **Volume**: High sell volume (54k) at 182.86 breakdown.
+  - L14: - **Sentiment**: Mixed institutional interest (Goldman ETF buys vs. Fed scrapping crypto oversight).
+- .\storage\reports\2025-08-18_07-23-20__XRPUSDT.md
+  - L4: **Direction**: SHORT
+  - L13: - **Volume**: High sell-volume spikes during down moves (1.2M+ candles).
+  - L15: - **Risk**: Watch for BTC correlation if ETF buying resumes.
+- .\storage\reports\2025-08-18_07-23-30__RAYUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 3.36 (support).
+  - L13: - **News**: Institutional buying spree (Goldman Sachs, Harvard) may spill into altcoins.
+- .\storage\reports\2025-08-18_07-23-40__SHELLUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance (2:1 bid/ask volume). Strong bid wall at 0.1304 supports downside.
+  - L12: - **News**: Institutional buying spree (Goldman Sachs, Harvard) may fuel altcoin momentum.
+- .\storage\reports\2025-08-18_07-24-06__BTCUSDT.md
+  - L3: - **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance, but bid wall is thin, suggesting limited upside.
+- .\storage\reports\2025-08-18_07-24-19__ETHUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Buy-side imbalance but thin bid wall (228 ETH) vs. concentrated ask liquidity.
+- .\storage\reports\2025-08-18_07-24-23__BNBUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 834.72.
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree.
+- .\storage\reports\2025-08-18_07-24-36__SOLUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall (25k SOL) vs. thin ask wall (12k SOL).
+  - L12: - **News**: Institutional buying spree (Goldman, Harvard) may spill over to altcoins like SOL.
+- .\storage\reports\2025-08-18_07-24-47__XRPUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance but thin bid wall (2.9886) vs. stronger ask wall (2.9904).
+  - L12: - **Volume**: High sell-volume spikes during downticks (e.g., 4.6M at 2.9669).
+- .\storage\reports\2025-08-18_07-24-57__RAYUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance, strong bid wall at 3.36 (support).
+- .\storage\reports\2025-08-18_07-25-02__SHELLUSDT.md
+  - L4: ## Direction: **LONG**
+  - L12: - **Orderbook:** BUY_DOMINANT imbalance with strong bid wall at 0.1305, indicating buyer support.
+  - L12: - **Orderbook:** BUY_DOMINANT imbalance with strong bid wall at 0.1305, indicating buyer support.
+  - L14: - **News:** Positive sentiment around institutional Bitcoin ETF buying could spill over into altcoins.
+- .\storage\reports\2025-08-18_07-28-39__BTCUSDT.md
+  - L9: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid/ask walls are thin, indicating weak conviction.
+  - L10: - **News:** Mixed signals—rising leverage stress vs. institutional ETF buying—create uncertainty.
+  - L11: - **Volume:** Recent spikes in volume during downtrends suggest selling pressure.
+- .\storage\reports\2025-08-18_07-28-51__ETHUSDT.md
+  - L3: **Direction**: LONG
+  - L10: - **Orderbook**: Strong buy-side dominance (`BUY_DOMINANT`) with bid wall at 4325.08.
+  - L10: - **Orderbook**: Strong buy-side dominance (`BUY_DOMINANT`) with bid wall at 4325.08.
+  - L12: - **News**: Institutional buying spree (Goldman Sachs, Harvard) offsets leverage stress concerns.
+  - L13: - **Volume**: Recent spike in buy volume near lows suggests accumulation.
+- .\storage\reports\2025-08-18_07-28-59__BNBUSDT.md
+  - L6: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid/ask walls are thin, indicating weak conviction.
+  - L7: - **News:** Mixed sentiment with rising leverage stress and institutional buying, but no direct catalyst for BNB.
+- .\storage\reports\2025-08-18_07-29-06__SOLUSDT.md
+  - L6: - **Orderbook:** Despite a BUY_DOMINANT imbalance, the bid wall at 182.6 is weak compared to recent selling pressure.
+  - L6: - **Orderbook:** Despite a BUY_DOMINANT imbalance, the bid wall at 182.6 is weak compared to recent selling pressure.
+  - L8: - **Volume:** Recent candles show declining volume, suggesting lack of strong buying interest.
+- .\storage\reports\2025-08-18_07-29-18__XRPUSDT.md
+  - L4: **Direction**: SHORT
+  - L12: - **Orderbook**: Buy-side dominance but thin ask liquidity above (2.9979 wall).
+  - L13: - **Volume**: High sell-volume spikes during drops (1.2M+ candles).
+- .\storage\reports\2025-08-18_07-29-23__RAYUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 3.36.
+  - L12: - **News**: Positive sentiment around crypto ETFs and institutional buying spree.
+  - L13: - **Volume**: Bid volume significantly outweighs ask volume, indicating buyer strength.
+- .\storage\reports\2025-08-18_07-29-36__SHELLUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance (bid vol 2x ask vol) suggests accumulation.
+  - L12: - **News**: Institutional buying spree (Goldman Sachs, Harvard) may spill over to altcoins.
+  - L13: - **Volume**: Spike at 0.1331 confirms buyer interest.
+- .\storage\reports\2025-08-18_07-29-42__ADAUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree may spill over to altcoins like ADA.
+  - L14: - **Market Sentiment**: Rising leverage trades indicate speculative interest, potentially driving short-term gains.
+- .\storage\reports\2025-08-18_07-30-09__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell dominance (imbalance), thin bid wall vs. stacked asks.
+  - L13: - **Volume**: High sell-volume spikes near resistance (116.5K–117K).
+- .\storage\reports\2025-08-18_07-30-13__ETHUSDT.md
+  - L4: - **Direction**: SHORT
+  - L11: - **Orderbook**: Sell dominance with higher ask volume and bid wall below current price.
+  - L13: - **Imbalance**: SELL_DOMINANT orderbook suggests downward pressure.
+- .\storage\reports\2025-08-18_07-30-20__BNBUSDT.md
+  - L6: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid/ask walls are thin, indicating weak conviction.
+  - L7: - **News:** Mixed sentiment with rising leverage stress and institutional buying, but no direct catalyst for BNB.
+- .\storage\reports\2025-08-18_07-30-27__SOLUSDT.md
+  - L2: **Direction:** SHORT
+  - L10: - **Orderbook:** BUY_DOMINANT imbalance but thin bid wall at 182.3 suggests limited support.
+- .\storage\reports\2025-08-18_07-33-07__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L10: - **Orderbook**: Sell dominance (ask wall 17.68 BTC vs bid wall 4.05 BTC), imbalance favors shorts.
+  - L12: - **Volume**: High sell-volume spikes during downtrend (315 BTC at 116k breakdown).
+  - L13: - **Sentiment**: Mixed institutional news (ETF buys vs. leverage warnings).
+- .\storage\reports\2025-08-18_07-33-51__ADAUSDT.md
+  - L8: - **News**: Mixed sentiment with rising leverage concerns but institutional buying in broader crypto market.
+- .\storage\reports\2025-08-18_07-45-12__ETHUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell dominance (216.7 vs 40.0 bid vol), weak bid wall at 4325.58.
+- .\storage\reports\2025-08-18_07-45-17__BNBUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 838.01.
+- .\storage\reports\2025-08-18_07-45-24__SOLUSDT.md
+  - L6: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid and ask walls are close, indicating potential indecision.
+  - L7: - **News:** Mixed sentiment with rising leverage stress but institutional buying in Bitcoin ETFs.
+  - L8: - **Volume:** Recent spikes in volume during price drops suggest selling pressure.
+- .\storage\reports\2025-08-18_07-45-35__XRPUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance, bid wall at 2.9893 (~761k XRP).
+- .\storage\reports\2025-08-18_07-45-41__RAYUSDT.md
+  - L9: - **News**: Mixed sentiment in crypto markets with rising leverage stress and institutional ETF buying, creating uncertainty.
+- .\storage\reports\2025-08-18_07-45-46__SHELLUSDT.md
+  - L4: **Direction:** LONG
+  - L12: - **Orderbook:** BUY_DOMINANT imbalance with strong bid wall at 0.1306.
+  - L13: - **News:** Positive sentiment from institutional Bitcoin ETF buying spree.
+- .\storage\reports\2025-08-18_07-45-53__ADAUSDT.md
+  - L7: - **News:** Mixed sentiment in crypto markets with rising leverage stress and institutional buying, but no direct impact on ADA.
+- .\storage\reports\2025-08-18_07-47-19__BTCUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 115451.99 suggests bullish momentum.
+  - L13: - **News**: Institutional buying spree in Bitcoin ETFs and rising mining profitability indicate positive sentiment.
+- .\storage\reports\2025-08-18_07-47-24__ETHUSDT.md
+  - L4: - **Direction**: SHORT
+  - L11: - **Orderbook**: SELL_DOMINANT imbalance with significant ask wall (~277.92) vs bid wall (~74.22).
+  - L13: - **Volume**: High sell volume near resistance reinforces bearish sentiment.
+- .\storage\reports\2025-08-18_07-47-38__BNBUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance but thin bid wall (837.41) vs. stronger ask resistance (838.24).
+  - L13: - **Volume**: High sell-volume spikes (e.g., 3871 BNB at 839.95) indicate distribution.
+- .\storage\reports\2025-08-18_07-47-50__SOLUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Buy dominance but thin bid wall (182.31) vs stronger ask wall (183.2).
+  - L12: - **Volume**: High sell volume spikes near lows (e.g., 73k at 186.53).
+- .\storage\reports\2025-08-18_07-48-01__XRPUSDT.md
+  - L8: - **Orderbook**: Despite BUY_DOMINANT imbalance, walls at 2.9921 (bid) and 2.997 (ask) limit near-term momentum.
+- .\storage\reports\2025-08-18_07-48-12__RAYUSDT.md
+  - L11: - **Risk/Reward**: Poor setup—no clear support for LONG, shorts risky near bid wall.
+- .\storage\reports\2025-08-18_07-48-26__SHELLUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Buy-side dominance but thin bid liquidity below 0.1308; ask wall at 0.1337 caps upside.
+  - L12: - **Volume**: High sell-volume spikes (e.g., 936k at 0.1320) signal bearish momentum.
+- .\storage\reports\2025-08-18_07-48-38__ADAUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance; bid wall (0.9193) provides strong support.
+  - L13: - **News**: Institutional buying spree (Goldman/Harvard) may lift altcoins.
+- .\storage\reports\2025-08-18_07-58-06__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell-dominant imbalance + thicker ask wall (13.2 BTC vs 6.8 BTC bids).
+  - L13: - **Volume**: Weak bids during rallies; strong sell volume at resistance.
+  - L14: - **Context**: Institutional ETF buying (bullish) countered by local exhaustion.
+- .\storage\reports\2025-08-18_07-58-15__ETHUSDT.md
+  - L6: - **Orderbook:** Sell-side dominance with a significant ask wall at 4337.32, indicating resistance.
+  - L7: - **News:** Mixed sentiment with rising leverage trades showing stress, but institutional buying in Bitcoin ETFs could indirectly support ETH.
+- .\storage\reports\2025-08-18_07-58-23__BNBUSDT.md
+  - L8: - **News**: Mixed sentiment (leverage stress vs. institutional buying) lacks directional catalyst.
+- .\storage\reports\2025-08-18_07-58-28__SOLUSDT.md
+  - L9: - **News**: Mixed sentiment in crypto markets; rising leverage trades indicate potential stress, but institutional buying sprees provide some support.
+- .\storage\reports\2025-08-18_07-58-33__XRPUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 2.9983.
+- .\storage\reports\2025-08-18_07-58-40__RAYUSDT.md
+  - L6: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid and ask walls are close, indicating potential equilibrium.
+  - L7: - **News:** Mixed sentiment with rising leverage concerns but institutional buying interest.
+- .\storage\reports\2025-08-18_07-58-45__SHELLUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 0.1309.
+  - L14: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree.
+- .\storage\reports\2025-08-18_08-00-55__BTCUSDT.md
+  - L7: - **Orderbook**: BUY_DOMINANT imbalance, but bid/ask walls are thin, indicating weak liquidity.
+  - L8: - **News**: Mixed sentiment with rising leverage concerns and institutional ETF buying, creating uncertainty.
+- .\storage\reports\2025-08-18_08-01-07__ETHUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - *Orderbook*: Buy-side dominance (imbalance) with thin ask liquidity above
+  - L12: - *News*: Institutional buying spree (Goldman/Harvard ETF inflows) offsets leverage concerns
+  - L13: - *Volume*: Sustained buying volume on up-moves, weak sell pressure
+  - L13: - *Volume*: Sustained buying volume on up-moves, weak sell pressure
+- .\storage\reports\2025-08-18_08-01-12__BNBUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree spills over into altcoins like BNB.
+- .\storage\reports\2025-08-18_08-01-19__SOLUSDT.md
+  - L6: - **Orderbook:** BUY_DOMINANT imbalance, but bid wall at 182.75 is weak compared to ask wall at 183.37.
+  - L7: - **News:** Mixed sentiment with rising leverage stress warnings but institutional buying spree in Bitcoin ETFs.
+- .\storage\reports\2025-08-18_08-01-39__RAYUSDT.md
+  - L3: - **Direction**: LONG
+  - L10: - **Orderbook**: BUY_DOMINANT imbalance with a significant bid wall at 3.356, indicating strong buying interest.
+  - L10: - **Orderbook**: BUY_DOMINANT imbalance with a significant bid wall at 3.356, indicating strong buying interest.
+  - L11: - **News**: Positive sentiment from institutional buying spree in Bitcoin ETFs, which often spills over to altcoins.
+- .\storage\reports\2025-08-18_08-01-53__SHELLUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance (bid vol 2.3x ask vol) with strong bid wall at 0.1313.
+  - L12: - **News**: Institutional buying spree (Goldman/Harvard ETF inflows) may spill over to altcoins.
+- .\storage\reports\2025-08-18_08-02-04__ADAUSDT.md
+  - L3: **Direction**: LONG
+  - L13: - **News**: Altcoin momentum highlighted by Binance report; institutional interest spillover (Bitcoin ETF buying).
+  - L14: - **Risk**: Leverage stress warning (Galaxy Digital) could trigger short-term volatility.
+- .\storage\reports\2025-08-18_08-02-57__BTCUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: Strong buy-side dominance with a significant bid wall at 115,545.99.
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree.
+  - L14: - **Imbalance**: BUY_DOMINANT orderbook imbalance supports upward potential.
+- .\storage\reports\2025-08-18_08-03-02__ETHUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 4341.45, indicating buyer support.
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 4341.45, indicating buyer support.
+- .\storage\reports\2025-08-18_08-03-08__BNBUSDT.md
+  - L7: - **News:** Mixed sentiment with rising leverage stress concerns countered by institutional ETF buying.
+- .\storage\reports\2025-08-18_08-03-14__SOLUSDT.md
+  - L6: - **Orderbook:** Despite BUY_DOMINANT imbalance, bid/ask walls are thin, indicating weak support/resistance levels.
+  - L7: - **News:** Mixed sentiment with rising leverage stress and institutional buying, creating uncertainty.
+- .\storage\reports\2025-08-18_08-03-22__XRPUSDT.md
+  - L6: - **Orderbook:** Despite a BUY_DOMINANT imbalance, the bid and ask walls are weak, suggesting limited support/resistance.
+- .\storage\reports\2025-08-18_08-03-26__RAYUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 3.358.
+  - L13: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree.
+- .\storage\reports\2025-08-18_08-03-30__SHELLUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 0.1313.
+  - L12: - **Volume**: Bid volume significantly higher than ask volume, indicating buyer interest.
+  - L13: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree.
+- .\storage\reports\2025-08-18_08-10-19__BTCUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance, bid wall stronger than ask.
+  - L12: - **News**: Institutional buying (Goldman, Harvard ETFs) supports bullish sentiment.
+  - L13: - **Volume**: Spike on last dip suggests absorption of selling pressure.
+- .\storage\reports\2025-08-18_08-10-24__ETHUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 4342.36, indicating buyer strength.
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 4342.36, indicating buyer strength.
+  - L13: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree likely spills over into ETH.
+- .\storage\reports\2025-08-18_08-10-28__BNBUSDT.md
+  - L8: - **Orderbook**: Sell dominance with strong ask wall (~838.7) and higher ask volume (341.945 vs. 233.999 bid).
+  - L10: - **Market Context**: Lack of strong directional momentum despite recent ETF buying spree news.
+- .\storage\reports\2025-08-18_08-10-33__SOLUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with a significant bid wall at 182.87, indicating strong buying pressure.
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with a significant bid wall at 182.87, indicating strong buying pressure.
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree and altcoin gains, which could spill over into SOL.
+- .\storage\reports\2025-08-18_08-10-37__XRPUSDT.md
+  - L3: - **Direction**: LONG
+  - L10: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 3.0.
+- .\storage\reports\2025-08-18_08-10-42__LTCUSDT.md
+  - L4: - **Direction**: SHORT
+  - L11: - **Orderbook**: SELL_DOMINANT imbalance with strong bid wall at 117.0 and weaker ask wall at 117.73.
+  - L13: - **Volume**: Declining volume on recent rallies suggests lack of buying conviction.
+- .\storage\reports\2025-08-18_08-10-46__XLMUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 0.4113, indicating buyer interest.
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 0.4113, indicating buyer interest.
+  - L14: - **News**: Positive sentiment around crypto ETFs and institutional buying sprees could boost altcoins like XLM.
+- .\storage\reports\2025-08-18_08-10-51__ADAUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree may spill over to altcoins like ADA.
+  - L13: - **Volume**: Increasing volume on upward moves suggests strong buying interest.
+- .\storage\reports\2025-08-18_08-56-08__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance but thin bid liquidity (25.95 BTC vs. 2.07 BTC asks).
+  - L14: - **Sentiment**: Mixed institutional interest (ETF buys vs. mining profit concerns).
+- .\storage\reports\2025-08-18_08-56-16__ETHUSDT.md
+  - L2: **Direction:** SHORT
+  - L9: - **Orderbook:** Sell dominance with a significant ask wall at 4308.26.
+  - L11: - **Volume:** Recent high-volume candles confirm selling pressure.
+- .\storage\reports\2025-08-18_08-56-29__BNBUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with bid wall (834.26) stronger than ask wall (835.0).
+  - L12: - **Volume**: Recent green candles show absorption of selling pressure.
+  - L13: - **News**: Institutional interest (Goldman Sachs/Harvard ETF buying) supports bullish sentiment.
+- .\storage\reports\2025-08-18_08-56-35__SOLUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 182.20, indicating buyer interest.
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 182.20, indicating buyer interest.
+  - L13: - **News**: Positive sentiment from institutional Bitcoin ETF buying spree could spill over into altcoins like SOL.
+- .\storage\reports\2025-08-18_08-56-51__LTCUSDT.md
+  - L11: - **Orderbook**: Orderbook imbalance is balanced, indicating no strong buying or selling pressure.
+  - L11: - **Orderbook**: Orderbook imbalance is balanced, indicating no strong buying or selling pressure.
+  - L12: - **News**: Mixed sentiment with rising leverage trades showing stress and institutional buying in Bitcoin ETFs, but no direct impact on LTC.
+- .\storage\reports\2025-08-18_08-57-05__XLMUSDT.md
+  - L3: **Direction**: SHORT
+  - L12: - **Volume**: Bearish volume spikes on down-candles signal selling pressure.
+- .\storage\reports\2025-08-18_08-57-16__ADAUSDT.md
+  - L3: **Direction**: LONG
+  - L10: - Strong **BUY_DOMINANT** orderbook with bid wall at 0.917 and volume imbalance (2.19M vs 1.66M).
+  - L12: - News highlights institutional interest in crypto (Goldman Sachs/Harvard ETF buying).
+- .\storage\reports\2025-08-18_09-59-45__BTCUSDT.md
+  - L4: - **Direction**: SHORT
+  - L11: - **Orderbook**: SELL_DOMINANT imbalance with significant ask wall pressure.
+- .\storage\reports\2025-08-18_09-59-52__ETHUSDT.md
+  - L10: - **Volume**: Recent volume spikes on downside moves indicate selling pressure.
+- .\storage\reports\2025-08-18_10-00-00__BNBUSDT.md
+  - L7: - **News:** Mixed sentiment; rising leverage trades indicate potential stress, but institutional buying sprees suggest underlying support.
+- .\storage\reports\2025-08-18_10-00-08__SOLUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall at 181.0.
+  - L12: - **Volume**: Bid volume significantly higher than ask volume, indicating buyer interest.
+  - L14: - **Market Sentiment**: Bitcoin ETF buying spree could spill over into altcoins like SOL.
+- .\storage\reports\2025-08-18_10-00-16__XRPUSDT.md
+  - L8: - **Orderbook**: Despite BUY_DOMINANT imbalance, bid walls are thin, suggesting limited support at current levels.
+  - L10: - **Volume**: High sell-side volume during declines reinforces bearish sentiment.
+- .\storage\reports\2025-08-18_10-00-26__LTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: BUY_DOMINANT but thin bid wall (115.71) vulnerable to breakdown.
+  - L14: - **Volume**: High sell-volume spikes near resistance (121-122).
+- .\storage\reports\2025-08-18_10-00-37__XLMUSDT.md
+  - L8: - **News**: Mixed sentiment (leverage stress vs. institutional buying) with no direct XLM catalyst.
+- .\storage\reports\2025-08-18_10-00-50__ADAUSDT.md
+  - L3: **Direction**: SHORT
+- .\storage\reports\2025-08-18_10-40-56__BTCUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: Strong buy-side dominance (imbalance) with bid wall at 115,423.96
+  - L12: - **News**: Institutional buying spree (Goldman Sachs, Harvard) supports bullish sentiment
+- .\storage\reports\2025-08-18_10-41-13__BNBUSDT.md
+  - L3: **Direction**: LONG
+- .\storage\reports\2025-08-18_10-41-20__SOLUSDT.md
+  - L7: - **Orderbook**: BUY_DOMINANT imbalance, but bid wall at 180.7 suggests limited downside potential.
+- .\storage\reports\2025-08-18_10-41-31__XRPUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell dominance (imbalance) + ask wall at 2.9754 adds overhead pressure.
+  - L12: - **Volume**: High sell-volume during drops vs. weak rallies.
+- .\storage\reports\2025-08-18_10-41-47__LTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L12: - **Volume**: Elevated sell volume during breakdowns, weak buying interest on rebounds.
+  - L12: - **Volume**: Elevated sell volume during breakdowns, weak buying interest on rebounds.
+- .\storage\reports\2025-08-18_10-41-54__XLMUSDT.md
+  - L7: - **Orderbook**: Despite BUY_DOMINANT imbalance, bid/ask walls suggest limited upside potential.
+- .\storage\reports\2025-08-18_10-42-14__ETHUSDT.md
+  - L4: - **Direction**: SHORT
+  - L11: - **Orderbook**: Sell-side dominance with higher ask volume and a strong ask wall at 4269.49.
+  - L14: - **Imbalance**: SELL_DOMINANT orderbook imbalance reinforces bearish bias.
+- .\storage\reports\2025-08-18_10-42-26__BNBUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: Buy dominance with bid wall at 829.86 (strong support)
+  - L12: - **Volume**: Increased buying volume on last green candle
+  - L13: - **News**: Institutional buying spree (Goldman/Harvard) may spill into altcoins
+- .\storage\reports\2025-08-18_10-42-33__SOLUSDT.md
+  - L3: - **Direction**: SHORT
+  - L12: - **Volume**: Recent volume spikes on down candles confirm selling pressure.
+- .\storage\reports\2025-08-18_10-42-39__XRPUSDT.md
+  - L11: - **Orderbook**: SELL_DOMINANT imbalance with significant ask volume, indicating potential downward pressure.
+  - L13: - **Volume**: High volume during price drops suggests strong selling interest.
+- .\storage\reports\2025-08-18_10-42-53__LTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L12: - **Volume**: High sell-volume spikes during drops (e.g., 180k at 120.85→122.66).
+- .\storage\reports\2025-08-18_10-43-09__XLMUSDT.md
+  - L3: **Direction**: SHORT
+  - L12: - **Volume**: Elevated sell-side volume during drops (e.g., 7.8M at 0.4418 → 0.4233).
+- .\storage\reports\2025-08-18_14-09-50__BTCUSDT.md
+  - L4: - **Direction**: LONG
+  - L10: - **Orderbook**: BUY_DOMINANT imbalance with strong bid wall (18.09729 BTC) vs weak ask wall (3.46853 BTC).
+  - L12: - **News**: Positive sentiment from Metaplanet's Bitcoin treasury expansion and institutional ETF buying spree.
+- .\storage\reports\2025-08-18_14-10-01__ETHUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell-dominant imbalance (103.7 vs 74.4 BTC liquidity).
+  - L14: - **Volume**: Weak rallies vs strong sell-offs (see 1755456300000 candle).
+- .\storage\reports\2025-08-18_14-10-13__BNBUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - Orderbook imbalance: BUY_DOMINANT but thin bid wall (332 vs 262 ask vol)
+- .\storage\reports\2025-08-18_14-10-19__SOLUSDT.md
+  - L4: - **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 180.50, suggesting solid support.
+  - L13: - **Volume**: Increasing volume on upward moves signals strong buyer interest.
+- .\storage\reports\2025-08-18_14-10-27__XRPUSDT.md
+  - L3: **Direction:** SHORT
+  - L11: - **Orderbook:** BUY_DOMINANT imbalance but weak bid wall at 2.9607, suggesting limited support.
+  - L13: - **Volume:** High volume on recent down candles confirms selling pressure.
+  - L14: - **Risk:** Potential for short-term bounce near support levels, hence tight stop.
+- .\storage\reports\2025-08-18_14-10-37__LTCUSDT.md
+  - L4: **Direction**: SHORT
+  - L12: - **Orderbook**: Sell-dominant imbalance, strong ask wall at 116.95
+- .\storage\reports\2025-08-18_14-10-54__XLMUSDT.md
+  - L3: **Direction**: SHORT
+  - L12: - **Volume**: High sell-side volume near breakdown levels (2.4M at 0.4263).
+- .\storage\reports\2025-08-18_14-12-54__BTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell-dominant imbalance (11.57 vs 4.48 BTC volume topN), strong ask wall at entry.
+- .\storage\reports\2025-08-18_14-12-58__ETHUSDT.md
+  - L8: - **Orderbook**: Sell-side dominance (SELL_DOMINANT) with higher ask volume (128.39 vs 64.51 bid) suggests bearish pressure.
+  - L8: - **Orderbook**: Sell-side dominance (SELL_DOMINANT) with higher ask volume (128.39 vs 64.51 bid) suggests bearish pressure.
+- .\storage\reports\2025-08-18_14-13-04__BNBUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 831.76, indicating buyer interest.
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 831.76, indicating buyer interest.
+  - L14: - **News**: Positive sentiment around institutional Bitcoin ETF buying spree could spill over into altcoins like BNB.
+- .\storage\reports\2025-08-18_14-13-15__SOLUSDT.md
+  - L3: **Direction**: LONG
+  - L11: - **Orderbook**: BUY_DOMINANT imbalance, bid wall at 180.5 provides support.
+- .\storage\reports\2025-08-18_14-13-19__XRPUSDT.md
+  - L4: - **Direction**: LONG
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 2.9692, indicating buyer interest.
+  - L12: - **Orderbook**: BUY_DOMINANT imbalance with a strong bid wall at 2.9692, indicating buyer interest.
+- .\storage\reports\2025-08-18_14-13-30__LTCUSDT.md
+  - L3: **Direction**: SHORT
+  - L11: - **Orderbook**: Sell-dominant imbalance (11.3k vs 5.3k ask/bid volume) with strong ask wall at 116.86
+- .\storage\reports\2025-08-18_14-13-41__XLMUSDT.md
+  - L4: **Direction**: SHORT
+- .\telegram_bot\handlers.py
+  - L298: _VALID_DIR_WORDS = {"LONG", "SHORT", "NEUTRAL"}
+  - L298: _VALID_DIR_WORDS = {"LONG", "SHORT", "NEUTRAL"}
+  - L345: dir_m = re.search(r"\b(LONG|SHORT|NEUTRAL)\b", txt or "", re.I)
+  - L345: dir_m = re.search(r"\b(LONG|SHORT|NEUTRAL)\b", txt or "", re.I)
+  - L369: if direction == "LONG":
+- .\telegram_bot\handlers\ai_commands.py
+  - L38: '{"direction":"LONG|SHORT|NEUTRAL","entry":number,"stop":number,"tp":number,'
+  - L38: '{"direction":"LONG|SHORT|NEUTRAL","entry":number,"stop":number,"tp":number,'
+  - L80: dir_m = re.search(r"\b(LONG|SHORT|NEUTRAL)\b", txt or "", re.I)
+  - L80: dir_m = re.search(r"\b(LONG|SHORT|NEUTRAL)\b", txt or "", re.I)
+  - L101: if direction == "LONG":
+- .\telegram_bot\handlers\commands.py
+  - L64: "• Тренд: EMA/SMA (нахил, перетини), якщо ціна > EMA(50/200) — перевага LONG.\n"
+  - L70: "📐 RR: LONG=(TP−Entry)/(Entry−SL), SHORT навпаки. Фільтр: RR<1.5 — скіп.\n"
+  - L70: "📐 RR: LONG=(TP−Entry)/(Entry−SL), SHORT навпаки. Фільтр: RR<1.5 — скіп.\n"
+- .\telegram_bot\handlers\top_handlers.py
+  - L39: emoji = "🟢" if chg >= 0 else "🔴"
+  - L39: emoji = "🟢" if chg >= 0 else "🔴"
+- .\tests\conftest.py
+  - L96: "direction": "LONG",
+  - L112: "direction": "LONG",
+  - L129: "content": '{"direction":"LONG","entry":100.0,"stop":95.0,"tp":115.0,"confidence":0.8,"holding_time_hours":24,"rationale":"Test"}'
+- .\tests\unit\test_decider.py
+  - L10: """Test parsing valid LONG signal."""
+  - L12: Direction: LONG
+  - L23: assert result["direction"] == "LONG"
+  - L31: """Test parsing valid SHORT signal."""
+  - L33: Direction: SHORT
+- .\tests\unit\test_gate_scoring.py
+  - L11: result = evaluate_gate(sample_indicators, "LONG")
+  - L22: "ema200": 99.0,  # EMA50 < EMA200, fails trend for LONG
+  - L38: result = evaluate_gate(indicators, "LONG")
+  - L64: result = evaluate_gate(indicators, "LONG")
+  - L69: """Test that low RSI fails for LONG."""
+- .\tests\unit\test_pnl_calculations.py
+  - L11: """Test P&L for winning LONG trade."""
+  - L15: rr, pnl = calc_pnl_usd(entry, sl, close, "LONG", size_usd, fees_bps)
+  - L26: """Test P&L for losing LONG trade."""
+  - L30: rr, pnl = calc_pnl_usd(entry, sl, close, "LONG", size_usd, fees_bps)
+  - L39: """Test P&L for winning SHORT trade."""
+- .\tests\unit\test_rr_calculations.py
+  - L12: """Test LONG position RR calculation."""
+  - L17: rr = _compute_rr_num("LONG", entry, sl, tp)
+  - L21: """Test SHORT position RR calculation."""
+  - L26: rr = _compute_rr_num("SHORT", entry, sl, tp)
+  - L30: """Test handlers RR calculation for LONG."""
+- .\tools\seed_signals.py
+  - L29: (uid,"BTCUSDT","15m","LONG", 60000, 59000, 63000, 3.0, "WIN",  +5.0, day0+3600, day0+7200),
+  - L30: (uid,"ETHUSDT","15m","SHORT",3500,  3600,  3300,  3.0, "WIN",  +5.8, day0+8000, day0+11000),
+  - L31: (uid,"ADAUSDT","15m","LONG", 0.40,  0.37,  0.52,  4.0, "LOSS", -7.5, day0+12000, day0+15000),
+  - L33: (uid,"SOLUSDT","1h","LONG", 150.0, 140.0, 180.0, 3.0, "WIN", +10.0, day0-40000, day0-38000),
+- .\trader\broker.py
+  - L7: side: str   # BUY/SELL
+  - L7: side: str   # BUY/SELL
+- .\utils\formatter.py
+  - L4: arrow = "▲" if bias=="LONG" else "▼" if bias=="SHORT" else "•"
+  - L4: arrow = "▲" if bias=="LONG" else "▼" if bias=="SHORT" else "•"
+- .\utils\formatting.py
+  - L66: Direction: LONG
+- .\utils\pretty_md.py
+  - L6: _DIR_EMOJI = {"LONG": "🟢", "SHORT": "🔻", "NEUTRAL": "⚪️", "NO_TRADE": "⚪️"}
+  - L6: _DIR_EMOJI = {"LONG": "🟢", "SHORT": "🔻", "NEUTRAL": "⚪️", "NO_TRADE": "⚪️"}
+  - L6: _DIR_EMOJI = {"LONG": "🟢", "SHORT": "🔻", "NEUTRAL": "⚪️", "NO_TRADE": "⚪️"}
+  - L21: if direction == "LONG":
+  - L24: elif direction == "SHORT":
+- .\utils\scoring.py
+  - L39: direction = "LONG"
+  - L41: direction = "SHORT"
+- .\utils\signals_db.py
+  - L19: direction TEXT NOT NULL,  -- LONG/SHORT
+  - L19: direction TEXT NOT NULL,  -- LONG/SHORT
+- .\utils\ta_formatter.py
+  - L232: bias_trend = "🟢" if vals["ema50"] > vals["ema200"] else "🔴" if vals["ema50"] < vals["ema200"] else "⚪️"
+  - L232: bias_trend = "🟢" if vals["ema50"] > vals["ema200"] else "🔴" if vals["ema50"] < vals["ema200"] else "⚪️"
+  - L233: bias_macd = "🟢" if vals["macd"] > vals["macd_sig"] else "🔴" if vals["macd"] < vals["macd_sig"] else "⚪️"
+  - L233: bias_macd = "🟢" if vals["macd"] > vals["macd_sig"] else "🔴" if vals["macd"] < vals["macd_sig"] else "⚪️"
+  - L234: bias_rsi = _badge(vals["rsi"], pos="🟢", neg="🔴", mid="⚪️", thr_lo=45, thr_hi=55)
+- .\utils\texts.py
+  - L34: • <SYMBOL> · <TF> · <LONG|SHORT> | RR X.XX
+  - L34: • <SYMBOL> · <TF> · <LONG|SHORT> | RR X.XX
+- .\utils\trading_db.py
+  - L17: direction TEXT CHECK(direction IN ('LONG','SHORT')) NOT NULL,
+  - L17: direction TEXT CHECK(direction IN ('LONG','SHORT')) NOT NULL,
+
+## rr (55 files)
+- .\main.py
+  - L379: rr=m.get("rr"),
+  - L379: rr=m.get("rr"),
+- .\schema_migration.sql
+  - L26: rr REAL,
+- .\SUMMARY.md
+  - L110: - Per-user RR thresholds
+  - L165: | RR ≥1.8 | +10 |
+  - L166: | RR ≥1.5 | +6 |
+  - L178: | `signals` | Trading signals | symbol, direction, entry, sl, tp, rr, status |
+  - L196: | `min_entry_rr` | 1.5 | Minimum RR for signals |
+- .\.cursor\plans\ccbv3.8_code_quality_improvements_1d94033a.plan.md
+  - L12: content: "Phase 1.5: Implement unit tests for RR, PnL, gate scoring, and decider"
+  - L312: raise TradingError(f"RR calculation failed: {e}") from e
+- .\alerts\push_alerts.py
+  - L52: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+  - L60: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+  - L64: for (rr,) in rows:
+  - L65: if (rr or 0.0) <= 0.0:
+  - L74: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+- .\gpt_analyst\full_analyzer.py
+  - L54: "rr": re.compile(r"\bRR\s*[:=]\s*([0-9]+(?:\.[0-9]+)?)", re.I),
+  - L61: Якщо реальна RR-логіка буде в іншому модулі (наприклад, analyzer_core чи services.autopost),
+  - L70: #     rr = m.get("rr_target")
+  - L71: #     if rr is not None:
+  - L72: #         return f"🎯 RR(target): {rr:.2f}"
+- .\gpt_decider\decider.py
+  - L57: "rr": float|None,
+  - L65: rr = _extract_rr(md)
+  - L73: if rr is None:
+  - L75: reasons.append("RR не знайдено")
+  - L76: elif rr < rr_threshold:
+- .\scripts\auto_analyze.py
+  - L10: "rr": re.compile(r"\brr\b|risk[_\s-]*reward|autopost[_\s-]*rr", re.I),
+  - L10: "rr": re.compile(r"\brr\b|risk[_\s-]*reward|autopost[_\s-]*rr", re.I),
+  - L57: for key in ["autopost","parse_func","direction","rr","user_settings","db_insert","transactions","db_create_signals","signals_table","trades_table"]:
+  - L81: f.write("- Review files listed above for: support of SHORT and LONG parsing, RR sourcing from user settings, DB transactions wrapping inserts.\n")
+  - L82: f.write("- Run detailed iterator on candidate parser files and add unit tests for parse() to assert LONG/SHORT and rr extraction.\n")
+- .\scripts\db_audit.py
+  - L71: COALESCE(autopost_rr, rr_threshold, 1.5) AS ap_rr,
+  - L93: AVG(COALESCE(rr,0)) AS rr_avg,
+  - L105: # winrate з урахуванням RR-порогу користувача
+  - L111: AVG(COALESCE(s.rr,0)) AS rr_avg,
+  - L116: AND COALESCE(s.rr,0) >= COALESCE(u.rr_threshold, 1.5)
+- .\scripts\db_migrate_v2.py
+  - L18: rr REAL,
+  - L33: "ALTER TABLE signals ADD COLUMN rr REAL;",
+- .\scripts\db_probe_open.py
+  - L18: # 2) чи є в них entry/stop/tp/rr
+  - L22: SUM(CASE WHEN rr IS NULL OR rr<=0 THEN 1 ELSE 0 END) AS bad_rr
+  - L22: SUM(CASE WHEN rr IS NULL OR rr<=0 THEN 1 ELSE 0 END) AS bad_rr
+- .\scripts\db_seed_signals.py
+  - L29: rr REAL,                -- risk/reward
+  - L44: autopost_rr REAL,
+  - L69: # Прості рівні для заглушки, щоб RR вийшов ≈ rr_target
+  - L79: pnl_pct = round(rr_target * 1.0, 2)      # умовно +RR%
+  - L81: stop = round(entry - reward, 4)          # втрати більше — щоб RR < 1 для LOSS у реалі
+- .\scripts\kpi_by_symbol.py
+  - L26: def rr_bucket_label(rr: float | None, step: float) -> str:
+  - L27: if rr is None or math.isnan(rr):
+  - L27: if rr is None or math.isnan(rr):
+  - L32: if rr < e:
+  - L45: parser.add_argument("--rr-bucket", type=float, default=float(os.getenv("KPI_RR_BUCKET", "2")),
+- .\scripts\kpi_report.py
+  - L26: # RR
+  - L27: rrcol = "rr_realized" if "rr_realized" in cols else ("rr_planned" if "rr_planned" in cols else ("rr" if "rr" in cols else "0"))
+  - L27: rrcol = "rr_realized" if "rr_realized" in cols else ("rr_planned" if "rr_planned" in cols else ("rr" if "rr" in cols else "0"))
+- .\scripts\migrate_v3.py
+  - L25: "autopost_rr": "REAL DEFAULT 1.5",
+- .\scripts\migrate_v3.sql
+  - L7: autopost_rr REAL DEFAULT 1.5,
+  - L23: rr REAL NOT NULL,
+  - L36: rr REAL NOT NULL,
+- .\scripts\rr_probe.py
+  - L22: def rr(entry, sl, px, direction='LONG', eps=1e-6):
+  - L34: print("OPEN TRADES RR snapshot:")
+  - L37: rrv = rr(float(entry or 0), float(sl or 0), px, direction or "LONG")
+  - L43: print(f"{flag} id={tid:>3} {sym:<10} dir={direction:<5} entry={entry:.6f} sl={sl:.6f} px={px} RR={rrv:.2f}")
+- .\scripts\Smoke_test_trading.py
+  - L46: entry=60000.0, sl=59400.0, tp=61200.0, rr=2.0) -> int|None:
+  - L82: now, float(rr))
+  - L104: f"pnl={r['pnl_usd']} rr={r['rr_realized']} "
+  - L116: # спрощений розрахунок pnl/rr
+  - L188: print(f"- Avg RR: {k['avg_rr']}")
+- .\services\analyzer_core.py
+  - L363: Базові RR-метрики для автопоста + захист від нулів/NaN/inf.
+- .\services\autopost.py
+  - L65: # >>> SAFE RR: надійні перетворення та обчислення RR
+  - L65: # >>> SAFE RR: надійні перетворення та обчислення RR
+  - L105: def mark_autopost_sent(*, symbol: str, timeframe: str, rr: float | None = None, user_id: str | None = None) -> None:
+  - L111: has_rr = "rr" in cols
+  - L115: "INSERT INTO autopost_log(user_id,symbol,timeframe,rr,ts_sent,ts) VALUES(?,?,?,?,?,?)",
+- .\services\autopost_bridge.py
+  - L23: # Dir: LONG | RR≈2.4211
+  - L27: _RE_DIR_RR = re.compile(r"Dir:\s*(LONG|SHORT)\s*\|\s*RR[≈~=]\s*([0-9.]+)", re.I)
+  - L43: direction, rr = m2.group(1).upper(), float(m2.group(2))
+  - L49: "rr": rr,
+  - L49: "rr": rr,
+- .\services\autopost_sources.py
+  - L116: Повертає (tp, rr, source).
+  - L137: # Оцінюємо RR для кожного
+  - L140: rr = _rr(entry, sl, price, direction)
+  - L141: if rr > 0:
+  - L142: scored.append((name, price, rr))
+- .\services\daily_tracker.py
+  - L49: rr: Optional[float]
+  - L73: SELECT symbol, timeframe, status, pnl, rr, closed_at
+  - L89: rr=(float(r["rr"]) if r["rr"] is not None else None),
+  - L89: rr=(float(r["rr"]) if r["rr"] is not None else None),
+  - L89: rr=(float(r["rr"]) if r["rr"] is not None else None),
+- .\services\kpi.py
+  - L12: rr_col   = "rr_realized" if "rr_realized" in cols else ("rr" if "rr" in cols else None)
+  - L12: rr_col   = "rr_realized" if "rr_realized" in cols else ("rr" if "rr" in cols else None)
+- .\services\pnl.py
+  - L13: rr = calc_rr_realized(entry, sl, close_price, direction)
+  - L14: if rr is None or not entry:
+  - L15: return (rr, None)
+  - L19: pnl = rr * risk_usd - fees
+  - L20: return (rr, pnl)
+- .\services\position_manager.py
+  - L109: # Старий RR для сумісності
+  - L139: "[pm] CLOSE FULL trade#%s %s rr=%.2f→%.2f pnl=$%.2f reason=%s",
+  - L184: if "rr" not in cols:
+  - L185: conn.execute("ALTER TABLE trades ADD COLUMN rr REAL")
+  - L210: - при RR ≥ MOVE_BE_AT_RR (1.0) → часткове закриття 50% (з PnL розрахунком) + SL→BE (be_done=1)
+- .\services\signals_repo.py
+  - L41: ("rr",         "REAL"),
+  - L82: rr: Optional[float] = None,
+  - L108: "rr": _f(rr, None),
+  - L108: "rr": _f(rr, None),
+  - L130: "entry","stop","sl","tp","rr",
+- .\services\signal_closer.py
+  - L40: if "rr" not in cols_tr:
+  - L41: conn.execute("ALTER TABLE trades ADD COLUMN rr REAL")
+  - L168: # ← Старий розрахунок RR (залишаємо для сумісності)
+  - L169: rr = _rr_from_exit(entry, sl, exit_px, direction or "LONG")
+  - L170: pnl = rr  # у R
+- .\services\trade_engine.py
+  - L62: - entry | sl | tp | rr (optional)
+  - L73: rr_planned = signal.get("rr")
+- .\services\autopost\core.py
+  - L50: """Parse RR from reasons list."""
+  - L54: if "RR=" in str(r):
+  - L56: return float(r.split("RR=")[-1])
+  - L133: (us.get("autopost_rr") if isinstance(us, dict) else None)
+  - L179: rr=rr_t,
+- .\services\autopost\formatting.py
+  - L61: header = f"📈 {symbol} · {timeframe} · {direction}  |  RR {rr_text}"
+- .\services\autopost\persistence.py
+  - L29: def mark_autopost_sent(*, symbol: str, timeframe: str, rr: float | None = None, user_id: str | None = None) -> None:
+  - L36: has_rr = "rr" in cols
+  - L40: "INSERT INTO autopost_log(user_id,symbol,timeframe,rr,ts_sent,ts) VALUES(?,?,?,?,?,?)",
+  - L41: (user_id, symbol, timeframe, float(rr or 0.0), ts, ts),
+  - L45: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,rr) VALUES(?,?,?,?,?)",
+- .\services\autopost\scoring.py
+  - L13: """Compute RR number."""
+- .\stats\model_ranker.py
+  - L4: """Проста агрегація: сортуємо за win_rate, далі за середнім RR."""
+- .\storage\seed_demo.py
+  - L12: # id, user_id, symbol, tf, direction, entry, sl, tp, rr, ts_created, ts_closed, status, pnl_pct
+  - L17: for (u,sym,tf,dir,entry,sl,tp,rr,tc,td,st,pnl) in rows:
+  - L19: "INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,ts_closed,status,pnl_pct) "
+  - L21: (u,sym,tf,dir,entry,sl,tp,rr,tc,td,st,pnl)
+- .\telegram_bot\auto_scheduler.py
+  - L25: f"Avg RR: {s['avg_rr']:.2f}\n"
+- .\telegram_bot\handlers.py
+  - L136: ("rr", "REAL"),
+  - L179: row.setdefault("rr", None)
+  - L204: rr_val = row.get("rr",   None)
+  - L217: row["rr"] = rr_val
+  - L240: "entry","stop","sl","tp","rr",
+- .\telegram_bot\panel.py
+  - L39: ap_rr     = float(us.get("autopost_rr") or 1.5)
+  - L68: # Autopost RR threshold
+  - L71: _mark(f"AP RR {r:.1f}", f"AP RR {ap_rr:.1f}"),
+  - L71: _mark(f"AP RR {r:.1f}", f"AP RR {ap_rr:.1f}"),
+  - L122: try: rr = float(value)
+- .\telegram_bot\panel_neutral.py
+  - L134: Показує KPI (останній період і RR-бакет беруться з settings/.env).
+- .\telegram_bot\handlers\ai_commands.py
+  - L42: "Prefer ~1:3 risk-reward when reasonable."
+  - L97: """Compute RR number."""
+  - L548: await _send(update, context, f"⚠️ {symbol} скіп (RR < {rr_min}).")
+  - L570: rr=rr_val,
+  - L598: f"RR: {rr_text}\n"
+- .\telegram_bot\handlers\commands.py
+  - L39: "• `/ai <SYMBOL> [TF]` — AI-план (Entry/SL/TP, RR, утримання) + індикатори.\n"
+  - L45: "• Автопост: ON/OFF, TF автопосту, RR-поріг.\n"
+  - L54: "   • `Autopost RR` — мінімальний Risk/Reward для автопосту\n"
+  - L70: "📐 RR: LONG=(TP−Entry)/(Entry−SL), SHORT навпаки. Фільтр: RR<1.5 — скіп.\n"
+  - L70: "📐 RR: LONG=(TP−Entry)/(Entry−SL), SHORT навпаки. Фільтр: RR<1.5 — скіп.\n"
+- .\telegram_bot\handlers\kpi_handlers.py
+  - L60: SELECT status, rr, pnl_pct FROM signals
+  - L62: AND COALESCE(rr,0) >= ? AND COALESCE(ts_closed, ts_created) BETWEEN ? AND ?
+  - L68: avg_rr = (sum(float(r["rr"]) for r in rows) / n) if n else 0.0
+  - L71: f"**📈 Winrate {days}d (RR≥{rr_min:g})**\n\n"
+  - L73: f"Avg RR: **{avg_rr:.2f}** | Avg PnL: **{avg_pnl:.2f}%**"
+- .\telegram_bot\handlers\panel_handlers.py
+  - L49: "- AP RR — мінімальний Risk/Reward для автопосту.\n"
+- .\tests\conftest.py
+  - L36: rr REAL,
+  - L116: "rr": 3.0,
+- .\tests\unit\test_decider.py
+  - L16: RR: 3.0
+  - L27: assert result["rr"] == 3.0
+  - L37: RR: 3.0
+  - L50: """Test that low RR fails threshold."""
+  - L56: RR: 0.4
+- .\tests\unit\test_pnl_calculations.py
+  - L15: rr, pnl = calc_pnl_usd(entry, sl, close, "LONG", size_usd, fees_bps)
+  - L17: # Risk = 100 - 95 = 5, Move = 110 - 100 = 10, RR = 10/5 = 2.0
+  - L18: assert rr == 2.0
+  - L30: rr, pnl = calc_pnl_usd(entry, sl, close, "LONG", size_usd, fees_bps)
+  - L32: # Move = 93 - 100 = -7, Risk = 5, RR = -7/5 = -1.4
+- .\tests\unit\test_rr_calculations.py
+  - L9: """Test RR calculation functions."""
+  - L12: """Test LONG position RR calculation."""
+  - L16: # RR = 15 / 5 = 3.0
+  - L17: rr = _compute_rr_num("LONG", entry, sl, tp)
+  - L18: assert rr == 3.0
+- .\tools\seed_signals.py
+  - L9: timeframe TEXT, autopost INTEGER, autopost_tf TEXT, autopost_rr REAL,
+  - L17: entry REAL, sl REAL, tp REAL, rr REAL,
+  - L28: # сьогодні: 2 WIN RR>=3, 1 LOSS RR>=3
+  - L28: # сьогодні: 2 WIN RR>=3, 1 LOSS RR>=3
+  - L35: cur.executemany("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,status,pnl_pct,ts_created,ts_closed)
+- .\utils\db_migrate.py
+  - L80: rr            REAL,
+  - L116: "rr": "REAL",
+  - L172: rr              REAL,
+  - L207: "rr": "REAL",
+  - L249: autopost_rr     REAL    DEFAULT 1.5,
+- .\utils\formatting.py
+  - L10: f"📊 Win-Rate за {days} днів (RR ≥ {rr_threshold}):\n"
+  - L13: f"- Середній RR: {stats['avg_rr']:.2f}"
+  - L68: RR: 2.57
+  - L84: lines.append(f"RR: {rr_text}")
+- .\utils\pretty_md.py
+  - L74: # RR
+- .\utils\signals_db.py
+  - L23: rr REAL,
+  - L36: rr REAL,
+  - L45: entry: float, sl: float, tp: float, rr: Optional[float],
+  - L49: INSERT INTO signals(user_id, symbol, tf, direction, entry, sl, tp, rr, ts_created, status)
+  - L51: """, (user_id, symbol, tf, direction, float(entry), float(sl), float(tp), rr, ts_created, "OPEN"))
+- .\utils\texts.py
+  - L6: • /panel — панель керування (TF, RR, Autopost, Model, Locale, OrderBook)
+  - L13: • /guide — як читати сигнал (E/SL/TP, RR, Quality, Walls)
+  - L17: • За замовчуванням увімкнено. Публікує сигнал, якщо виконує пороги RR і Quality.
+  - L34: • <SYMBOL> · <TF> · <LONG|SHORT> | RR X.XX
+  - L35: RR — співвідношення прибуток/ризик (чим вище, тим краще).
+- .\utils\trading_db.py
+  - L21: rr REAL NOT NULL,
+  - L33: rr REAL NOT NULL,
+  - L40: entry: float, sl: float, tp: float, rr: float) -> int:
+  - L42: cur = con.execute("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,status)
+  - L44: (user_id, symbol, tf, direction, float(entry), float(sl), float(tp), float(rr), int(time.time())))
+- .\utils\user_settings.py
+  - L25: autopost_rr     REAL    DEFAULT 1.5,
+  - L42: "autopost_rr":     "ALTER TABLE user_settings ADD COLUMN autopost_rr REAL DEFAULT 1.5",
+  - L42: "autopost_rr":     "ALTER TABLE user_settings ADD COLUMN autopost_rr REAL DEFAULT 1.5",
+  - L113: SELECT user_id, timeframe, autopost, autopost_tf, autopost_rr,
+  - L126: Приклад: set_user_settings(123, autopost_rr=2.0, autopost=1)
+
+## user_settings (29 files)
+- .\HYBRID_MIGRATION.md
+  - L15: 5) Smoke‑тест: `/panel → /ai BTCUSDT 15m → /analyze → /stats → /modelrank`.
+- .\main.py
+  - L62: from telegram_bot.handlers import register_handlers  # ваш catch-all "^panel:"
+  - L63: from telegram_bot.handlers_addons import register_extra  # /daily_now, /winrate_now, panel:neutral/kpi
+- .\schema_migration.sql
+  - L3: -- user_settings (v2 already); add locale/model_key if missing
+  - L4: CREATE TABLE IF NOT EXISTS user_settings (
+- .\SUMMARY.md
+  - L43: │   ├── panel.py      # Settings panel UI
+  - L43: │   ├── panel.py      # Settings panel UI
+  - L89: | `/panel` | User settings panel |
+  - L89: | `/panel` | User settings panel |
+  - L89: | `/panel` | User settings panel |
+- .\.cursor\plans\ccbv3.8_code_quality_improvements_1d94033a.plan.md
+  - L180: │   ├── panel_handlers.py    # /panel and callbacks (~200 lines)
+  - L191: - Lines 598-651: `/panel` handlers -> `panel_handlers.py`
+  - L216: - Lines 220-412: Indicator/panel functions -> `indicators.py`
+- .\scripts\auto_analyze.py
+  - L17: "user_settings": re.compile(r"\buser[_\s-]*settings\b|\bpanel\b|/set_rr|set_rr\b", re.I),
+  - L17: "user_settings": re.compile(r"\buser[_\s-]*settings\b|\bpanel\b|/set_rr|set_rr\b", re.I),
+  - L17: "user_settings": re.compile(r"\buser[_\s-]*settings\b|\bpanel\b|/set_rr|set_rr\b", re.I),
+  - L57: for key in ["autopost","parse_func","direction","rr","user_settings","db_insert","transactions","db_create_signals","signals_table","trades_table"]:
+  - L81: f.write("- Review files listed above for: support of SHORT and LONG parsing, RR sourcing from user settings, DB transactions wrapping inserts.\n")
+- .\scripts\db_audit.py
+  - L57: must = ["user_settings", "signals"]
+  - L75: FROM user_settings
+  - L79: print("— user_settings: 0 записів")
+  - L114: LEFT JOIN user_settings u ON u.user_id=s.user_id
+  - L124: print("by user (RR filtered by user_settings.rr_threshold):")
+- .\scripts\db_seed_signals.py
+  - L39: CREATE TABLE IF NOT EXISTS user_settings (
+- .\scripts\migrate_v3.py
+  - L20: con.execute("CREATE TABLE IF NOT EXISTS user_settings (user_id INTEGER PRIMARY KEY)")
+  - L30: cur = con.execute("PRAGMA table_info(user_settings)")
+  - L34: con.execute(f"ALTER TABLE user_settings ADD COLUMN {c} {ddl}")
+- .\scripts\migrate_v3.sql
+  - L1: -- user_settings
+  - L2: CREATE TABLE IF NOT EXISTS user_settings (
+- .\services\autopost.py
+  - L19: from utils.user_settings import get_user_settings
+  - L686: panel: Optional[str] = None,
+  - L742: if panel:
+  - L743: lines += ["", panel]
+  - L897: log.debug("[autopost] panel build failed for %s/%s: %s", symbol, timeframe, e)
+- .\services\daily_tracker.py
+  - L251: cur.execute("SELECT user_id FROM user_settings WHERE COALESCE(daily_tracker,0)=1")
+- .\services\autopost\core.py
+  - L14: from utils.user_settings import get_user_settings
+  - L158: log.debug("[autopost] panel build failed for %s/%s: %s", symbol, timeframe, e)
+  - L196: panel=panel_text,
+  - L221: {"type": "cb", "text": "✅ Відкрити як трейд", "data": f"panel:open_trade:{symbol}:{timeframe}:{direction}"},
+  - L222: {"type": "cb", "text": "🚫 Ігнор", "data": "panel:ignore"},
+- .\services\autopost\formatting.py
+  - L52: panel: Optional[str] = None,
+  - L106: if panel:
+  - L107: lines += ["", panel]
+- .\services\autopost\indicators.py
+  - L1: """Indicator summary and panel functions."""
+  - L60: """Build lite panel text."""
+- .\storage\seed_demo.py
+  - L10: cur.execute("INSERT OR IGNORE INTO user_settings(user_id,autopost,locale) VALUES(?,0,'uk')", (uid,))
+- .\telegram_bot\handlers.py
+  - L23: from telegram_bot.panel import panel_keyboard, apply_panel_action
+  - L24: from utils.user_settings import ensure_user_row, get_user_settings
+  - L275: ["/help", "/guide", "/panel"],
+  - L291: InlineKeyboardButton("⚙️ Panel", callback_data="goto_panel"),
+  - L424: from telegram_bot.handlers.panel_handlers import panel, on_cb_panel
+- .\telegram_bot\handlers_addons.py
+  - L15: # Кнопки з /panel → ті самі екрани, що й /neutral та /kpi
+  - L16: app.add_handler(CallbackQueryHandler(panel_neutral.cmd_neutral, pattern=r"^panel:neutral$"))
+  - L17: app.add_handler(CallbackQueryHandler(panel_neutral.cmd_kpi,     pattern=r"^panel:kpi$"))
+- .\telegram_bot\panel.py
+  - L1: # telegram_bot/panel.py
+  - L7: from utils.user_settings import get_user_settings, set_user_settings, ensure_user_row
+  - L52: callback_data=f"panel:toggle_autopost:{1 if not autopost else 0}"
+  - L57: InlineKeyboardButton("⚙️ Neutral", callback_data="panel:neutral"),
+  - L58: InlineKeyboardButton("📊 KPI", callback_data="panel:kpi"),
+- .\telegram_bot\panel_neutral.py
+  - L152: (кнопки panel:* додаються в handlers_addons.py, щоб не дублювати відповіді)
+- .\telegram_bot\handlers\ai_commands.py
+  - L25: from utils.user_settings import get_user_settings
+  - L26: from telegram_bot.panel import panel_keyboard
+  - L27: from utils.user_settings import ensure_user_row
+  - L376: "- Або обери модель у `/panel` → *Model*."
+  - L445: InlineKeyboardButton("⚙️ Panel", callback_data="goto_panel"),
+- .\telegram_bot\handlers\commands.py
+  - L21: ["/help", "/guide", "/panel"],
+  - L42: "• `/panel` — Панель налаштувань.\n\n"
+  - L50: "1) `/panel` → обери *Timeframe* — дефолтний для `/ai`, `/req` тощо.\n"
+- .\telegram_bot\handlers\kpi_handlers.py
+  - L54: cur.execute("SELECT COALESCE(rr_threshold,1.5) FROM user_settings WHERE user_id=?", (uid,))
+- .\telegram_bot\handlers\panel_handlers.py
+  - L1: """Panel handlers (/panel and callbacks)."""
+  - L1: """Panel handlers (/panel and callbacks)."""
+  - L8: from telegram_bot.panel import panel_keyboard, apply_panel_action
+  - L9: from utils.user_settings import ensure_user_row
+  - L15: async def panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+- .\telegram_bot\handlers\register.py
+  - L7: from telegram_bot.handlers.panel_handlers import panel, on_cb_panel
+  - L23: app.add_handler(CommandHandler("panel", panel))
+  - L23: app.add_handler(CommandHandler("panel", panel))
+  - L36: app.add_handler(CallbackQueryHandler(on_cb_panel, pattern=r"^panel:.+"))
+- .\tools\seed_signals.py
+  - L7: cur.execute("""CREATE TABLE IF NOT EXISTS user_settings(
+  - L23: cur.execute("INSERT OR IGNORE INTO user_settings(user_id, timeframe, locale, daily_tracker, winrate_tracker, daily_rr, rr_threshold) VALUES(?,?,?,?,?,?,?)",
+- .\utils\db_migrate.py
+  - L234: Міграція user_settings зі старої KV-схеми (user_id,key,value, UNIQUE(user_id,key))
+  - L240: # чи існує таблиця user_settings?
+  - L241: if not _has_table(conn, "user_settings"):
+  - L243: CREATE TABLE IF NOT EXISTS user_settings(
+  - L260: cols = _table_columns(conn, "user_settings")
+- .\utils\texts.py
+  - L6: • /panel — панель керування (TF, RR, Autopost, Model, Locale, OrderBook)
+- .\utils\user_settings.py
+  - L1: # utils/user_settings.py
+  - L8: log = logging.getLogger("user_settings")
+  - L19: CREATE TABLE IF NOT EXISTS user_settings(
+  - L36: cur.execute("PRAGMA table_info(user_settings)")
+  - L39: "timeframe":       "ALTER TABLE user_settings ADD COLUMN timeframe TEXT DEFAULT '15m'",
+
+## db_insert (20 files)
+- .\scripts\auto_analyze.py
+  - L67: # check files that insert into signals/trades but have no transactions
+- .\scripts\db_seed_signals.py
+  - L106: INSERT INTO signals (user_id, symbol, status, rr, pnl_pct, entry, stop, tp, ts_created, ts_closed)
+- .\scripts\make_neutral.py
+  - L38: cur.execute(f"INSERT INTO signals({','.join(fields)}) VALUES({ph})", values)
+- .\scripts\Smoke_test_trading.py
+  - L35: conn.execute("INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (key, value))
+  - L78: """INSERT INTO trades(signal_id, symbol, timeframe, direction, entry, sl, tp,
+- .\services\autopost.py
+  - L115: "INSERT INTO autopost_log(user_id,symbol,timeframe,rr,ts_sent,ts) VALUES(?,?,?,?,?,?)",
+  - L120: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,rr) VALUES(?,?,?,?,?)",
+  - L125: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts) VALUES(?,?,?,?)",
+  - L153: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,rr,ts_sent) VALUES(?,?,?,?,?,?)",
+  - L158: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,ts_sent) VALUES(?,?,?,?,?)",
+- .\services\autopost_bridge.py
+  - L112: INSERT INTO signals(user_id, symbol, timeframe, direction, entry, sl, tp, rr, source, status, opened_at)
+  - L131: INSERT INTO trades(
+- .\services\autopost_llm_guard.py
+  - L22: "INSERT INTO settings(key,value) VALUES(?,?) "
+- .\services\ladder_manager.py
+  - L37: c.execute("INSERT INTO trade_legs(trade_id, side, qty, price, filled_at) VALUES (?,?,?,?,datetime('now'))", (trade_id, "BUY" if price<=new_avg else "SELL", qty, price))
+- .\services\signals_repo.py
+  - L145: cur.execute(f"INSERT INTO signals ({col_list}) VALUES ({placeholders})", values)
+- .\services\trade_engine.py
+  - L29: "INSERT INTO settings(key,value) VALUES(?,?) "
+  - L85: "INSERT INTO trades(signal_id,symbol,timeframe,direction,entry,sl,tp,opened_at,"
+- .\services\autopost\persistence.py
+  - L40: "INSERT INTO autopost_log(user_id,symbol,timeframe,rr,ts_sent,ts) VALUES(?,?,?,?,?,?)",
+  - L45: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,rr) VALUES(?,?,?,?,?)",
+  - L50: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts) VALUES(?,?,?,?)",
+  - L74: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,rr,ts_sent) VALUES(?,?,?,?,?,?)",
+  - L79: "INSERT INTO autopost_log(user_id,symbol,timeframe,ts,ts_sent) VALUES(?,?,?,?,?)",
+- .\storage\seed_demo.py
+  - L19: "INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,ts_closed,status,pnl_pct) "
+- .\telegram_bot\handlers.py
+  - L258: cur.execute(f"INSERT INTO signals ({col_list}) VALUES ({placeholders})", values)
+- .\telegram_bot\panel_neutral.py
+  - L60: "INSERT INTO settings(key,value) VALUES(?,?) "
+- .\tools\seed_signals.py
+  - L35: cur.executemany("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,status,pnl_pct,ts_created,ts_closed)
+- .\utils\db_migrate.py
+  - L62: conn.execute("INSERT INTO settings(key, value) VALUES(?, ?)", (key, value))
+- .\utils\settings.py
+  - L29: "INSERT INTO settings(key,value) VALUES(?, ?) "
+- .\utils\settings_ob.py
+  - L28: "INSERT INTO settings(key,value) VALUES(?,?) "
+- .\utils\signals_db.py
+  - L49: INSERT INTO signals(user_id, symbol, tf, direction, entry, sl, tp, rr, ts_created, status)
+  - L65: INSERT INTO autopost_log(user_id, symbol, tf, rr, ts_sent)
+- .\utils\trading_db.py
+  - L42: cur = con.execute("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,status)
+  - L62: con.execute("INSERT INTO autopost_log(user_id,symbol,tf,rr,ts_sent) VALUES (?,?,?,?,?)",
+
+## transactions (27 files)
+- .\migrations\003_settings_and_indexes.sql
+  - L5: BEGIN;
+  - L22: COMMIT;
+- .\migrations\004_telemetry_columns.sql
+  - L7: BEGIN;
+  - L29: COMMIT;
+- .\migrations\005_laddering.sql
+  - L5: BEGIN;
+  - L22: COMMIT;
+- .\scripts\auto_analyze.py
+  - L71: f.write(f"- Files with INSERT but no transaction keywords: {len(suspect)}\n")
+- .\scripts\db_add_indexes.py
+  - L16: c.commit()
+- .\scripts\db_migrate_v2.py
+  - L65: c.commit()
+- .\scripts\db_seed_signals.py
+  - L50: conn.commit()
+  - L109: conn.commit()
+- .\scripts\make_neutral.py
+  - L27: con.commit()
+  - L39: con.commit()
+- .\scripts\migrate_v3.py
+  - L15: con.commit()
+  - L35: con.commit()
+- .\scripts\Smoke_test_trading.py
+  - L36: conn.commit(); conn.close()
+  - L85: conn.commit(); conn.close()
+  - L134: conn.commit(); conn.close()
+  - L152: conn.commit(); conn.close()
+- .\services\autopost.py
+  - L128: conn.commit()
+  - L172: conn.commit()
+  - L217: conn.commit()
+  - L1057: conn.commit()
+- .\services\autopost_bridge.py
+  - L208: c.commit()
+- .\services\autopost_llm_guard.py
+  - L26: c.commit()
+- .\services\position_manager.py
+  - L201: conn.commit()
+  - L277: conn.commit()
+- .\services\signals_repo.py
+  - L56: c.commit()
+- .\services\signal_closer.py
+  - L75: conn.commit()
+  - L261: conn.commit()
+- .\services\autopost\persistence.py
+  - L53: conn.commit()
+  - L93: conn.commit()
+  - L134: conn.commit()
+- .\storage\seed_demo.py
+  - L23: con.commit(); con.close(); print("✅ demo rows inserted")
+- .\telegram_bot\panel_neutral.py
+  - L64: c.commit()
+- .\tests\conftest.py
+  - L60: conn.commit()
+- .\tools\seed_signals.py
+  - L37: conn.commit(); conn.close()
+- .\utils\db.py
+  - L130: con.execute("ROLLBACK")  # Rollback any uncommitted transactions
+  - L130: con.execute("ROLLBACK")  # Rollback any uncommitted transactions
+- .\utils\db_migrate.py
+  - L314: conn.commit()
+  - L349: conn.commit()
+  - L439: conn.commit()
+  - L462: BEGIN
+  - L469: BEGIN
+- .\utils\settings.py
+  - L33: conn.commit()
+- .\utils\settings_ob.py
+  - L32: conn.commit()
+- .\utils\trading_db.py
+  - L36: con.commit()
+  - L45: con.commit()
+  - L64: con.commit()
+  - L80: con.commit()
+- .\utils\user_settings.py
+  - L94: c.commit()
+  - L106: c.commit()
+  - L137: c.commit()
+
+## db_create_signals (9 files)
+- .\schema_migration.sql
+  - L16: CREATE TABLE IF NOT EXISTS signals (
+- .\scripts\db_migrate_v2.py
+  - L8: """CREATE TABLE IF NOT EXISTS signals (
+- .\scripts\db_seed_signals.py
+  - L24: CREATE TABLE IF NOT EXISTS signals (
+- .\scripts\migrate_v3.sql
+  - L14: CREATE TABLE IF NOT EXISTS signals (
+- .\tests\conftest.py
+  - L27: CREATE TABLE IF NOT EXISTS signals(
+- .\tools\seed_signals.py
+  - L14: cur.execute("""CREATE TABLE IF NOT EXISTS signals(
+- .\utils\db_migrate.py
+  - L71: CREATE TABLE IF NOT EXISTS signals(
+- .\utils\signals_db.py
+  - L14: CREATE TABLE IF NOT EXISTS signals (
+- .\utils\trading_db.py
+  - L12: CREATE TABLE IF NOT EXISTS signals (
+
+## signals_table (70 files)
+- .\HYBRID_MIGRATION.md
+  - L12: 2) Виконай `schema_migration.sql` (додає таблиці `signals`, `outcomes`, і колонки за потреби).
+  - L19: - Дані `signals`/`outcomes` не заважають v2 ігнорувати v3‑логіку.
+- .\main.py
+  - L134: """Підтримує /kpi, /kpi 3, /kpi trades 7, /kpi signals 14, /kpi 14 trades."""
+  - L145: table = "signals" if a.startswith("sig") else "trades"
+  - L152: table = "signals" if b.lower().startswith("sig") else "trades"
+  - L154: table = "signals" if a.lower().startswith("sig") else "trades"
+  - L160: table = "signals"
+- .\schema_migration.sql
+  - L15: -- signals (new in v3)
+  - L16: CREATE TABLE IF NOT EXISTS signals (
+- .\SUMMARY.md
+  - L178: | `signals` | Trading signals | symbol, direction, entry, sl, tp, rr, status |
+  - L178: | `signals` | Trading signals | symbol, direction, entry, sl, tp, rr, status |
+  - L196: | `min_entry_rr` | 1.5 | Minimum RR for signals |
+- .\migrations\003_settings_and_indexes.sql
+  - L12: -- індекси на signals (якщо таблиця існує)
+  - L13: CREATE INDEX IF NOT EXISTS ix_signals_closed_at ON signals(closed_at);
+  - L14: CREATE INDEX IF NOT EXISTS ix_signals_status    ON signals(status);
+  - L15: CREATE INDEX IF NOT EXISTS ix_signals_symbol    ON signals(symbol);
+- .\migrations\004_telemetry_columns.sql
+  - L20: -- Дзеркальні легкі поля на signals (для фільтрації/аналітики)
+  - L21: ALTER TABLE signals ADD COLUMN reason_close  TEXT;
+  - L22: ALTER TABLE signals ADD COLUMN trend_ok      INTEGER;
+  - L23: ALTER TABLE signals ADD COLUMN atr_entry     REAL;
+  - L24: ALTER TABLE signals ADD COLUMN ema50         REAL;
+- .\migrations\00XX_trades_and_settings.sql
+  - L22: FOREIGN KEY(signal_id) REFERENCES signals(id)
+- .\scripts\auto_analyze.py
+  - L67: # check files that insert into signals/trades but have no transactions
+- .\scripts\db_add_indexes.py
+  - L7: "CREATE INDEX IF NOT EXISTS idx_signals_user_time   ON signals(user_id, COALESCE(ts_closed, ts_created));",
+  - L8: "CREATE INDEX IF NOT EXISTS idx_signals_status      ON signals(status);",
+  - L9: "CREATE INDEX IF NOT EXISTS idx_signals_symbol_time ON signals(symbol, COALESCE(ts_closed, ts_created));",
+- .\scripts\db_audit.py
+  - L57: must = ["user_settings", "signals"]
+  - L87: section(f"SIGNALS last {days}d (WIN/LOSS stats)")
+  - L95: FROM signals
+  - L113: FROM signals s
+  - L146: FROM signals
+- .\scripts\db_migrate_v2.py
+  - L8: """CREATE TABLE IF NOT EXISTS signals (
+  - L30: "ALTER TABLE signals ADD COLUMN entry REAL;",
+  - L31: "ALTER TABLE signals ADD COLUMN stop REAL;",
+  - L32: "ALTER TABLE signals ADD COLUMN tp REAL;",
+  - L33: "ALTER TABLE signals ADD COLUMN rr REAL;",
+- .\scripts\db_peek.py
+  - L25: # можна передати таблиці як аргументи: python scripts/db_peek.py trades signals
+  - L26: tables = sys.argv[1:] or ["trades", "signals"]
+- .\scripts\db_probe_open.py
+  - L13: SELECT COUNT(*) FROM signals
+  - L23: FROM signals WHERE status='OPEN'
+  - L31: FROM signals
+- .\scripts\db_seed_signals.py
+  - L24: CREATE TABLE IF NOT EXISTS signals (
+  - L106: INSERT INTO signals (user_id, symbol, status, rr, pnl_pct, entry, stop, tp, ts_created, ts_closed)
+  - L112: ap = argparse.ArgumentParser(description="Seed test WIN/LOSS signals")
+- .\scripts\kpi_by_symbol.py
+  - L41: parser.add_argument("--table", choices=["trades", "signals"], default="trades",
+  - L133: # signals
+  - L134: rr_col = "rr_real" if has_col(cur, "signals", "rr_real") else ("rr" if has_col(cur,"signals","rr") else None)
+  - L134: rr_col = "rr_real" if has_col(cur, "signals", "rr_real") else ("rr" if has_col(cur,"signals","rr") else None)
+  - L135: pnl_col = "pnl_usd" if has_col(cur, "signals", "pnl_usd") else None
+- .\scripts\kpi_reasons.py
+  - L94: description="KPI by reasons (signals/trades). Supports positional DAYS or --days/--db flags.",
+  - L105: sig_cols = _cols(con, "signals")
+  - L108: # signals.reject_reason
+  - L110: con, "signals",
+  - L114: _print_block("signals.reject_reason", sig_reject)
+- .\scripts\kpi_report.py
+  - L14: row = c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name IN ('trades','signals') ORDER BY CASE name WHEN 'trades' THEN 0 ELSE 1 END LIMIT 1;").fetchone()
+  - L15: return row["name"] if row else "signals"
+- .\scripts\make_neutral.py
+  - L12: cols = [r[1] for r in cur.execute("PRAGMA table_info(signals)").fetchall()]
+  - L14: print("signals.trade_id not found — nothing to do")
+  - L17: row = cur.execute("SELECT id FROM signals WHERE trade_id=? ORDER BY id DESC LIMIT 1", (tid,)).fetchone()
+  - L24: print("signals.decision/status not found — nothing to update")
+  - L26: cur.execute(f"UPDATE signals SET {', '.join(sets)} WHERE id=?", (sid,))
+- .\scripts\migrate.py
+  - L27: for tbl, col in (("signals","closed_at"),("signals","status"),("signals","symbol"),
+  - L27: for tbl, col in (("signals","closed_at"),("signals","status"),("signals","symbol"),
+  - L27: for tbl, col in (("signals","closed_at"),("signals","status"),("signals","symbol"),
+  - L33: for tbl in ("trades","signals"):
+- .\scripts\migrate_v3.sql
+  - L13: -- signals
+  - L14: CREATE TABLE IF NOT EXISTS signals (
+  - L40: CREATE INDEX IF NOT EXISTS idx_signals_user_open ON signals(user_id, status);
+- .\scripts\Smoke_test_trading.py
+  - L19: for t in ("settings","trades","signals"):
+  - L195: sub.add_parser("schema", help="перевірити наявність таблиць settings/trades/signals")
+- .\services\autopost.py
+  - L574: cols = [r[1] for r in cur.execute("PRAGMA table_info(signals)")]
+  - L611: sql = f"INSERT INTO signals({','.join(keep)}) VALUES({','.join(['?']*len(keep))})"
+- .\services\autopost_bridge.py
+  - L106: cur.execute("UPDATE signals SET status='CLOSED', closed_at=datetime('now') WHERE id=? AND status='OPEN'",
+  - L112: INSERT INTO signals(user_id, symbol, timeframe, direction, entry, sl, tp, rr, source, status, opened_at)
+  - L153: - створює рядки у signals та trades; повертає trade_id.
+- .\services\position_manager.py
+  - L83: cols = [r[1] for r in conn.execute("PRAGMA table_info(signals)").fetchall()]
+  - L87: "UPDATE signals SET reason_close=?, closed_at=?, status='CLOSED' WHERE trade_id=?",
+  - L225: cols_sg = [r[1] for r in conn.execute("PRAGMA table_info(signals)").fetchall()]
+  - L233: "SELECT atr_entry FROM signals WHERE trade_id=? ORDER BY id DESC LIMIT 1",
+- .\services\signals_repo.py
+  - L24: cur = c.execute("PRAGMA table_info(signals)")
+  - L33: cur.execute("PRAGMA table_info(signals)")
+  - L53: cur.execute(f"ALTER TABLE signals ADD COLUMN {col} {typ}")
+  - L145: cur.execute(f"INSERT INTO signals ({col_list}) VALUES ({placeholders})", values)
+- .\services\signal_closer.py
+  - L54: # signals
+  - L56: cols_sg = [r[1] for r in conn.execute("PRAGMA table_info(signals)").fetchall()]
+  - L58: conn.execute("ALTER TABLE signals ADD COLUMN reason_close TEXT")
+  - L60: conn.execute("ALTER TABLE signals ADD COLUMN closed_at INTEGER")
+  - L62: conn.execute("ALTER TABLE signals ADD COLUMN status TEXT")
+- .\services\signal_sync.py
+  - L17: WHERE type='table' AND name IN ('trades','signals')
+  - L21: return row["name"] if row else "signals"
+- .\services\winrate_tracker.py
+  - L28: rows = _q("SELECT * FROM signals WHERE ts_created>=? AND status IN('WIN','LOSS')", (since,))
+  - L42: rows = _q("SELECT * FROM signals WHERE ts_created>=? AND status IN('WIN','LOSS')", (since,))
+- .\storage\seed_demo.py
+  - L19: "INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,ts_closed,status,pnl_pct) "
+- .\storage\reports\2025-08-18_07-22-48__BTCUSDT.md
+  - L12: - **News**: Rising leverage stress (Galaxy Digital) contrasts with institutional ETF inflows (mixed signals).
+- .\storage\reports\2025-08-18_07-22-58__BNBUSDT.md
+  - L9: - **Risk:** High volatility risk due to conflicting signals and thin liquidity.
+- .\storage\reports\2025-08-18_07-28-39__BTCUSDT.md
+  - L10: - **News:** Mixed signals—rising leverage stress vs. institutional ETF buying—create uncertainty.
+- .\storage\reports\2025-08-18_07-28-59__BNBUSDT.md
+  - L5: - **Technical:** Price is consolidating near support levels with no clear breakout or trend reversal signals.
+- .\storage\reports\2025-08-18_07-30-09__BTCUSDT.md
+  - L12: - **News**: Leverage stress signals (Galaxy Digital) may trigger liquidations.
+- .\storage\reports\2025-08-18_07-30-20__BNBUSDT.md
+  - L9: - **Risk:** High uncertainty in both directions; better to wait for clearer signals.
+- .\storage\reports\2025-08-18_07-33-51__ADAUSDT.md
+  - L10: - **Risk**: Low conviction for entry due to lack of clear signals.
+- .\storage\reports\2025-08-18_07-45-24__SOLUSDT.md
+  - L9: - **Risk:** Lack of clear directional bias and mixed signals make a trade unattractive at this time.
+- .\storage\reports\2025-08-18_07-45-41__RAYUSDT.md
+  - L7: - **Technical Analysis**: Price is consolidating near support (~3.39) with no clear breakout or trend reversal signals on the 5m chart.
+  - L13: **Wait for clearer signals or a breakout from the consolidation range.**
+- .\storage\reports\2025-08-18_07-58-28__SOLUSDT.md
+  - L11: - **Conclusion**: Wait for clearer signals or a breakout before entering a trade.
+- .\storage\reports\2025-08-18_07-58-49__ADAUSDT.md
+  - L7: - **Technical**: Mixed signals on 5m chart; no clear trend or breakout pattern.
+  - L11: - **Risk**: Low conviction for entry; better to wait for clearer signals.
+- .\storage\reports\2025-08-18_08-00-55__BTCUSDT.md
+  - L6: - **Technical**: Price action shows consolidation with no clear breakout or trend reversal signals.
+  - L10: - **Risk**: Low conviction due to conflicting signals; better to wait for clearer market structure.
+- .\storage\reports\2025-08-18_08-02-04__ADAUSDT.md
+  - L12: - **Volume**: Sustained high volume on rallies signals accumulation.
+- .\storage\reports\2025-08-18_08-03-02__ETHUSDT.md
+  - L14: - **Market Sentiment**: Rising leverage trades suggest speculative interest, but Galaxy Digital warns of stress signals.
+- .\storage\reports\2025-08-18_08-03-14__SOLUSDT.md
+  - L9: - **Risk:** Current conditions favor staying sidelined until clearer signals emerge.
+- .\storage\reports\2025-08-18_08-03-22__XRPUSDT.md
+  - L7: - **News:** Positive adoption news (XRP Ledger used by Nasdaq-listed pharma distributor) is offset by broader market stress signals (rising leverage trades).
+  - L9: - **Conclusion:** Wait for clearer price action or stronger market signals before entering a trade.
+- .\storage\reports\2025-08-18_08-03-34__ADAUSDT.md
+  - L7: - **Technical**: ADAUSDT shows mixed signals with recent volatility but lacks a clear trend on the 1h timeframe.
+  - L11: - **Risk**: High volatility and lack of clear direction increase risk of false signals.
+- .\storage\reports\2025-08-18_08-10-28__BNBUSDT.md
+  - L13: Wait for clearer signals or breakout confirmation.
+- .\storage\reports\2025-08-18_08-56-51__LTCUSDT.md
+  - L10: - **Technical**: Price is consolidating near $117 with no clear breakout or trend reversal signals.
+  - L16: **Conclusion**: Wait for clearer signals before entering a trade.
+- .\storage\reports\2025-08-18_09-59-52__ETHUSDT.md
+  - L11: - **Support/Resistance**: Key support at $4252.74 is under threat, with no clear reversal signals.
+- .\storage\reports\2025-08-18_10-00-08__SOLUSDT.md
+  - L10: - **Technical**: Price near support at 181.38, with potential reversal signals.
+- .\storage\reports\2025-08-18_10-00-16__XRPUSDT.md
+  - L7: - **Technical**: Recent price action shows a sharp decline with weak recovery signals, indicating continued bearish momentum.
+  - L11: - **Risk**: Lack of clear reversal signals makes entry risky; better to wait for stabilization or confirmation of support.
+  - L13: **Conclusion**: Avoid trading until clearer bullish signals emerge or support levels are established.
+- .\storage\reports\2025-08-18_10-41-13__BNBUSDT.md
+  - L14: - **Risk**: Watch for broader market stress signals (leveraged trades news).
+- .\storage\reports\2025-08-18_10-41-20__SOLUSDT.md
+  - L6: - **Technical**: Price is consolidating near recent lows with no clear breakout or reversal signals.
+  - L10: - **Risk**: High uncertainty in the current market environment; better to wait for clearer signals.
+- .\storage\reports\2025-08-18_10-41-31__XRPUSDT.md
+  - L13: - **News**: XRP-specific profit-taking noted; broader crypto leverage stress signals caution.
+- .\storage\reports\2025-08-18_10-41-47__LTCUSDT.md
+  - L13: - **News**: Crypto leverage stress signals (Galaxy Digital) and altcoin rotation risks (Coindesk).
+- .\storage\reports\2025-08-18_10-42-06__BTCUSDT.md
+  - L12: - **Risk:** Low volatility and lack of clear signals increase risk of false breakouts or whipsaws.
+  - L14: **Conclusion:** Wait for clearer technical signals or a catalyst before entering a trade.
+- .\storage\reports\2025-08-18_10-42-53__LTCUSDT.md
+  - L13: - **News**: Crypto leverage stress signals (Galaxy Digital); altcoin rotation risks flagged.
+- .\storage\reports\2025-08-18_10-43-16__ADAUSDT.md
+  - L5: - **Technical Analysis:** ADAUSDT shows mixed signals with recent volatility and no clear trend direction.
+- .\storage\reports\2025-08-18_14-10-13__BNBUSDT.md
+  - L12: - News context: Rising leverage stress signals (Galaxy Digital report)
+- .\storage\reports\2025-08-18_14-10-19__SOLUSDT.md
+  - L13: - **Volume**: Increasing volume on upward moves signals strong buyer interest.
+- .\storage\reports\2025-08-18_14-12-58__ETHUSDT.md
+  - L7: - **Technical**: ETHUSDT shows consolidation near $4272 with no clear breakout or trend reversal signals.
+- .\storage\reports\2025-08-18_14-13-41__XLMUSDT.md
+  - L14: - **News**: Crypto leverage stress signals (Galaxy Digital) may dampen altcoin sentiment.
+- .\storage\reports\2025-08-18_14-13-49__ADAUSDT.md
+  - L10: - **Risk**: Low conviction for entry due to lack of clear catalysts or technical signals.
+- .\telegram_bot\handlers.py
+  - L110: cur = c.execute("PRAGMA table_info(signals)")
+  - L119: # Signals table: schema guard + universal saver
+  - L126: cur.execute("PRAGMA table_info(signals)")
+  - L149: cur.execute(f"ALTER TABLE signals ADD COLUMN {col} {typ}")
+  - L258: cur.execute(f"INSERT INTO signals ({col_list}) VALUES ({placeholders})", values)
+- .\telegram_bot\handlers\kpi_handlers.py
+  - L60: SELECT status, rr, pnl_pct FROM signals
+- .\tests\conftest.py
+  - L27: CREATE TABLE IF NOT EXISTS signals(
+- .\tools\seed_signals.py
+  - L14: cur.execute("""CREATE TABLE IF NOT EXISTS signals(
+  - L35: cur.executemany("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,status,pnl_pct,ts_created,ts_closed)
+- .\utils\db_migrate.py
+  - L69: if not _has_table(conn, "signals"):
+  - L71: CREATE TABLE IF NOT EXISTS signals(
+  - L144: _ensure_column(conn, "signals", col, decl)
+  - L147: "CREATE INDEX IF NOT EXISTS ix_signals_closed_at ON signals(closed_at)")
+  - L149: "CREATE INDEX IF NOT EXISTS ix_signals_status ON signals(status)")
+- .\utils\signals_db.py
+  - L14: CREATE TABLE IF NOT EXISTS signals (
+  - L41: conn.execute("CREATE INDEX IF NOT EXISTS idx_sig_user_status ON signals(user_id, status)")
+  - L49: INSERT INTO signals(user_id, symbol, tf, direction, entry, sl, tp, rr, ts_created, status)
+  - L57: UPDATE signals
+  - L81: SELECT * FROM signals WHERE user_id=? AND status='OPEN'
+- .\utils\trading_db.py
+  - L12: CREATE TABLE IF NOT EXISTS signals (
+  - L42: cur = con.execute("""INSERT INTO signals(user_id,symbol,tf,direction,entry,sl,tp,rr,ts_created,status)
+  - L70: FROM signals WHERE status='OPEN'""")
+  - L78: con.execute("UPDATE signals SET status=?, pnl_pct=?, ts_closed=? WHERE id=?",
+  - L92: FROM signals
+
+## trades_table (57 files)
+- .\main.py
+  - L134: """Підтримує /kpi, /kpi 3, /kpi trades 7, /kpi signals 14, /kpi 14 trades."""
+  - L134: """Підтримує /kpi, /kpi 3, /kpi trades 7, /kpi signals 14, /kpi 14 trades."""
+  - L135: table = "trades"
+  - L145: table = "signals" if a.startswith("sig") else "trades"
+  - L152: table = "signals" if b.lower().startswith("sig") else "trades"
+- .\SUMMARY.md
+  - L179: | `trades` | Executed trades | signal_id, pnl_usd, rr_realized, status |
+  - L179: | `trades` | Executed trades | signal_id, pnl_usd, rr_realized, status |
+- .\alerts\push_alerts.py
+  - L52: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+  - L60: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+  - L74: "SELECT COALESCE(rr,0.0) FROM trades WHERE UPPER(COALESCE(status,''))='CLOSED' "
+  - L133: # WR% last N trades
+- .\market_data\binance_data.py
+  - L13: "close_time","qav","trades","tbbav","tbqav","ignore"
+- .\migrations\003_settings_and_indexes.sql
+  - L17: -- індекси на trades (якщо таблиця існує)
+  - L18: CREATE INDEX IF NOT EXISTS ix_trades_closed_at  ON trades(closed_at);
+  - L19: CREATE INDEX IF NOT EXISTS ix_trades_status     ON trades(status);
+  - L20: CREATE INDEX IF NOT EXISTS ix_trades_symbol     ON trades(symbol);
+- .\migrations\004_telemetry_columns.sql
+  - L9: -- На trades
+  - L10: ALTER TABLE trades ADD COLUMN reason_close   TEXT;   -- 'tp','sl','neutral','reverse','manual'
+  - L11: ALTER TABLE trades ADD COLUMN trend_ok       INTEGER;-- 0/1
+  - L12: ALTER TABLE trades ADD COLUMN atr_entry      REAL;
+  - L13: ALTER TABLE trades ADD COLUMN ema50          REAL;
+- .\migrations\005_laddering.sql
+  - L14: FOREIGN KEY(trade_id) REFERENCES trades(id)
+  - L17: -- розширення таблиці trades під laddering
+  - L18: ALTER TABLE trades  ADD COLUMN avg_entry        REAL;
+  - L19: ALTER TABLE trades  ADD COLUMN filled_buckets   INTEGER;
+  - L20: ALTER TABLE trades  ADD COLUMN target_rrs_json  TEXT;  -- напр. '["0.5","1.0","1.5"]'
+- .\migrations\00XX_trades_and_settings.sql
+  - L1: -- trades: executed trades tracking (simulation-friendly)
+  - L1: -- trades: executed trades tracking (simulation-friendly)
+  - L2: CREATE TABLE IF NOT EXISTS trades (
+  - L24: CREATE INDEX IF NOT EXISTS idx_trades_open ON trades(symbol, timeframe, status);
+- .\scripts\auto_analyze.py
+  - L67: # check files that insert into signals/trades but have no transactions
+- .\scripts\db_audit.py
+  - L101: print("total trades:", total)
+- .\scripts\db_peek.py
+  - L25: # можна передати таблиці як аргументи: python scripts/db_peek.py trades signals
+  - L26: tables = sys.argv[1:] or ["trades", "signals"]
+- .\scripts\db_seed_signals.py
+  - L115: ap.add_argument("--n", type=int, default=6, help="Number of trades to create (default 6)")
+  - L122: print(f"OK: seeded {args.n} trades for user {args.user} over last {args.days} days (RR≥{args.rr}, symbol={args.symbol})")
+- .\scripts\kpi_by_symbol.py
+  - L41: parser.add_argument("--table", choices=["trades", "signals"], default="trades",
+  - L41: parser.add_argument("--table", choices=["trades", "signals"], default="trades",
+  - L42: help="Яку таблицю аналізувати (default: trades)")
+  - L57: if args.table == "trades":
+  - L59: rr_real_col = "rr_realized" if has_col(cur, "trades", "rr_realized") else "rr"
+- .\scripts\kpi_reasons.py
+  - L94: description="KPI by reasons (signals/trades). Supports positional DAYS or --days/--db flags.",
+  - L106: tr_cols  = _cols(con, "trades")
+  - L116: # trades.reason_close (зливаємо reason_close/close_reason)
+  - L118: tr_close = _fetch_reasons(con, "trades", tr_reason_sql, days, TRD_TS_CANDIDATES)
+  - L119: _print_block("trades.reason_close", tr_close)
+- .\scripts\kpi_report.py
+  - L14: row = c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name IN ('trades','signals') ORDER BY CASE name WHEN 'trades' THEN 0 ELSE 1 END LIMIT 1;").fetchone()
+  - L14: row = c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name IN ('trades','signals') ORDER BY CASE name WHEN 'trades' THEN 0 ELSE 1 END LIMIT 1;").fetchone()
+- .\scripts\migrate.py
+  - L28: ("trades","closed_at"),("trades","status"),("trades","symbol")):
+  - L28: ("trades","closed_at"),("trades","status"),("trades","symbol")):
+  - L28: ("trades","closed_at"),("trades","status"),("trades","symbol")):
+  - L33: for tbl in ("trades","signals"):
+  - L43: # flags лише для trades
+- .\scripts\rr_probe.py
+  - L30: "SELECT id, symbol, direction, entry, sl FROM trades WHERE (status IS NULL OR UPPER(status)='OPEN') ORDER BY id"
+  - L34: print("OPEN TRADES RR snapshot:")
+- .\scripts\Smoke_test_trading.py
+  - L19: for t in ("settings","trades","signals"):
+  - L48: Створює запис у trades, імітуючи open_trade_from_signal().
+  - L54: CREATE TABLE IF NOT EXISTS trades (
+  - L78: """INSERT INTO trades(signal_id, symbol, timeframe, direction, entry, sl, tp,
+  - L93: FROM trades ORDER BY id DESC LIMIT ?
+- .\services\autopost_bridge.py
+  - L79: "SELECT 1 FROM trades WHERE symbol=? AND timeframe=? AND status='OPEN' LIMIT 1",
+  - L86: "SELECT * FROM trades WHERE symbol=? AND timeframe=? AND status='OPEN' ORDER BY id",
+  - L101: "UPDATE trades SET status='CLOSED', closed_at=datetime('now'), close_reason=?, pnl_usd=?, rr_realized=? WHERE id=?",
+  - L131: INSERT INTO trades(
+  - L153: - створює рядки у signals та trades; повертає trade_id.
+- .\services\daily_tracker.py
+  - L74: FROM trades
+  - L100: FROM trades
+  - L148: trades = _fetch_trades_closed_between(start_iso, end_iso)
+  - L150: total = len(trades)
+  - L151: wins = sum(1 for t in trades if (t.status or "").upper() == "WIN")
+- .\services\kpi.py
+  - L7: def kpi_summary(days: int = 7, table: str = "trades") -> str:
+- .\services\ladder_manager.py
+  - L28: tr = c.execute("SELECT * FROM trades WHERE id=?", (trade_id,)).fetchone()
+  - L36: c.execute("UPDATE trades SET avg_entry=?, filled_buckets=COALESCE(filled_buckets,0)+1 WHERE id=?", (new_avg, trade_id))
+- .\services\position_manager.py
+  - L65: row = conn.execute("SELECT size_usd FROM trades WHERE id=?", (trade_id,)).fetchone()
+  - L125: UPDATE trades
+  - L145: "UPDATE trades SET partial_50_done=1, pnl_usd=COALESCE(pnl_usd,0)+? WHERE id=?",
+  - L156: conn.execute("UPDATE trades SET be_done=1 WHERE id=?", (tid,))
+  - L158: conn.execute("UPDATE trades SET sl=?, be_done=1 WHERE id=?", (entry, tid,))
+- .\services\signal_closer.py
+  - L28: # trades
+  - L29: cols_tr = [r[1] for r in conn.execute("PRAGMA table_info(trades)").fetchall()]
+  - L31: conn.execute("ALTER TABLE trades ADD COLUMN partial_50_done INTEGER NOT NULL DEFAULT 0")
+  - L33: conn.execute("ALTER TABLE trades ADD COLUMN be_done INTEGER NOT NULL DEFAULT 0")
+  - L35: conn.execute("ALTER TABLE trades ADD COLUMN closed_at INTEGER")
+- .\services\signal_sync.py
+  - L17: WHERE type='table' AND name IN ('trades','signals')
+  - L18: ORDER BY CASE name WHEN 'trades' THEN 0 ELSE 1 END
+- .\services\trade_engine.py
+  - L37: "SELECT * FROM trades WHERE symbol=? AND timeframe=? AND status='OPEN' "
+  - L85: "INSERT INTO trades(signal_id,symbol,timeframe,direction,entry,sl,tp,opened_at,"
+  - L118: "UPDATE trades SET closed_at=?, close_price=?, close_reason=?, pnl_usd=?, pnl_pct=?, rr_realized=?, status=? "
+  - L126: Evaluates TP/SL hits for OPEN trades using provided price_map:
+  - L128: Returns number of closed trades.
+- .\storage\reports\2025-08-18_07-22-52__ETHUSDT.md
+  - L9: - **News**: Rising leverage trades and regulatory uncertainty add market stress, increasing volatility risk.
+- .\storage\reports\2025-08-18_07-24-06__BTCUSDT.md
+  - L12: - **News**: Rising leverage trades indicate potential market stress, increasing downside risk.
+- .\storage\reports\2025-08-18_07-29-06__SOLUSDT.md
+  - L7: - **News:** Rising leverage trades show signs of stress, potentially increasing market volatility.
+- .\storage\reports\2025-08-18_07-29-42__ADAUSDT.md
+  - L14: - **Market Sentiment**: Rising leverage trades indicate speculative interest, potentially driving short-term gains.
+- .\storage\reports\2025-08-18_07-30-13__ETHUSDT.md
+  - L12: - **News**: Rising leverage trades show signs of stress, indicating potential market instability.
+- .\storage\reports\2025-08-18_07-30-27__SOLUSDT.md
+  - L11: - **News:** Rising leverage trades indicate potential market stress, increasing downside risk.
+- .\storage\reports\2025-08-18_07-47-19__BTCUSDT.md
+  - L15: - **Risk**: Monitor for signs of stress in leverage trades, as highlighted by Galaxy Digital.
+- .\storage\reports\2025-08-18_07-47-24__ETHUSDT.md
+  - L12: - **News**: Rising leverage trades in crypto show signs of stress, indicating potential market weakness.
+- .\storage\reports\2025-08-18_07-58-15__ETHUSDT.md
+  - L7: - **News:** Mixed sentiment with rising leverage trades showing stress, but institutional buying in Bitcoin ETFs could indirectly support ETH.
+- .\storage\reports\2025-08-18_07-58-28__SOLUSDT.md
+  - L9: - **News**: Mixed sentiment in crypto markets; rising leverage trades indicate potential stress, but institutional buying sprees provide some support.
+- .\storage\reports\2025-08-18_08-01-39__RAYUSDT.md
+  - L13: - **Risk**: Rising leverage trades show signs of stress, but current price action and orderbook suggest upward potential.
+- .\storage\reports\2025-08-18_08-03-02__ETHUSDT.md
+  - L14: - **Market Sentiment**: Rising leverage trades suggest speculative interest, but Galaxy Digital warns of stress signals.
+- .\storage\reports\2025-08-18_08-03-22__XRPUSDT.md
+  - L7: - **News:** Positive adoption news (XRP Ledger used by Nasdaq-listed pharma distributor) is offset by broader market stress signals (rising leverage trades).
+- .\storage\reports\2025-08-18_08-03-34__ADAUSDT.md
+  - L9: - **News**: Crypto leverage trades show signs of stress, and altcoins are driving gains, but no direct catalyst for ADA.
+- .\storage\reports\2025-08-18_08-10-24__ETHUSDT.md
+  - L15: - **Risk**: Leverage trades showing signs of stress could introduce volatility, hence tight stop-loss.
+- .\storage\reports\2025-08-18_08-10-28__BNBUSDT.md
+  - L11: - **Risk**: High volatility and potential for sudden moves due to leveraged trades.
+- .\storage\reports\2025-08-18_08-10-42__LTCUSDT.md
+  - L12: - **News**: Rising leverage trades in crypto markets indicate potential stress, increasing downside risks.
+- .\storage\reports\2025-08-18_08-56-16__ETHUSDT.md
+  - L10: - **News:** Rising leverage trades indicate potential market stress, adding bearish sentiment.
+- .\storage\reports\2025-08-18_08-56-51__LTCUSDT.md
+  - L12: - **News**: Mixed sentiment with rising leverage trades showing stress and institutional buying in Bitcoin ETFs, but no direct impact on LTC.
+- .\storage\reports\2025-08-18_09-59-45__BTCUSDT.md
+  - L13: - **News**: Rising leverage trades showing signs of stress, potential market instability.
+- .\storage\reports\2025-08-18_09-59-52__ETHUSDT.md
+  - L9: - **News**: Rising leverage trades in crypto markets show signs of stress, adding to market uncertainty.
+- .\storage\reports\2025-08-18_10-00-00__BNBUSDT.md
+  - L7: - **News:** Mixed sentiment; rising leverage trades indicate potential stress, but institutional buying sprees suggest underlying support.
+- .\storage\reports\2025-08-18_10-41-13__BNBUSDT.md
+  - L14: - **Risk**: Watch for broader market stress signals (leveraged trades news).
+- .\storage\reports\2025-08-18_10-42-14__ETHUSDT.md
+  - L12: - **News**: Ether market sentiment is cautious below $4.2K, with rising leverage trades showing signs of stress.
+- .\storage\reports\2025-08-18_10-43-16__ADAUSDT.md
+  - L7: - **News:** Crypto market sentiment is mixed, with rising leverage trades showing signs of stress and no direct bullish catalysts for ADA.
+- .\telegram_bot\auto_scheduler.py
+  - L22: f"Trades: {s['trades']}\n"
+  - L22: f"Trades: {s['trades']}\n"
+- .\telegram_bot\handlers.py
+  - L1161: f"Trades: **{n}** | WIN: **{wins}** | LOSS: **{n-wins}** | Winrate: **{winrate:.2f}%**\n"
+- .\telegram_bot\handlers\kpi_handlers.py
+  - L72: f"Trades: **{n}** | WIN: **{wins}** | LOSS: **{n-wins}** | Winrate: **{winrate:.2f}%**\n"
+- .\tests\conftest.py
+  - L43: CREATE TABLE IF NOT EXISTS trades(
+- .\utils\db_migrate.py
+  - L153: if not _has_table(conn, "trades"):
+  - L155: CREATE TABLE IF NOT EXISTS trades(
+  - L226: _ensure_column(conn, "trades", col, decl)
+  - L229: "CREATE INDEX IF NOT EXISTS ix_trades_closed_at ON trades(closed_at)")
+  - L455: CREATE INDEX IF NOT EXISTS ix_trades_closed_at  ON trades(closed_at);
+- .\utils\trading_db.py
+  - L102: "trades": int(total),
+
+## Heuristics
+- Files with INSERT but no transaction keywords: 4
+  - .\services\ladder_manager.py
+  - .\services\trade_engine.py
+  - .\telegram_bot\handlers.py
+  - .\utils\signals_db.py
+- Files mentioning directions (sample 10):
+  - .\SUMMARY.md
+  - .\.cursor\plans\ccbv3.8_code_quality_improvements_1d94033a.plan.md
+  - .\alerts\signal_registry.py
+  - .\gpt_analyst\full_analyzer.py
+  - .\gpt_decider\decider.py
+  - .\migrations\005_laddering.sql
+  - .\migrations\00XX_trades_and_settings.sql
+  - .\scheduler\local_top5_job.py
+  - .\scheduler\screener_job.py
+  - .\scripts\auto_analyze.py
+
+## Recommendations
+- Review files listed above for: support of SHORT and LONG parsing, RR sourcing from user settings, DB transactions wrapping inserts.
+- Run detailed iterator on candidate parser files and add unit tests for parse() to assert LONG/SHORT and rr extraction.

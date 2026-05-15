@@ -1,0 +1,884 @@
+{
+  "timestamp": "2026-04-07T20:17:17.706616",
+  "database_path": "storage/bot.db",
+  "summary": {
+    "tables_count": 8,
+    "total_rows": 49753,
+    "total_trades": 4076,
+    "closed_trades": 4075,
+    "win_rate": 27.78
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "PERFORMANCE",
+      "issue": "Low win rate: 27.78%",
+      "recommendation": "Review gate logic and entry criteria"
+    },
+    {
+      "priority": "HIGH",
+      "category": "PROFITABILITY",
+      "issue": "Negative total P&L: $-402.7754",
+      "recommendation": "Implement stricter risk management"
+    }
+  ],
+  "tables": {
+    "settings": {
+      "columns": [
+        {
+          "name": "key",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "value",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "row_count": 25,
+      "column_count": 2
+    },
+    "user_settings": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timeframe",
+          "type": "TEXT",
+          "nullable": true,
+          "default": "'15m'"
+        },
+        {
+          "name": "autopost",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "autopost_tf",
+          "type": "TEXT",
+          "nullable": true,
+          "default": "'15m'"
+        },
+        {
+          "name": "autopost_rr",
+          "type": "REAL",
+          "nullable": true,
+          "default": "1.5"
+        },
+        {
+          "name": "rr_threshold",
+          "type": "REAL",
+          "nullable": true,
+          "default": "1.5"
+        },
+        {
+          "name": "model_key",
+          "type": "TEXT",
+          "nullable": true,
+          "default": "'auto'"
+        },
+        {
+          "name": "locale",
+          "type": "TEXT",
+          "nullable": true,
+          "default": "'uk'"
+        },
+        {
+          "name": "daily_tracker",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "daily_rr",
+          "type": "REAL",
+          "nullable": true,
+          "default": "3.0"
+        },
+        {
+          "name": "winrate_tracker",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "scalping_mode",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "scalping_sl_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": "0.3"
+        },
+        {
+          "name": "scalping_tp_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": "0.9"
+        },
+        {
+          "name": "slippage_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": "0.05"
+        },
+        {
+          "name": "quality_gate_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": "70"
+        },
+        {
+          "name": "monitored_symbols",
+          "type": "TEXT",
+          "nullable": true,
+          "default": "''"
+        }
+      ],
+      "row_count": 2,
+      "column_count": 18
+    },
+    "sqlite_sequence": {
+      "columns": [
+        {
+          "name": "name",
+          "type": "",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "seq",
+          "type": "",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "row_count": 4,
+      "column_count": 2
+    },
+    "signals": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "symbol",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timeframe",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "direction",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "entry",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "sl",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "tp",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "source",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "opened_at",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "closed_at",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pnl_usd",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_real",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "tf",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "analysis_id",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "snapshot_ts",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "size_usd",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ts_created",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ts_closed",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pnl_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "details",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "reason_close",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trend_ok",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "atr_entry",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ema50",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ema200",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_target",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "entry_sl_dist",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trade_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "decision",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "reject_reason",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "row_count": 8123,
+      "column_count": 34
+    },
+    "trades": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "signal_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "symbol",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timeframe",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "direction",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "entry",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "sl",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "tp",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "opened_at",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "closed_at",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "close_reason",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "size_usd",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "fees_bps",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_planned",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pnl",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "close_price",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "reason_close",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trend_ok",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "atr_entry",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ema50",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ema200",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_target",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "entry_sl_dist",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "partial_50_done",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "be_done",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "avg_entry",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "filled_buckets",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "target_rrs_json",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pnl_usd",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_realized",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trail_mode",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "trade_mode",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "indicators_json",
+          "type": "TEXT",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "gate_score",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "gate_total",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "gate_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "slippage_pct",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_raw",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "rr_adj",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "row_count": 4076,
+      "column_count": 41
+    },
+    "autopost_log": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "symbol",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timeframe",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "rr",
+          "type": "REAL",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ts_sent",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ts",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "row_count": 37506,
+      "column_count": 7
+    },
+    "autopost_candidates": {
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "symbol",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "timeframe",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "consecutive_passes",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "last_pass_ts",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        }
+      ],
+      "row_count": 13,
+      "column_count": 5
+    },
+    "user_verified": {
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "verified",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "row_count": 4,
+      "column_count": 3
+    }
+  },
+  "trades_analysis": {
+    "counts": {
+      "total": 4076,
+      "closed": 4075,
+      "open": 1
+    },
+    "status_breakdown": [
+      {
+        "status": "CLOSED",
+        "count": 4066
+      },
+      {
+        "status": "LOSS",
+        "count": 9
+      },
+      {
+        "status": "OPEN",
+        "count": 1
+      }
+    ],
+    "win_loss": {
+      "wins": 1132,
+      "losses": 2943,
+      "breakeven": 0,
+      "win_rate_pct": 27.78,
+      "avg_win": 1.3928,
+      "avg_loss": -0.6726,
+      "profit_factor": 2.07,
+      "total_pnl": -402.7754
+    },
+    "symbols": [
+      {
+        "symbol": "FOGOUSDT",
+        "count": 704,
+        "total_pnl": -68.165,
+        "avg_pnl": -0.0968
+      },
+      {
+        "symbol": "LINKUSDT",
+        "count": 455,
+        "total_pnl": -41.0302,
+        "avg_pnl": -0.0902
+      },
+      {
+        "symbol": "XLMUSDT",
+        "count": 439,
+        "total_pnl": -44.6932,
+        "avg_pnl": -0.1018
+      },
+      {
+        "symbol": "SOLUSDT",
+        "count": 426,
+        "total_pnl": -21.0386,
+        "avg_pnl": -0.0494
+      },
+      {
+        "symbol": "ETHUSDT",
+        "count": 423,
+        "total_pnl": -61.7354,
+        "avg_pnl": -0.1459
+      },
+      {
+        "symbol": "ADAUSDT",
+        "count": 412,
+        "total_pnl": -40.9647,
+        "avg_pnl": -0.0994
+      },
+      {
+        "symbol": "XRPUSDT",
+        "count": 362,
+        "total_pnl": -29.6948,
+        "avg_pnl": -0.082
+      },
+      {
+        "symbol": "LTCUSDT",
+        "count": 301,
+        "total_pnl": -48.7041,
+        "avg_pnl": -0.1618
+      },
+      {
+        "symbol": "BTCUSDT",
+        "count": 288,
+        "total_pnl": -13.9109,
+        "avg_pnl": -0.0483
+      },
+      {
+        "symbol": "BNBUSDT",
+        "count": 265,
+        "total_pnl": -32.8385,
+        "avg_pnl": -0.1239
+      }
+    ],
+    "modes": [
+      {
+        "mode": "ai",
+        "count": 18,
+        "total_pnl": -1.1159,
+        "avg_pnl": -0.062
+      },
+      {
+        "mode": "scalping",
+        "count": 4057,
+        "total_pnl": -401.6595,
+        "avg_pnl": -0.099
+      }
+    ],
+    "daily_stats": [
+      {
+        "date": "1970-01-01",
+        "count": 4076,
+        "pnl": -402.7754
+      }
+    ]
+  },
+  "integrity_issues": [],
+  "key_metrics": {
+    "overall_performance": {
+      "total_trades": 4075,
+      "winning_trades": 1132,
+      "losing_trades": 2943,
+      "win_rate_pct": 27.78,
+      "total_pnl": -402.7754,
+      "avg_pnl_per_trade": -0.0988,
+      "best_trade": 3.4115,
+      "worst_trade": -3.6344
+    },
+    "risk_metrics": {
+      "avg_return": -0.098841,
+      "std_dev": 0.962704,
+      "sharpe_ratio": -0.1027
+    },
+    "streaks": {
+      "current_streak": 17,
+      "max_win_streak": 17,
+      "max_loss_streak": 59
+    }
+  }
+}

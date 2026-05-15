@@ -1,0 +1,2062 @@
+{
+  "timestamp": "2026-01-30T10:36:15.130622",
+  "phase": "security_configuration_audit",
+  "status": "completed",
+  "secrets_audit": {
+    "hardcoded_secrets": [
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 309,
+        "type": "key",
+        "code": "COALESCE(MAX(CASE WHEN kv.key='autopost'     THEN CAST(kv.value AS INTEGER) END), 0),"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 310,
+        "type": "key",
+        "code": "COALESCE(MAX(CASE WHEN kv.key='autopost_rr'  THEN CAST(kv.value AS REAL)    END), 1.5),"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 311,
+        "type": "key",
+        "code": "COALESCE(MAX(CASE WHEN kv.key='rr_threshold' THEN CAST(kv.value AS REAL)    END), 1.5),"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 312,
+        "type": "key",
+        "code": "COALESCE(MAX(CASE WHEN kv.key='model_key'    THEN kv.value END), 'auto'),"
+      },
+      {
+        "file": "utils\\db_migrate.py",
+        "line": 313,
+        "type": "key",
+        "code": "COALESCE(MAX(CASE WHEN kv.key='locale'       THEN kv.value END), 'uk')"
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "line": 7,
+        "type": "key",
+        "code": "_KEY = \"orderbook_enabled\""
+      }
+    ],
+    "env_variables": [
+      "OPENROUTER_TEMPERATURE",
+      "OR_BASE",
+      "LLM_BACKOFF",
+      "DEFAULT_LOCALE",
+      "OR_BACKOFF_START",
+      "LLM_RETRIES",
+      "OR_SLOTS",
+      "LOCAL_LLM_BASE",
+      "TELEGRAM_CHAT_ID",
+      "TZ_NAME",
+      "OPENROUTER_KEY",
+      "DB_POOL_SIZE",
+      "AUTOPOST_SCAN_CRON",
+      "LOG_FILE",
+      "AUTOPOST_LLM_ENABLED",
+      "ANALYZE_LIMIT",
+      "BOT_MODE",
+      "PORT",
+      "KPI_RR_BUCKET",
+      "OR_MAX_TOKENS",
+      "AUTOPOST_INTERVAL_SEC",
+      "ORDERBOOK_LEVELS",
+      "OR_BACKOFF_CAP",
+      "KPI_DAYS",
+      "ORDERBOOK_BUCKET_PCT",
+      "WALL_USDT_THRESHOLD",
+      "LLM_MAX_TOKENS",
+      "INDICATOR_PRESET",
+      "SIGNAL_SYNC_ENABLED",
+      "LOG_LEVEL",
+      "DB_PATH",
+      "OPENROUTER_BASE",
+      "DATABASE_PATH",
+      "OPENROUTER_MODEL",
+      "VERBOSE_MIGRATE",
+      "TELEGRAM_BOT_TOKEN",
+      "TEST_UID",
+      "LOG_JSON",
+      "WEBHOOK_URL",
+      "SEED_UID",
+      "WALL_NEAR_PCT",
+      "AI_FORCE_LLM",
+      "LLM_DISABLED",
+      "OPENROUTER_KEYS",
+      "LOCAL_LLM_MODEL",
+      "MONITORED_SYMBOLS",
+      "ORDERBOOK_TTL_SEC",
+      "ANALYZE_TIMEFRAME",
+      "LLM_TEMPERATURE",
+      "OR_TITLE",
+      "LLM_TIMEOUT",
+      "SQLITE_PATH",
+      "SETTINGS_CACHE_TTL_SEC",
+      "OR_REFERER",
+      "ORDERBOOK_ENABLED",
+      "AUTOPOST_COOLDOWN_MIN",
+      "OPENROUTER_TIMEOUT"
+    ],
+    "config_files": [
+      ".env"
+    ],
+    "api_keys": [],
+    "database_credentials": [],
+    "missing_env_vars": []
+  },
+  "input_validation": {
+    "missing_validation": [],
+    "sql_injection_risks": [
+      {
+        "file": "security_auditor.py",
+        "line": 133,
+        "code": "if ('execute(' in line or 'cursor.execute' in line) and ('%' in line or '+' in line or 'format(' in line):",
+        "risk": "potential_sql_injection"
+      }
+    ],
+    "xss_risks": [
+      {
+        "file": "main.py",
+        "line": 285,
+        "code": "\"\"\"Інлайн-кнопки KPI: kpi:<table>:<days> або kpi:close.\"\"\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "security_auditor.py",
+        "line": 152,
+        "code": "if ('telegram' in content.lower() or 'bot' in content.lower()) and ('<' in line and '>' in line):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 53,
+        "code": "\"AND closed_at>=? AND closed_at<?\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 132,
+        "code": "f\"⚠️ <b>ALERT: Серія лосів</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 133,
+        "code": "f\"🔴 <b>{cl}</b> лосів підряд (ліміт: {cfg.max_consec_losses})\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 134,
+        "code": "f\"💡 <i>Рекомендація: зроби паузу, проаналізуй останні угоди.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 144,
+        "code": "f\"📉 <b>ALERT: Денний дроудаун</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 145,
+        "code": "f\"💰 Сьогодні: <b>{day_rr:.2f}R</b> (ліміт: -{cfg.drawdown_alert_r}R)\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 146,
+        "code": "f\"💡 <i>Денний ліміт збитків перевищено.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 156,
+        "code": "f\"📉 <b>ALERT: Тижневий дроудаун</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 157,
+        "code": "f\"💰 Цього тижня: <b>{week_rr:.2f}R</b> (ліміт: -{cfg.drawdown_alert_r}R)\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 158,
+        "code": "f\"💡 <i>Тижневий ліміт збитків перевищено.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 170,
+        "code": "f\"❗ <b>ALERT: Низький Win Rate</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 171,
+        "code": "f\"📊 WR = <b>{wr*100:.1f}%</b> (мін. {cfg.wr_min*100:.0f}%)\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "alerts\\push_alerts.py",
+        "line": 173,
+        "code": "f\"💡 <i>Win Rate нижче порогу — розглянь паузу або перегляд стратегії.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scheduler\\local_top5_job.py",
+        "line": 25,
+        "code": "trend=1.0 if sma7>sma25 else -1.0 if sma7<sma25 else 0.0",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "line": 124,
+        "code": "order = [\"<-1R\",\"-1..0R\",\"0..1R\",\"1..2R\",\"2..3R\",\"3..5R\",\">=5R\",\"nan\"]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "line": 198,
+        "code": "order = [\"<-1R\",\"-1..0R\",\"0..1R\",\"1..2R\",\"2..3R\",\"3..5R\",\">=5R\",\"nan\"]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scripts\\kpi_report.py",
+        "line": 52,
+        "code": "print(f\"{d:<20}{r['trd']:>3} {r['wr_pct']:>7} {r['pnl_usd']:>10} {r['avg_rr']:>7} {r['rr2_cnt']:>10} {r['pnl_rr2']:>11}\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scripts\\make_neutral.py",
+        "line": 7,
+        "code": "print(\"Usage: python scripts/make_neutral.py <trade_id>\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "scripts\\rr_probe.py",
+        "line": 43,
+        "code": "print(f\"{flag} id={tid:>3} {sym:<10} dir={direction:<5} entry={entry:.6f} sl={sl:.6f} px={px} RR={rrv:.2f}\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 252,
+        "code": "trend_ok = (ema50 > ema200) if dir_long else (ema50 < ema200)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 265,
+        "code": "if rsi is not None and ((dir_long and rsi >= RSI_LONG_MIN) or ((not dir_long) and rsi <= RSI_SHORT_MAX)):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 295,
+        "code": "if ema50_slope is not None and ((dir_long and ema50_slope > 0) or ((not dir_long) and ema50_slope < 0)):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 301,
+        "code": "if pr_ema50 is not None and ((dir_long and pr_ema50 > 0) or ((not dir_long) and pr_ema50 < 0)):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 307,
+        "code": "if pr_ema200 is not None and ((dir_long and pr_ema200 > 0) or ((not dir_long) and pr_ema200 < 0)):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 321,
+        "code": "# оцінимо за close: (останнє > max за n-1) для LONG, або < min для SHORT",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 236,
+        "code": "trend_ok = (ema50 >= ema200) if direction == \"LONG\" else (ema50 < ema200)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 378,
+        "code": "f\"  ↳ Hist>0 = імпульс вгору, <0 = вниз\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 380,
+        "code": "f\"  ↳ RSI>70 перекуплено, <30 перепродано\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 382,
+        "code": "f\"  ↳ ADX>25 сильний тренд, <20 флет\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 386,
+        "code": "f\"  ↳ <0.2 біля низу, >0.8 біля верху\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 400,
+        "code": "lines.append(f\"  ↳ >1.5 багато лонгів (squeeze?), <0.7 багато шортів\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 459,
+        "code": "if (direction == \"LONG\" and rsi14 >= 55) or (direction == \"SHORT\" and rsi14 <= 45):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 469,
+        "code": "if (direction == \"LONG\" and macd_h > 0) or (direction == \"SHORT\" and macd_h < 0):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 542,
+        "code": "if (dir == \"LONG\" and rsi14 >= 55) or (dir == \"SHORT\" and rsi14 <= 45):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 552,
+        "code": "if (dir == \"LONG\" and macd < 0) or (dir == \"SHORT\" and macd > 0):",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 146,
+        "code": "if rr >= min_rr and rr <= rr_max:",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 238,
+        "code": "trend_ok = (direction == \"LONG\" and ema50 >= ema200) or (direction == \"SHORT\" and ema50 < ema200)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 241,
+        "code": "rsi_ok   = (rsi >= rsi_long_min) if direction == \"LONG\" else (rsi <= rsi_short_max)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 245,
+        "code": "reasons.append((\"+TREND\"  if trend_ok else \"-TREND\")  + f\" ema50{'>=' if ema50>=ema200 else '<'}ema200\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 92,
+        "code": "(typeof(closed_at) = 'integer' AND closed_at >= ? AND closed_at < ?)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 94,
+        "code": "(closed_at GLOB '[0-9]*' AND CAST(closed_at AS INTEGER) >= ? AND CAST(closed_at AS INTEGER) < ?)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 95,
+        "code": "OR (closed_at >= ? AND closed_at < ?)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 124,
+        "code": "AND opened_at >= ? AND opened_at < ?",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 467,
+        "code": "reasons.append(f\"{'✅' if trend_ema_ok else '❌'} TREND EMA50{'≥' if ind['ema50']>=ind['ema200'] else '<'}EMA200\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 477,
+        "code": "reasons.append(f\"{'✅' if trend_sma_ok else '❌'} SMA7{'≥' if ind['sma7']>=ind['sma25'] else '<'}SMA25\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 483,
+        "code": "rsi_ok = rsi >= thresholds[\"rsi_long_min\"] and rsi < thresholds[\"rsi_overbought\"]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 486,
+        "code": "rsi_ok = rsi <= thresholds[\"rsi_short_max\"] and rsi > thresholds[\"rsi_oversold\"]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 497,
+        "code": "stoch_ok = stoch_k > stoch_d and stoch_k < 80  # K > D і не перекуплений",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 499,
+        "code": "stoch_ok = stoch_k < stoch_d and stoch_k > 20  # K < D і не перепроданий",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 502,
+        "code": "reasons.append(f\"{'✅' if stoch_ok else '❌'} StochRSI K:{stoch_k:.1f} {'>' if stoch_k>stoch_d else '<'} D:{stoch_d:.1f}\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 515,
+        "code": "reasons.append(f\"{'✅' if macd_ok else '❌'} MACD hist:{macd_hist:.4f} {'>' if macd_hist>0 else '<'}0\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 530,
+        "code": "cci_ok = cci > -100 and cci < 200  # не в зоні перепроданості, не екстремально перекуплений",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 532,
+        "code": "cci_ok = cci < 100 and cci > -200",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 540,
+        "code": "atr_ok = atr_pct >= thresholds[\"atr_pct_min\"] and atr_pct <= thresholds[\"atr_pct_max\"]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 549,
+        "code": "bb_ok = bb_pct_b < thresholds[\"bb_pct_b_long_max\"] and bb_pct_b > 0",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 551,
+        "code": "bb_ok = bb_pct_b > thresholds[\"bb_pct_b_short_min\"] and bb_pct_b < 1",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 581,
+        "code": "mfi_ok = mfi < thresholds[\"mfi_overbought\"] and mfi > 20",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 583,
+        "code": "mfi_ok = mfi > thresholds[\"mfi_oversold\"] and mfi < 80",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 613,
+        "code": "ls_ok = ls_ratio < 0.95  # >5% більше шортів ніж лонгів",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 495,
+        "code": "\"• `/ai <SYMBOL> [TF]` — AI-план (Entry/SL/TP, RR, утримання) + індикатори.\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 496,
+        "code": "\"• `/req <SYMBOL> [TF]` — Залежність монети від BTC/ETH (ρ, β, Δ Ratio).\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 519,
+        "code": "\"• Моментум: RSI, MACD — імпульс/розвороти (RSI<30 — перепроданість, RSI>70 — перекупленість).\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 532,
+        "code": "# /req — залежність BTC/ETH → <SYMBOL> [TF]",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 646,
+        "code": "\"\"\"Команда: /req <SYMBOL> [TF] — кореляції/β/ratio до BTC та ETH.\"\"\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 692,
+        "code": "# формат callback_data: \"panel:<action>:<value>\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 1077,
+        "code": "indi += f\"\\n  ↳ >1.5 багато лонгів (squeeze?), <0.7 багато шортів\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 1134,
+        "code": "# CALLBACK: ai:<SYM>  (плитка \"🤖 AI <SYM>\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 1137,
+        "code": "\"\"\"Обробляє кнопку ai:<SYM> з /top або /analyze меню та делегує в /ai.\"\"\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 1145,
+        "code": "# делегуємо в новий cmd_ai: підставимо args так, ніби це /ai <SYM>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "trader\\risk_manager.py",
+        "line": 130,
+        "code": "WHERE status = 'CLOSED' AND closed_at >= ? AND closed_at < ?",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "trader\\risk_manager.py",
+        "line": 145,
+        "code": "WHERE status = 'CLOSED' AND closed_at >= ? AND closed_at < ?",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 7,
+        "code": "• /ai <SYMBOL> [TF] — AI-аналіз монети (12 індикаторів + пояснення)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 31,
+        "code": "📘 <b>ЯК ЧИТАТИ СИГНАЛ</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 34,
+        "code": "<b>🎯 ЗАГОЛОВОК</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 43,
+        "code": "<b>💰 ЦІНИ ТА РІВНІ</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 45,
+        "code": "📍 <b>Entry</b> — ціна входу в позицію",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 46,
+        "code": "🛑 <b>SL</b> — Stop Loss (0.38%) — вихід зі збитком",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 47,
+        "code": "🎯 <b>TP</b> — Take Profit (1.12%) — фіксація прибутку",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 48,
+        "code": "⚖️ <b>RR</b> — Risk/Reward (ризик/прибуток)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 52,
+        "code": "<b>📊 ІНДИКАТОРИ</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 58,
+        "code": "<b>Тренд:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 59,
+        "code": "• <b>EMA50/200</b> — якщо 50 > 200 = uptrend",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 60,
+        "code": "• <b>MACD hist</b> — позитивний = бичий імпульс",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 62,
+        "code": "<b>Моментум:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 63,
+        "code": "• <b>RSI14</b> — 30-70 норма, &gt;70 перекуплено, &lt;30 перепродано",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 64,
+        "code": "• <b>StochRSI K/D</b> — K&gt;D бичий, K&lt;D ведмежий",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 65,
+        "code": "• <b>MFI14</b> — Money Flow, як RSI але з обсягом",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 67,
+        "code": "<b>Волатильність:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 68,
+        "code": "• <b>ATR</b> — середній рух за свічку в %",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 69,
+        "code": "• <b>BB%B</b> — позиція в каналі Боллінджера (0-1)",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 70,
+        "code": "• <b>CCI20</b> — відхилення від середньої ціни",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 72,
+        "code": "<b>Обʼєм:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 73,
+        "code": "• <b>Vol ratio</b> — поточний обʼєм / середній",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 77,
+        "code": "<b>VWAP:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 78,
+        "code": "• <b>VWAPΔ</b> — відстань від середньозваженої ціни",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 83,
+        "code": "<b>🚦 GATE SCORE</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 93,
+        "code": "<b>📐 PIVOTS (рівні)</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 97,
+        "code": "• <b>S1</b> — перший рівень підтримки",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 98,
+        "code": "• <b>P</b> — центральний pivot",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 99,
+        "code": "• <b>R1</b> — перший рівень опору",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 105,
+        "code": "<b>📊 L/S RATIO</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 114,
+        "code": "<b>🧱 ORDERBOOK WALLS</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 121,
+        "code": "<b>💡 ПОРАДИ</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "utils\\texts.py",
+        "line": 129,
+        "code": "<b>⚠️ Ризик-менеджмент:</b>",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 39,
+        "code": "\"2. MOMENTUM: RSI (oversold<30, overbought>70), StochRSI, MACD histogram direction\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 582,
+        "code": "indi += f\"\\n  ↳ >1.5 багато лонгів (squeeze?), <0.7 багато шортів\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 57,
+        "code": "f\"🤖 <b>Перевірка на бота</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 59,
+        "code": "f\"<i>Це захист від спаму. Вибери правильний емодзі.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 94,
+        "code": "\"✅ <b>Верифікація пройдена!</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 120,
+        "code": "f\"❌ <b>Неправильно!</b> Спробуй ще раз.\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 122,
+        "code": "f\"<i>Вибери правильний емодзі.</i>\",",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 135,
+        "code": "\"• `/ai <SYM>` — AI-план (Entry/SL/TP, RR)\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 136,
+        "code": "\"• `/req <SYM>` — Залежність від BTC/ETH\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 166,
+        "code": "\"• Моментум: RSI, MACD — імпульс/розвороти (RSI<30 — перепроданість, RSI>70 — перекупленість).\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 201,
+        "code": "header = f\"📰 <b>Новини: {query}</b>\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 203,
+        "code": "header = \"📰 <b>Останні крипто-новини</b>\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 217,
+        "code": "lines.append(f\"{num_emoji} <a href=\\\"{link}\\\">{title}</a>\\n      <i>{src}{time_str}</i>\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\commands.py",
+        "line": 220,
+        "code": "lines.append(\"💡 <code>/news bitcoin</code> — пошук\")",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 104,
+        "code": "f\"🚨 <b>RISK MONITORING DASHBOARD</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 105,
+        "code": "f\"🔴 <b>Circuit Breaker:</b> {cb_status}{cb_reason}\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 106,
+        "code": "f\"📊 <b>Current Metrics:</b>\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 107,
+        "code": "f\"• Consecutive Losses: <b>{metrics['consecutive_losses']}</b> (max: {metrics['limits']['max_consecutive_losses']})\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 108,
+        "code": "f\"• Daily P&L: <b>{metrics['daily_rr']:+.2f}R</b> (limit: -{metrics['limits']['max_daily_drawdown_r']:.2f}R)\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 109,
+        "code": "f\"• Weekly P&L: <b>{metrics['weekly_rr']:+.2f}R</b> (limit: -{metrics['limits']['max_weekly_drawdown_r']:.2f}R)\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 110,
+        "code": "f\"• Win Rate (20): <b>{metrics['win_rate_20']:.1%}</b> (min: {metrics['limits']['min_win_rate']:.1%})\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 111,
+        "code": "f\"• Win Rate (50): <b>{metrics['win_rate_50']:.1%}</b>\\n\\n\"",
+        "risk": "potential_xss_in_telegram"
+      },
+      {
+        "file": "telegram_bot\\handlers\\panel_handlers.py",
+        "line": 112,
+        "code": "f\"⚙️ <b>Risk Limits:</b>\\n\"",
+        "risk": "potential_xss_in_telegram"
+      }
+    ],
+    "command_injection_risks": [
+      {
+        "file": "security_auditor.py",
+        "line": 143,
+        "code": "if ('subprocess.' in line or 'os.system' in line or 'os.popen' in line) and ('+' in line or 'format(' in line):",
+        "risk": "potential_command_injection"
+      }
+    ]
+  },
+  "error_handling": {
+    "bare_except_blocks": [],
+    "missing_exception_types": [
+      {
+        "file": "core_config.py",
+        "line": 54,
+        "code": "except Exception:"
+      },
+      {
+        "file": "core_config.py",
+        "line": 203,
+        "code": "except Exception:"
+      },
+      {
+        "file": "core_config.py",
+        "line": 221,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 90,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 93,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 98,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 103,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 108,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 142,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 266,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 294,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 301,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 442,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 445,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 511,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 544,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 608,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 820,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 938,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 1047,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 1204,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 1209,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 1221,
+        "code": "except Exception:"
+      },
+      {
+        "file": "main.py",
+        "line": 1270,
+        "code": "except Exception:"
+      },
+      {
+        "file": "sitecustomize.py",
+        "line": 22,
+        "code": "except Exception:"
+      },
+      {
+        "file": "sitecustomize.py",
+        "line": 51,
+        "code": "except Exception:"
+      },
+      {
+        "file": "sitecustomize.py",
+        "line": 164,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 42,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 70,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 80,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 115,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 127,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 139,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 189,
+        "code": "except Exception:"
+      },
+      {
+        "file": "alerts\\signal_registry.py",
+        "line": 262,
+        "code": "except Exception:"
+      },
+      {
+        "file": "config\\settings.py",
+        "line": 43,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "line": 13,
+        "code": "except Exception:  # pragma: no cover"
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "line": 28,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "line": 42,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "line": 45,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\full_analyzer.py",
+        "line": 74,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\symbol_screener.py",
+        "line": 32,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_analyst\\symbol_screener.py",
+        "line": 44,
+        "code": "except Exception:"
+      },
+      {
+        "file": "gpt_decider\\decider.py",
+        "line": 19,
+        "code": "except Exception: return None"
+      },
+      {
+        "file": "market_data\\binance_rank.py",
+        "line": 36,
+        "code": "except Exception:"
+      },
+      {
+        "file": "market_data\\news.py",
+        "line": 28,
+        "code": "except Exception:"
+      },
+      {
+        "file": "market_data\\news.py",
+        "line": 38,
+        "code": "except Exception:"
+      },
+      {
+        "file": "market_data\\orderbook_light.py",
+        "line": 27,
+        "code": "except Exception:"
+      },
+      {
+        "file": "market_data\\orderbook_light.py",
+        "line": 89,
+        "code": "except Exception:"
+      },
+      {
+        "file": "router\\analyzer_router.py",
+        "line": 63,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scheduler\\local_top5_job.py",
+        "line": 14,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scheduler\\local_top5_job.py",
+        "line": 35,
+        "code": "except Exception: return \"NEUTRAL\""
+      },
+      {
+        "file": "scheduler\\local_top5_job.py",
+        "line": 55,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scheduler\\runner.py",
+        "line": 16,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scheduler\\screener_job.py",
+        "line": 18,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scheduler\\screener_job.py",
+        "line": 45,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\auto_analyze.py",
+        "line": 25,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\db_audit.py",
+        "line": 160,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\debug_load_handlers.py",
+        "line": 9,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "line": 9,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "line": 94,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\kpi_by_symbol.py",
+        "line": 172,
+        "code": "except Exception:"
+      },
+      {
+        "file": "scripts\\rr_probe.py",
+        "line": 18,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 13,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 128,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 134,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 316,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 334,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\analyzer_core.py",
+        "line": 371,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 26,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 31,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 73,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 92,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 204,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 237,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 245,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 253,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 277,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 515,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 599,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 675,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 800,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 819,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 936,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 945,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 947,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 959,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost.py",
+        "line": 1101,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 16,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 60,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 84,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 112,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 213,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 219,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_bridge.py",
+        "line": 230,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_llm_guard.py",
+        "line": 15,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 25,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 31,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost_sources.py",
+        "line": 277,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 75,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 149,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 157,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 218,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\daily_tracker.py",
+        "line": 223,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\kpi.py",
+        "line": 28,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\position_manager.py",
+        "line": 20,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\position_manager.py",
+        "line": 36,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\position_manager.py",
+        "line": 44,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\position_manager.py",
+        "line": 68,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\position_manager.py",
+        "line": 77,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\scalping_sources.py",
+        "line": 27,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signals_repo.py",
+        "line": 26,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signals_repo.py",
+        "line": 54,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signals_repo.py",
+        "line": 68,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signals_repo.py",
+        "line": 124,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "line": 20,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "line": 137,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "line": 148,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\signal_closer.py",
+        "line": 157,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\trade_engine.py",
+        "line": 66,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\trade_engine.py",
+        "line": 117,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\winrate_tracker.py",
+        "line": 37,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\auto_scheduler.py",
+        "line": 18,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\auto_scheduler.py",
+        "line": 29,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\bot.py",
+        "line": 19,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 42,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 48,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 78,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 112,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 150,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 197,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 215,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 222,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 227,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 317,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 333,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 356,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 375,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 389,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 397,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 555,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 577,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 716,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 813,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 820,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 929,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 952,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers.py",
+        "line": 967,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\panel.py",
+        "line": 30,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\panel_neutral.py",
+        "line": 129,
+        "code": "except Exception:"
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "line": 55,
+        "code": "except Exception:"
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "line": 59,
+        "code": "except Exception:"
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "line": 102,
+        "code": "except Exception:"
+      },
+      {
+        "file": "tools\\backfill_signals_from_trades.py",
+        "line": 106,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 104,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 109,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 130,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 134,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 142,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 146,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 154,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\db.py",
+        "line": 161,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\formatting.py",
+        "line": 25,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\formatting.py",
+        "line": 35,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\news_fetcher.py",
+        "line": 33,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\news_fetcher.py",
+        "line": 44,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\news_fetcher.py",
+        "line": 61,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\news_fetcher.py",
+        "line": 68,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "line": 30,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "line": 102,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "line": 149,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter.py",
+        "line": 192,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter_client.py",
+        "line": 45,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\openrouter_client.py",
+        "line": 52,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\pretty_md.py",
+        "line": 14,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\pretty_md.py",
+        "line": 32,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\pretty_md.py",
+        "line": 71,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\pretty_md.py",
+        "line": 79,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\settings_cached.py",
+        "line": 9,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\settings_cached.py",
+        "line": 44,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "line": 17,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\settings_ob.py",
+        "line": 33,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\signal_register.py",
+        "line": 40,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\ta_formatter.py",
+        "line": 127,
+        "code": "except Exception:"
+      },
+      {
+        "file": "utils\\ta_formatter.py",
+        "line": 135,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\core.py",
+        "line": 36,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\core.py",
+        "line": 75,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\core.py",
+        "line": 121,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\core.py",
+        "line": 250,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\formatting.py",
+        "line": 37,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\indicators.py",
+        "line": 27,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\indicators.py",
+        "line": 36,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\indicators.py",
+        "line": 45,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\orderbook.py",
+        "line": 12,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\orderbook.py",
+        "line": 68,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\persistence.py",
+        "line": 120,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\scoring.py",
+        "line": 8,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\scoring.py",
+        "line": 29,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\scoring.py",
+        "line": 42,
+        "code": "except Exception:"
+      },
+      {
+        "file": "services\\autopost\\__init__.py",
+        "line": 15,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 71,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 95,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 128,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 156,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 182,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 286,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 307,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 739,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\ai_commands.py",
+        "line": 745,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 23,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 29,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 52,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 63,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 87,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 109,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\helpers.py",
+        "line": 120,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\kpi_handlers.py",
+        "line": 49,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\__init__.py",
+        "line": 14,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\__init__.py",
+        "line": 17,
+        "code": "except Exception:"
+      },
+      {
+        "file": "telegram_bot\\handlers\\__init__.py",
+        "line": 33,
+        "code": "except Exception:"
+      }
+    ],
+    "unhandled_exceptions": [],
+    "logging_issues": []
+  },
+  "configuration": {
+    "config_files": [
+      "analysis_results.json",
+      "backtest_template.json",
+      "critical_fixes_implementation.json",
+      "gate_optimization_results.json",
+      "implementation_roadmap.json",
+      "phase3_gate_validation.json",
+      "phase4_code_quality.json",
+      "phase5_security_audit.json",
+      "phase6_market_analysis.json",
+      ".vscode\\settings.json",
+      "pytest.ini"
+    ],
+    "settings_files": [
+      "config\\settings.py",
+      "utils\\settings.py",
+      "utils\\settings_cached.py",
+      "utils\\settings_ob.py",
+      "utils\\user_settings.py"
+    ],
+    "env_files": [
+      ".env"
+    ],
+    "hardcoded_values": [
+      {
+        "file": "config\\settings.py",
+        "line": 70,
+        "type": "hardcoded_url",
+        "code": "base_default = os.getenv(\"OPENROUTER_BASE\", \"https://openrouter.ai/api/v1\")"
+      },
+      {
+        "file": "config\\settings.py",
+        "line": 102,
+        "type": "hardcoded_url",
+        "code": "base_url: str = Field(\"https://openrouter.ai/api/v1\", alias=\"BASE\")"
+      }
+    ],
+    "missing_defaults": []
+  },
+  "dependencies": {
+    "requirements_files": [
+      "requirements.txt",
+      "requirements-dev.txt"
+    ],
+    "outdated_packages": [],
+    "security_vulnerabilities": [],
+    "unused_imports": []
+  },
+  "report": "# 🔒 PHASE 5: SECURITY & CONFIGURATION AUDIT REPORT\n**Timestamp:** 2026-01-30T10:36:22.554841\n\n## 🔐 SECRETS & CREDENTIALS\n- **Hardcoded secrets:** 6\n- **Environment variables used:** 57\n- **Config files:** .env\n\n### 🚨 HARDCODED SECRETS FOUND:\n- `utils\\db_migrate.py:309` - key\n- `utils\\db_migrate.py:310` - key\n- `utils\\db_migrate.py:311` - key\n- `utils\\db_migrate.py:312` - key\n- `utils\\db_migrate.py:313` - key\n- `utils\\settings_ob.py:7` - key\n\n## 🛡️ INPUT VALIDATION\n- **SQL injection risks:** 1\n- **Command injection risks:** 1\n- **XSS risks:** 129\n\n## 🚨 ERROR HANDLING\n- **Bare except blocks:** 0\n- **Missing exception types:** 220\n\n## ⚙️ CONFIGURATION MANAGEMENT\n- **Config files:** 11\n- **Settings files:** 5\n- **Env files:** 1\n- **Hardcoded values:** 2\n\n## 📦 DEPENDENCIES\n- **Requirements files:** requirements.txt, requirements-dev.txt\n- **Security vulnerabilities:** 0\n\n## 💡 SECURITY RECOMMENDATIONS\n- 🚨 CRITICAL: Move 6 hardcoded secrets to environment variables\n- Fix 1 potential SQL injection vulnerabilities\n- Fix 1 potential command injection vulnerabilities\n- Move 2 hardcoded configuration values to settings\n- Implement input sanitization for all user inputs\n- Add rate limiting for API endpoints\n- Implement proper logging for security events\n- Regular dependency updates and security scans\n- Use parameterized queries for all database operations\n"
+}

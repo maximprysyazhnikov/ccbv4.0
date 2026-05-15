@@ -1,0 +1,39 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+
+# Local data / secrets
+.env
+env
+*.env
+storage/
+logs/
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Archives / artifacts
+*.zip
+*.tar
+*.gz
+
+# Node/bundlers
+node_modules/
+
+# Scratch files
+=
