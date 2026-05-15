@@ -33,6 +33,17 @@ def _rr_eps() -> float:
 def _ensure_schema() -> None:
     """Ідемпотентно додаємо потрібні колонки/індекси, якщо їх ще нема."""
     with get_conn() as conn:
+        if not conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='trades'").fetchone():
+            try:
+                from utils.db_migrate import migrate_if_needed
+                migrate_if_needed()
+            except Exception as e:
+                log.warning("[schema] migrate before signal_closer failed: %s", e)
+
+        if not conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='trades'").fetchone():
+            log.warning("[schema] trades table is missing; signal_closer schema patch skipped")
+            return
+
         # trades
         cols_tr = [r[1] for r in conn.execute("PRAGMA table_info(trades)").fetchall()]
         if "partial_50_done" not in cols_tr:

@@ -1,5 +1,4 @@
 from __future__ import annotations
-from services.signal_closer import auto_close_tp_sl
 
 # ───────────────────────────────────────────────
 # Auto-close TP/SL job
@@ -7,6 +6,7 @@ async def auto_close_tp_sl_job(context) -> None:
     """Періодичне автозакриття по TP/SL для всіх відкритих трейдів."""
 
     try:
+        from services.signal_closer import auto_close_tp_sl
         closed = await _run_maybe_async(auto_close_tp_sl)
         if closed:
             log.info(f"auto_close_tp_sl_job: closed {closed} trades by TP/SL.")
